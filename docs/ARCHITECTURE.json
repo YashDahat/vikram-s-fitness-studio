@@ -2622,14 +2622,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles sending emails for various events like booking reminders and contact form submissions.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "sendEmail",
+      "parameters" : [ "String to", "String subject", "String body" ],
+      "return_type" : "void",
+      "description" : "Sends an email to the specified recipient with the given subject and body."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "notification-service-backend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements sendEmail(String to, String subject, String body): void; responsible for dispatching email notifications.",
     "change_required" : null
   }, {
     "file_name" : "GoogleReviewController.java",
@@ -4122,8 +4127,8 @@
     "feature_display_name" : "Notification Service (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/NotificationService.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Notification Service (Backend) feature is responsible for sending various types of email notifications to users. This service integrates with an external email sending library (e.g., JavaMailSender) to dispatch emails for events such as booking confirmations, booking cancellations, and contact form submissions. It provides a single public method, `sendEmail`, which encapsulates the logic for constructing and sending emails based on the recipient's email address, subject, and content.\n\n### `NotificationService.java`\nThis service class handles the core logic for sending emails. It will be injected into other services or controllers that need to send notifications. For example, the `inquiry-backend` feature's `ContactService` will inject `NotificationService` to send a confirmation email after a contact form submission.\n\n#### Public Methods:\n\n*   **`sendEmail(String to, String subject, String body)`**\n    *   **Description:** Sends an email to the specified recipient with the given subject and body.\n    *   **Parameters:**\n        *   `String to`: The email address of the recipient.\n        *   `String subject`: The subject line of the email.\n        *   `String body`: The HTML or plain text content of the email.\n    *   **Return Type:** `void`\n    *   **Logic:**\n        1.  Construct a `MimeMessage` using `JavaMailSender`.\n        2.  Set the recipient (`to`), subject, and body of the email.\n        3.  Set the `from` address (e.g., \"noreply@vikramsfitnessstudio.com\").\n        4.  Send the email using `javaMailSender.send(mimeMessage)`.\n    *   **Error Cases:**\n        *   `MailException`: If there is an issue sending the email (e.g., invalid address, connection error). This exception should be caught and logged, but not re-thrown to avoid blocking the main business flow. The system should continue to operate even if a notification fails to send.",
+    "depends_on_features" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
