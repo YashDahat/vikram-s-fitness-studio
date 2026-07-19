@@ -1756,14 +1756,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a blog post with title, content, author, and publication date.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the blog post. Generated automatically."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the blog post. Not null, max 255 characters."
+    }, {
+      "name" : "content",
+      "type" : "String",
+      "description" : "Full content of the blog post. Not null."
+    }, {
+      "name" : "author",
+      "type" : "String",
+      "description" : "Author of the blog post. Not null, max 100 characters."
+    }, {
+      "name" : "publicationDate",
+      "type" : "LocalDate",
+      "description" : "Date when the blog post was published. Not null."
+    }, {
+      "name" : "lastModifiedDate",
+      "type" : "LocalDateTime",
+      "description" : "Date and time when the blog post was last modified. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/User.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the `BlogPost` entity with fields for `id`, `title`, `content`, `author`, `publicationDate`, and `lastModifiedDate`.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostRepository.java",
@@ -1774,14 +1798,24 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for BlogPost entities.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "findById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "Optional<BlogPost>",
+      "description" : "Retrieves a blog post by its unique identifier."
+    }, {
+      "name" : "findAllByOrderByPublicationDateDesc",
+      "parameters" : [ ],
+      "return_type" : "List<BlogPost>",
+      "description" : "Retrieves all blog posts, ordered by publication date in descending order."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/BlogPost.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access methods for `BlogPost` entities, including `findById(UUID id)` and `findAllByOrderByPublicationDateDesc(): List<BlogPost>`.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostService.java",
@@ -1792,14 +1826,39 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles business logic for creating and managing blog posts.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "getAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "List<BlogPostDto>",
+      "description" : "Retrieves all blog posts, ordered by publication date descending."
+    }, {
+      "name" : "getBlogPostById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "BlogPostDto",
+      "description" : "Retrieves a single blog post by its ID. Throws ResourceNotFoundException if not found."
+    }, {
+      "name" : "createBlogPost",
+      "parameters" : [ "BlogPostDto blogPostDto" ],
+      "return_type" : "BlogPostDto",
+      "description" : "Creates a new blog post. Throws IllegalArgumentException for invalid data."
+    }, {
+      "name" : "updateBlogPost",
+      "parameters" : [ "UUID id", "BlogPostDto blogPostDto" ],
+      "return_type" : "BlogPostDto",
+      "description" : "Updates an existing blog post. Throws ResourceNotFoundException if not found, IllegalArgumentException for invalid data."
+    }, {
+      "name" : "deleteBlogPost",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes a blog post by its ID. Throws ResourceNotFoundException if not found."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/repository/BlogPostRepository.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements `getAllBlogPosts(): List<BlogPostDto>`, `getBlogPostById(UUID id): BlogPostDto`, `createBlogPost(BlogPostDto blogPostDto): BlogPostDto`, `updateBlogPost(UUID id, BlogPostDto blogPostDto): BlogPostDto`, and `deleteBlogPost(UUID id): void`.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostController.java",
@@ -1810,14 +1869,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Exposes public endpoints for listing and viewing blog posts.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<BlogPostDto>>",
+      "description" : "Retrieves all blog posts for public viewing."
+    }, {
+      "name" : "getBlogPostById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<BlogPostDto>",
+      "description" : "Retrieves a single blog post by ID for public viewing."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/blog",
+      "request_body" : null,
+      "response_body" : "List<BlogPostDto>",
+      "description" : "Get all blog posts, ordered by publication date descending.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/blog/{id}",
+      "request_body" : null,
+      "response_body" : "BlogPostDto",
+      "description" : "Get a single blog post by its ID.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/BlogPostService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/BlogPostDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes public API endpoints for listing and viewing blog posts: `GET /api/v1/blog` and `GET /api/v1/blog/{id}`.",
     "change_required" : null
   }, {
     "file_name" : "AdminBlogPostController.java",
@@ -1828,14 +1911,74 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides admin-only CRUD endpoints for managing blog posts.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
+    "public_functions" : [ {
+      "name" : "getAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<BlogPostDto>>",
+      "description" : "Retrieves all blog posts for admin management."
+    }, {
+      "name" : "getBlogPostById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<BlogPostDto>",
+      "description" : "Retrieves a single blog post by ID for admin management."
+    }, {
+      "name" : "createBlogPost",
+      "parameters" : [ "BlogPostDto blogPostDto" ],
+      "return_type" : "ResponseEntity<BlogPostDto>",
+      "description" : "Creates a new blog post."
+    }, {
+      "name" : "updateBlogPost",
+      "parameters" : [ "UUID id", "BlogPostDto blogPostDto" ],
+      "return_type" : "ResponseEntity<BlogPostDto>",
+      "description" : "Updates an existing blog post."
+    }, {
+      "name" : "deleteBlogPost",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Deletes a blog post by its ID."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/blog",
+      "request_body" : null,
+      "response_body" : "List<BlogPostDto>",
+      "description" : "Get all blog posts for admin management.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/blog/{id}",
+      "request_body" : null,
+      "response_body" : "BlogPostDto",
+      "description" : "Get a single blog post by its ID for admin management.",
+      "access" : "admin"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/admin/blog",
+      "request_body" : "BlogPostDto",
+      "response_body" : "BlogPostDto",
+      "description" : "Create a new blog post.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/blog/{id}",
+      "request_body" : "BlogPostDto",
+      "response_body" : "BlogPostDto",
+      "description" : "Update an existing blog post.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/blog/{id}",
+      "request_body" : null,
+      "response_body" : "Void",
+      "description" : "Delete a blog post by its ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/BlogPostService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/BlogPostDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — provides admin-only CRUD endpoints for managing blog posts: `GET /api/v1/admin/blog`, `GET /api/v1/admin/blog/{id}`, `POST /api/v1/admin/blog`, `PUT /api/v1/admin/blog/{id}`, and `DELETE /api/v1/admin/blog/{id}`.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostDto.java",
@@ -1846,14 +1989,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Data transfer object for blog post data.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the blog post."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the blog post. @NotBlank, @Size(max = 255)."
+    }, {
+      "name" : "content",
+      "type" : "String",
+      "description" : "Full content of the blog post. @NotBlank."
+    }, {
+      "name" : "author",
+      "type" : "String",
+      "description" : "Author of the blog post. @NotBlank, @Size(max = 100)."
+    }, {
+      "name" : "publicationDate",
+      "type" : "LocalDate",
+      "description" : "Date when the blog post was published. @NotNull."
+    }, {
+      "name" : "lastModifiedDate",
+      "type" : "LocalDateTime",
+      "description" : "Date and time when the blog post was last modified. @NotNull."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — data transfer object for blog post data, used for API requests and responses.",
     "change_required" : null
   }, {
     "file_name" : "Order.java",
@@ -3652,8 +3819,8 @@
     "feature_display_name" : "Content Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/BlogPost.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/BlogPostRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/service/BlogPostService.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/BlogPostController.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/admin/AdminBlogPostController.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/BlogPostDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Content Management (Backend) feature provides the API for managing blog posts for Vikram's Fitness Studio. It includes models for blog posts, a repository for data access, a service layer for business logic, and two controllers: one for public access to view blog posts and another for administrative CRUD operations.\n\n### BlogPost Model\nThe `BlogPost` entity represents a single blog post. It will have fields for `id` (UUID), `title` (String), `content` (String), `author` (String), `publicationDate` (LocalDate), and `lastModifiedDate` (LocalDateTime). The `author` field will initially be a simple String, but can be linked to a `User` entity from the `shared-backend` feature in future iterations if user management for authors is implemented.\n\n### BlogPostRepository\nThe `BlogPostRepository` extends `JpaRepository` and provides standard CRUD operations for `BlogPost` entities. It will include custom query methods to find blog posts by `id` and to retrieve all blog posts ordered by `publicationDate` in descending order.\n\n### BlogPostService\nThe `BlogPostService` encapsulates the business logic for blog posts. It injects `BlogPostRepository` to perform database operations. It will expose the following public methods:\n\n1.  `getAllBlogPosts(): List<BlogPostDto>`\n    -   Retrieves all blog posts, ordered by `publicationDate` descending.\n    -   Maps `BlogPost` entities to `BlogPostDto`.\n    -   Throws no exceptions.\n\n2.  `getBlogPostById(UUID id): BlogPostDto`\n    -   Retrieves a single blog post by its `id`.\n    -   Maps the `BlogPost` entity to `BlogPostDto`.\n    -   Throws `ResourceNotFoundException` (from `shared-backend`) if no blog post with the given `id` is found.\n\n3.  `createBlogPost(BlogPostDto blogPostDto): BlogPostDto`\n    -   Creates a new blog post.\n    -   Takes a `BlogPostDto` as input, sets `publicationDate` to the current date, and `lastModifiedDate` to the current date.\n    -   Saves the new `BlogPost` entity via `BlogPostRepository`.\n    -   Returns the saved `BlogPost` mapped to `BlogPostDto`.\n    -   Throws `IllegalArgumentException` if `blogPostDto` contains invalid data (e.g., null title or content).\n\n4.  `updateBlogPost(UUID id, BlogPostDto blogPostDto): BlogPostDto`\n    -   Updates an existing blog post identified by `id`.\n    -   Takes a `BlogPostDto` with updated details. The `id` in the DTO is ignored; the path variable `id` is used.\n    -   Retrieves the existing `BlogPost` using `BlogPostRepository.findById()`. If not found, throws `ResourceNotFoundException`.\n    -   Updates the `title`, `content`, `author`, and sets `lastModifiedDate` to the current date.\n    -   Saves the updated `BlogPost` entity.\n    -   Returns the updated `BlogPost` mapped to `BlogPostDto`.\n    -   Throws `ResourceNotFoundException` if the blog post does not exist.\n    -   Throws `IllegalArgumentException` if `blogPostDto` contains invalid data.\n\n5.  `deleteBlogPost(UUID id): void`\n    -   Deletes a blog post by its `id`.\n    -   Retrieves the existing `BlogPost` using `BlogPostRepository.findById()`. If not found, throws `ResourceNotFoundException`.\n    -   Deletes the `BlogPost` entity via `BlogPostRepository`.\n    -   Throws `ResourceNotFoundException` if the blog post does not exist.\n\n### BlogPostController\nThe `BlogPostController` exposes public read-only endpoints for blog posts. It injects `BlogPostService`.\n\n1.  `getAllBlogPosts(): ResponseEntity<List<BlogPostDto>>`\n    -   Handles GET requests to `/api/v1/blog`.\n    -   Calls `blogPostService.getAllBlogPosts()`.\n    -   Returns a `200 OK` response with a list of `BlogPostDto`.\n\n2.  `getBlogPostById(UUID id): ResponseEntity<BlogPostDto>`\n    -   Handles GET requests to `/api/v1/blog/{id}`.\n    -   Calls `blogPostService.getBlogPostById(id)`.\n    -   Returns a `200 OK` response with the `BlogPostDto`.\n    -   If `ResourceNotFoundException` is thrown by the service, it will be handled by `GlobalExceptionHandler` (from `shared-backend`) returning a `404 Not Found`.\n\n### AdminBlogPostController\nThe `AdminBlogPostController` provides administrative CRUD endpoints for blog posts. It injects `BlogPostService`.\n\n1.  `getAllBlogPosts(): ResponseEntity<List<BlogPostDto>>`\n    -   Handles GET requests to `/api/v1/admin/blog`.\n    -   Calls `blogPostService.getAllBlogPosts()`.\n    -   Returns a `200 OK` response with a list of `BlogPostDto`.\n\n2.  `getBlogPostById(UUID id): ResponseEntity<BlogPostDto>`\n    -   Handles GET requests to `/api/v1/admin/blog/{id}`.\n    -   Calls `blogPostService.getBlogPostById(id)`.\n    -   Returns a `200 OK` response with the `BlogPostDto`.\n    -   If `ResourceNotFoundException` is thrown, returns `404 Not Found`.\n\n3.  `createBlogPost(BlogPostDto blogPostDto): ResponseEntity<BlogPostDto>`\n    -   Handles POST requests to `/api/v1/admin/blog`.\n    -   Validates `blogPostDto` using `@Valid` annotations.\n    -   Calls `blogPostService.createBlogPost(blogPostDto)`.\n    -   Returns a `201 Created` response with the created `BlogPostDto`.\n    -   If `IllegalArgumentException` is thrown, returns `400 Bad Request`.\n\n4.  `updateBlogPost(UUID id, BlogPostDto blogPostDto): ResponseEntity<BlogPostDto>`\n    -   Handles PUT requests to `/api/v1/admin/blog/{id}`.\n    -   Validates `blogPostDto` using `@Valid` annotations.\n    -   Calls `blogPostService.updateBlogPost(id, blogPostDto)`.\n    -   Returns a `200 OK` response with the updated `BlogPostDto`.\n    -   If `ResourceNotFoundException` is thrown, returns `404 Not Found`.\n    -   If `IllegalArgumentException` is thrown, returns `400 Bad Request`.\n\n5.  `deleteBlogPost(UUID id): ResponseEntity<Void>`\n    -   Handles DELETE requests to `/api/v1/admin/blog/{id}`.\n    -   Calls `blogPostService.deleteBlogPost(id)`.\n    -   Returns a `204 No Content` response.\n    -   If `ResourceNotFoundException` is thrown, returns `404 Not Found`.\n\n### BlogPostDto\nThe `BlogPostDto` is a data transfer object used for exposing blog post data through the API. It will mirror the `BlogPost` entity's fields: `id` (UUID), `title` (String), `content` (String), `author` (String), `publicationDate` (LocalDate), and `lastModifiedDate` (LocalDateTime). It will include validation annotations like `@NotBlank` for `title` and `content`.\n",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
