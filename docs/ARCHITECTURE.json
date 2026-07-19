@@ -2713,14 +2713,14 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Configures the global Axios instance for API requests, including interceptors for JWT handling.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "authentication-frontend",
-    "file_role" : null,
+    "file_role" : "Axios instance configuration — sets base URL and adds JWT interceptor for all API requests.",
     "change_required" : null
   }, {
     "file_name" : "AuthContext.tsx",
@@ -2731,14 +2731,24 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides authentication state (user, token) and methods (login, logout) to the entire application.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "AuthContext",
+      "parameters" : [ ],
+      "return_type" : "React.Context<AuthContextType>",
+      "description" : "The context object for authentication."
+    }, {
+      "name" : "AuthProvider",
+      "parameters" : [ "{ children: React.ReactNode } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides authentication state and functions to its children."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "authentication-frontend",
-    "file_role" : null,
+    "file_role" : "React Context provider — manages global authentication state, providing `user`, `token`, `isAuthenticated`, `login(token: string, username: string, roles: string[]): void`, and `logout(): void` to the application.",
     "change_required" : null
   }, {
     "file_name" : "useAuth.ts",
@@ -2749,14 +2759,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Custom hook for accessing authentication context and performing auth-related actions.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "useAuth",
+      "parameters" : [ ],
+      "return_type" : "{ user: User | null, token: string | null, isAuthenticated: boolean, login: (token: string, username: string, roles: string[]) => void, logout: () => void, loading: boolean, loginUser: (credentials: AuthRequest) => Promise<void>, registerUser: (userData: RegisterRequest) => Promise<void> }",
+      "description" : "Provides authentication state and actions."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/context/AuthContext.tsx", "frontend/src/services/authService.ts", "frontend/src/types/auth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "authentication-frontend",
-    "file_role" : null,
+    "file_role" : "Custom React Hook — provides convenient access to authentication context values and actions via `useAuth(): { user: User | null, token: string | null, isAuthenticated: boolean, login: (token: string, username: string, roles: string[]) => void, logout: () => void, loading: boolean, loginUser: (credentials: AuthRequest) => Promise<void>, registerUser: (userData: RegisterRequest) => Promise<void> }`.",
     "change_required" : null
   }, {
     "file_name" : "authService.ts",
@@ -2767,14 +2782,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions for making API calls to authentication-related endpoints.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "login",
+      "parameters" : [ "AuthRequest credentials" ],
+      "return_type" : "Promise<AuthResponse>",
+      "description" : "Authenticates a user with the backend."
+    }, {
+      "name" : "register",
+      "parameters" : [ "RegisterRequest userData" ],
+      "return_type" : "Promise<AuthResponse>",
+      "description" : "Registers a new user with the backend."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/auth/login",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Authenticates a user.",
+      "access" : null
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/auth/register",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Registers a new user.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/auth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "authentication-frontend",
-    "file_role" : null,
+    "file_role" : "Frontend Service — encapsulates API calls for user authentication, exposing `login(credentials: AuthRequest): Promise<AuthResponse>` and `register(userData: RegisterRequest): Promise<AuthResponse>`.",
     "change_required" : null
   }, {
     "file_name" : "auth.ts",
@@ -2785,14 +2824,30 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Defines TypeScript types and interfaces for authentication data structures.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "AuthRequest",
+      "type" : "{ username: string; password: string; }",
+      "description" : "Interface for user login request."
+    }, {
+      "name" : "AuthResponse",
+      "type" : "{ token: string; username: string; roles: string[]; }",
+      "description" : "Interface for user authentication response."
+    }, {
+      "name" : "RegisterRequest",
+      "type" : "{ username: string; password: string; email: string; firstName: string; lastName: string; }",
+      "description" : "Interface for user registration request."
+    }, {
+      "name" : "User",
+      "type" : "{ username: string; roles: string[]; }",
+      "description" : "Interface for authenticated user details."
+    } ],
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "authentication-frontend",
-    "file_role" : null,
+    "file_role" : "Defines TypeScript types and interfaces for authentication data structures.",
     "change_required" : null
   }, {
     "file_name" : "LoginPage.tsx",
@@ -2803,14 +2858,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Displays login and registration forms for user authentication.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "LoginPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "The login and registration page."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts", "frontend/src/components/auth/LoginForm.tsx", "frontend/src/components/auth/RegisterForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "authentication-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays login and registration forms, redirects authenticated users, and uses `Layout` from `core-ui-frontend`.",
     "change_required" : null
   }, {
     "file_name" : "LoginForm.tsx",
@@ -2821,14 +2881,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Component containing the user login form with validation.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "LoginForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "The login form component."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "authentication-frontend",
-    "file_role" : null,
+    "file_role" : "React Component — renders the user login form, uses `useAuth` for login logic, and applies client-side validation.",
     "change_required" : null
   }, {
     "file_name" : "RegisterForm.tsx",
@@ -2839,14 +2904,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Component containing the user registration form with validation.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "RegisterForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "The registration form component."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "authentication-frontend",
-    "file_role" : null,
+    "file_role" : "React Component — renders the user registration form, uses `useAuth` for registration logic, and applies client-side validation.",
     "change_required" : null
   }, {
     "file_name" : "App.tsx",
@@ -4177,8 +4247,8 @@
     "feature_display_name" : "Authentication (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/api/client.ts", "frontend/src/context/AuthContext.tsx", "frontend/src/hooks/useAuth.ts", "frontend/src/services/authService.ts", "frontend/src/types/auth.ts", "frontend/src/pages/LoginPage.tsx", "frontend/src/components/auth/LoginForm.tsx", "frontend/src/components/auth/RegisterForm.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature implements the frontend authentication flow for Vikram's Fitness Studio, allowing users to register, log in, and manage their session. It includes API service calls, a React context for global authentication state, a custom hook for easy access to auth functions, and UI components for login and registration.\n\n## Design Tokens\n- Navbar: bg-[#0D1B2A] text-white\n- Primary CTA: bg-[#F26419] hover:bg-[#E05A15] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#F26419]\n- Section bg: bg-white (odd sections) / bg-[#F5F5F5] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\n### `frontend/src/api/client.ts`\nThis file configures the global Axios instance. It sets the base URL for API requests to `/api/v1` and includes an interceptor to attach the JWT token from `localStorage` to every outgoing request's `Authorization` header. The token is stored under the key 'token'.\n\n### `frontend/src/types/auth.ts`\nThis file defines the TypeScript interfaces for authentication-related data structures, including `AuthRequest`, `AuthResponse`, `RegisterRequest`, and `User`.\n\n- `AuthRequest`: Represents the data sent for user login, containing `username: string` and `password: string`.\n- `AuthResponse`: Represents the data received after successful login or registration, containing `token: string`, `username: string`, and `roles: string[]`.\n- `RegisterRequest`: Represents the data sent for user registration, containing `username: string`, `password: string`, `email: string`, `firstName: string`, and `lastName: string`.\n- `User`: Represents the authenticated user's profile, containing `username: string` and `roles: string[]`.\n\n### `frontend/src/services/authService.ts`\nThis service provides asynchronous functions to interact with the backend authentication API endpoints. It uses the configured Axios instance from `frontend/src/api/client.ts`.\n\n- `login(credentials: AuthRequest): Promise<AuthResponse>`:\n  1. Makes a POST request to `/auth/login` with the provided `credentials`.\n  2. Returns the `AuthResponse` data upon success.\n  3. Throws an error if the API call fails.\n\n- `register(userData: RegisterRequest): Promise<AuthResponse>`:\n  1. Makes a POST request to `/auth/register` with the provided `userData`.\n  2. Returns the `AuthResponse` data upon success.\n  3. Throws an error if the API call fails.\n\n### `frontend/src/context/AuthContext.tsx`\nThis React context manages the global authentication state of the application. It provides the `AuthContext` and `AuthProvider` components.\n\n- `AuthContext` provides:\n  - `user: User | null`: The currently authenticated user's details, or `null` if not authenticated.\n  - `token: string | null`: The JWT token, or `null`.\n  - `isAuthenticated: boolean`: A boolean indicating if a user is authenticated.\n  - `login(token: string, username: string, roles: string[]): void`: Stores the token in `localStorage` under the key 'token', updates the context state with user details, and sets `isAuthenticated` to `true`.\n  - `logout(): void`: Removes the token from `localStorage`, clears the user and token from context state, and sets `isAuthenticated` to `false`.\n  - `loading: boolean`: A boolean indicating if the authentication state is currently being loaded (e.g., on initial app load).\n\n- `AuthProvider`:\n  1. On initial load, it attempts to retrieve the 'token' from `localStorage`.\n  2. If a token is found, it would ideally validate it with the backend (though this feature does not implement token validation, it assumes a valid token implies authentication for the frontend).\n  3. It initializes the `user`, `token`, and `isAuthenticated` states based on the presence and validity of the token.\n  4. Provides the context values to its children.\n\n### `frontend/src/hooks/useAuth.ts`\nThis custom React hook simplifies access to the `AuthContext`. It exports a `useAuth` function.\n\n- `useAuth()`:\n  1. Returns the `user`, `token`, `isAuthenticated`, `login`, `logout`, and `loading` values from the `AuthContext`.\n  2. Provides convenience methods for `loginUser` and `registerUser` that wrap `authService.login` and `authService.register` respectively. These methods handle updating the `AuthContext` upon successful API calls.\n\n### `frontend/src/components/auth/LoginForm.tsx`\nThis component renders the user login form.\n\n- It uses `useAuth` to access the `loginUser` function.\n- The form includes input fields for `username` and `password`.\n- It implements basic client-side validation for required fields.\n- On submission, it calls `loginUser` with the form data.\n- Displays error messages for failed login attempts.\n- The form elements should use Tailwind CSS for styling, adhering to the design tokens. The button should be a primary CTA style.\n\n### `frontend/src/components/auth/RegisterForm.tsx`\nThis component renders the user registration form.\n\n- It uses `useAuth` to access the `registerUser` function.\n- The form includes input fields for `username`, `password`, `email`, `firstName`, and `lastName`.\n- It implements basic client-side validation for required fields and password confirmation.\n- On submission, it calls `registerUser` with the form data.\n- Displays error messages for failed registration attempts.\n- The form elements should use Tailwind CSS for styling, adhering to the design tokens. The button should be a primary CTA style.\n\n### `frontend/src/pages/LoginPage.tsx`\nThis page serves as the entry point for user authentication, displaying both the `LoginForm` and `RegisterForm`.\n\n- It wraps its content with the `Layout` component from `core-ui-frontend`.\n- It uses `useAuth` to check `isAuthenticated` and redirects authenticated users to the dashboard or home page.\n- The page should have a clear heading like \"Welcome to Vikram's Fitness Studio\" (text-[#333333]) and subheadings for \"Login\" and \"Register\" (text-[#0D1B2A]).\n- The layout should present the login and registration forms side-by-side or in separate tabs/sections, allowing users to easily switch between them.\n- The background should use `bg-[#F5F5F5]`.\n- Placeholder copy for buttons should be \"Login\" and \"Register\" respectively, using the primary CTA design token.\n",
+    "depends_on_features" : [ "authentication-backend", "core-ui-frontend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
