@@ -347,14 +347,24 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles business logic related to user management, including registration and profile updates.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "registerUser",
+      "parameters" : [ "RegisterRequest registerRequest" ],
+      "return_type" : "AuthResponse",
+      "description" : "Registers a new user with the provided details. Throws IllegalArgumentException if the username already exists."
+    }, {
+      "name" : "authenticateUser",
+      "parameters" : [ "AuthRequest authRequest" ],
+      "return_type" : "AuthResponse",
+      "description" : "Authenticates a user with the provided credentials and generates a JWT token. Throws IllegalArgumentException if authentication fails."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/repository/UserRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/model/User.java" ],
     "depends_on" : [ ],
     "feature_name" : "authentication-backend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements registerUser(RegisterRequest): AuthResponse and authenticateUser(AuthRequest): AuthResponse; delegates persistence to UserRepository and token generation to JwtUtil.",
     "change_required" : null
   }, {
     "file_name" : "AuthController.java",
@@ -365,14 +375,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Manages user authentication endpoints for login and registration.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "register",
+      "parameters" : [ "RegisterRequest registerRequest" ],
+      "return_type" : "ResponseEntity<AuthResponse>",
+      "description" : "Handles user registration requests."
+    }, {
+      "name" : "login",
+      "parameters" : [ "AuthRequest authRequest" ],
+      "return_type" : "ResponseEntity<AuthResponse>",
+      "description" : "Handles user login requests."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/auth/register",
+      "request_body" : "RegisterRequest",
+      "response_body" : "AuthResponse",
+      "description" : "Registers a new user and returns an authentication token.",
+      "access" : "public"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/auth/login",
+      "request_body" : "AuthRequest",
+      "response_body" : "AuthResponse",
+      "description" : "Authenticates a user and returns an authentication token.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/dto/AuthRequest.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/AuthResponse.java", "backend/src/main/java/com/vikramsfitnessstudio/util/JwtUtil.java", "backend/src/main/java/com/vikramsfitnessstudio/service/UserService.java" ],
     "depends_on" : [ ],
     "feature_name" : "authentication-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes /api/v1/auth/register (POST) and /api/v1/auth/login (POST) endpoints for user authentication and registration.",
     "change_required" : null
   }, {
     "file_name" : "AuthRequest.java",
@@ -384,13 +418,21 @@
     "status" : "PLANNED",
     "description" : "Data transfer object for user login requests.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "username",
+      "type" : "String",
+      "description" : "User's username, not null, min 3, max 50 characters."
+    }, {
+      "name" : "password",
+      "type" : "String",
+      "description" : "User's password, not null, min 6, max 100 characters."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "authentication-backend",
-    "file_role" : null,
+    "file_role" : "DTO — defines the structure for user login requests.",
     "change_required" : null
   }, {
     "file_name" : "AuthResponse.java",
@@ -402,13 +444,25 @@
     "status" : "PLANNED",
     "description" : "Data transfer object for authentication responses, containing the JWT.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "token",
+      "type" : "String",
+      "description" : "The JWT authentication token."
+    }, {
+      "name" : "username",
+      "type" : "String",
+      "description" : "The authenticated user's username."
+    }, {
+      "name" : "roles",
+      "type" : "Set<String>",
+      "description" : "The roles assigned to the authenticated user."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "authentication-backend",
-    "file_role" : null,
+    "file_role" : "DTO — defines the structure for authentication responses, containing the JWT.",
     "change_required" : null
   }, {
     "file_name" : "RegisterRequest.java",
@@ -420,13 +474,33 @@
     "status" : "PLANNED",
     "description" : "Data transfer object for user registration requests.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "username",
+      "type" : "String",
+      "description" : "User's desired username, not null, min 3, max 50 characters."
+    }, {
+      "name" : "password",
+      "type" : "String",
+      "description" : "User's desired password, not null, min 6, max 100 characters."
+    }, {
+      "name" : "email",
+      "type" : "String",
+      "description" : "User's email address, not null, valid email format."
+    }, {
+      "name" : "firstName",
+      "type" : "String",
+      "description" : "User's first name, not null, max 50 characters."
+    }, {
+      "name" : "lastName",
+      "type" : "String",
+      "description" : "User's last name, not null, max 50 characters."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "authentication-backend",
-    "file_role" : null,
+    "file_role" : "DTO — defines the structure for user registration requests.",
     "change_required" : null
   }, {
     "file_name" : "MembershipPlan.java",
@@ -2819,8 +2893,8 @@
     "feature_display_name" : "Authentication (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/UserService.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/AuthController.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/AuthRequest.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/AuthResponse.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/RegisterRequest.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Authentication (Backend) feature provides the core API endpoints for user registration and login. It integrates with the `shared-backend` feature for user persistence via `UserRepository` and JWT token generation/validation via `JwtUtil`. \n\n`AuthController` exposes two public endpoints: `/api/v1/auth/register` for new user registration and `/api/v1/auth/login` for user authentication. Both endpoints consume DTOs (`RegisterRequest` and `AuthRequest` respectively) and return an `AuthResponse` containing a JWT token upon successful operation.\n\n`UserService` encapsulates the business logic for user management. When a user registers, `UserService.registerUser` creates a new `User` entity, encrypts the password, and saves it using `UserRepository.save`. During login, `UserService.authenticateUser` verifies the provided credentials against the stored user data and, if valid, generates a JWT using `JwtUtil.generateToken`.\n\nError Handling: If a username already exists during registration, `UserService.registerUser` should throw an `IllegalArgumentException`. If authentication fails (e.g., invalid username or password), `UserService.authenticateUser` should throw an `IllegalArgumentException`. These exceptions will be caught by the `GlobalExceptionHandler` (from `shared-backend`) and translated into appropriate HTTP responses (e.g., 400 Bad Request or 401 Unauthorized).",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
