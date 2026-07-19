@@ -511,14 +511,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a purchasable membership plan with a name, description, price, and duration.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the membership plan. Not null."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the membership plan. Not null, unique, max 100 characters."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Description of the membership plan. Max 500 characters."
+    }, {
+      "name" : "price",
+      "type" : "BigDecimal",
+      "description" : "Price of the membership plan. Not null, positive value, precision 10, scale 2."
+    }, {
+      "name" : "durationInMonths",
+      "type" : "Integer",
+      "description" : "Duration of the membership plan in months. Not null, positive integer."
+    }, {
+      "name" : "isActive",
+      "type" : "Boolean",
+      "description" : "Indicates if the membership plan is currently active and available for purchase. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "membership-core",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the data structure for a purchasable membership plan.",
     "change_required" : null
   }, {
     "file_name" : "Membership.java",
@@ -529,14 +553,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents an active membership subscription for a specific user.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the membership subscription. Not null."
+    }, {
+      "name" : "user",
+      "type" : "User",
+      "description" : "The user associated with this membership. Not null."
+    }, {
+      "name" : "membershipPlan",
+      "type" : "MembershipPlan",
+      "description" : "The membership plan associated with this subscription. Not null."
+    }, {
+      "name" : "startDate",
+      "type" : "LocalDate",
+      "description" : "The date when the membership started. Not null."
+    }, {
+      "name" : "endDate",
+      "type" : "LocalDate",
+      "description" : "The date when the membership will expire. Not null, must be after startDate."
+    }, {
+      "name" : "status",
+      "type" : "MembershipStatus",
+      "description" : "The current status of the membership (e.g., ACTIVE, EXPIRED, CANCELLED). Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/User.java", "backend/src/main/java/com/vikramsfitnessstudio/model/MembershipPlan.java", "backend/src/main/java/com/vikramsfitnessstudio/model/MembershipStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "membership-core",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the data structure for a user's active membership subscription.",
     "change_required" : null
   }, {
     "file_name" : "MembershipStatus.java",
@@ -547,14 +595,14 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Enumeration for membership statuses (e.g., ACTIVE, EXPIRED, CANCELLED).",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "membership-core",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the enumeration for membership statuses.",
     "change_required" : null
   }, {
     "file_name" : "MembershipPlanRepository.java",
@@ -565,14 +613,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for MembershipPlan entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByIsActiveTrue",
+      "parameters" : [ ],
+      "return_type" : "List<MembershipPlan>",
+      "description" : "Retrieves all membership plans that are currently active."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/MembershipPlan.java" ],
     "depends_on" : [ ],
     "feature_name" : "membership-core",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access methods for MembershipPlan entities, including `findByIsActiveTrue()`.",
     "change_required" : null
   }, {
     "file_name" : "MembershipRepository.java",
@@ -583,14 +636,24 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for Membership entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByUserId",
+      "parameters" : [ "Long userId" ],
+      "return_type" : "List<Membership>",
+      "description" : "Retrieves all membership subscriptions for a given user ID."
+    }, {
+      "name" : "findByUserIdAndStatus",
+      "parameters" : [ "Long userId", "MembershipStatus status" ],
+      "return_type" : "List<Membership>",
+      "description" : "Retrieves membership subscriptions for a given user ID and status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/Membership.java" ],
     "depends_on" : [ ],
     "feature_name" : "membership-core",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access methods for Membership entities, including `findByUserId(Long userId)` and `findByUserIdAndStatus(Long userId, MembershipStatus status)`.",
     "change_required" : null
   }, {
     "file_name" : "MembershipService.java",
@@ -601,14 +664,54 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles business logic for memberships, including plan management and user subscriptions.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createMembershipPlan",
+      "parameters" : [ "MembershipPlan membershipPlan" ],
+      "return_type" : "MembershipPlan",
+      "description" : "Creates a new membership plan."
+    }, {
+      "name" : "updateMembershipPlan",
+      "parameters" : [ "UUID id", "MembershipPlan membershipPlanDetails" ],
+      "return_type" : "MembershipPlan",
+      "description" : "Updates an existing membership plan."
+    }, {
+      "name" : "deleteMembershipPlan",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "void",
+      "description" : "Deletes a membership plan by its ID."
+    }, {
+      "name" : "getAllMembershipPlans",
+      "parameters" : [ ],
+      "return_type" : "List<MembershipPlan>",
+      "description" : "Retrieves all available membership plans."
+    }, {
+      "name" : "getMembershipPlanById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "MembershipPlan",
+      "description" : "Retrieves a single membership plan by its ID."
+    }, {
+      "name" : "assignMembershipToUser",
+      "parameters" : [ "Long userId", "UUID planId" ],
+      "return_type" : "Membership",
+      "description" : "Assigns a membership plan to a specified user."
+    }, {
+      "name" : "updateMembershipStatus",
+      "parameters" : [ "UUID membershipId", "MembershipStatus newStatus" ],
+      "return_type" : "Membership",
+      "description" : "Updates the status of an existing user membership."
+    }, {
+      "name" : "getUserMemberships",
+      "parameters" : [ "Long userId" ],
+      "return_type" : "List<Membership>",
+      "description" : "Retrieves all memberships for a specific user."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/repository/MembershipPlanRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/MembershipRepository.java" ],
     "depends_on" : [ ],
     "feature_name" : "membership-core",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements `createMembershipPlan(MembershipPlan membershipPlan)`, `updateMembershipPlan(UUID id, MembershipPlan membershipPlanDetails)`, `deleteMembershipPlan(UUID id)`, `getAllMembershipPlans()`, `getMembershipPlanById(UUID id)`, `assignMembershipToUser(Long userId, UUID planId)`, `updateMembershipStatus(UUID membershipId, MembershipStatus newStatus)`, and `getUserMemberships(Long userId)`.",
     "change_required" : null
   }, {
     "file_name" : "MembershipController.java",
@@ -2902,8 +3005,8 @@
     "feature_display_name" : "Membership Management (Core)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/MembershipPlan.java", "backend/src/main/java/com/vikramsfitnessstudio/model/Membership.java", "backend/src/main/java/com/vikramsfitnessstudio/model/MembershipStatus.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/MembershipPlanRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/MembershipRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/service/MembershipService.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature, Membership Management (Core), is responsible for defining the core data models and persistence logic for membership plans and user memberships within Vikram's Fitness Studio. It includes the `MembershipPlan` and `Membership` entities, the `MembershipStatus` enumeration, and their corresponding Spring Data JPA repositories (`MembershipPlanRepository` and `MembershipRepository`). The `MembershipService` class encapsulates the business logic for managing membership plans (e.g., creating, updating, retrieving) and user memberships (e.g., assigning, updating status). This feature interacts with the `shared-backend` feature to access `User` entities for associating memberships with specific users. The `MembershipService` will expose methods for other features, such as `membership-api` and `order-processing-backend`, to interact with membership data. For example, `membership-api` will call `MembershipService.getAllMembershipPlans()` to display available plans, and `order-processing-backend` will call `MembershipService.assignMembershipToUser(Long userId, Long planId)` upon successful order completion.\n\n### MembershipPlan.java\nThis JPA entity represents a purchasable membership plan. It will have fields for `id` (UUID), `name` (String), `description` (String), `price` (BigDecimal), `durationInMonths` (Integer), and `isActive` (Boolean). The `name` must be unique and not null. `price` must be positive. `durationInMonths` must be a positive integer.\n\n### Membership.java\nThis JPA entity represents an active membership subscription for a specific user. It will have fields for `id` (UUID), `user` (ManyToOne relationship with `User` from `shared-backend`), `membershipPlan` (ManyToOne relationship with `MembershipPlan`), `startDate` (LocalDate), `endDate` (LocalDate), and `status` (EnumType.STRING for `MembershipStatus`). The `user` and `membershipPlan` fields are mandatory. `startDate` and `endDate` must be valid dates, with `endDate` after `startDate`.\n\n### MembershipStatus.java\nThis enum defines the possible states of a user's membership: `ACTIVE`, `EXPIRED`, `CANCELLED`.\n\n### MembershipPlanRepository.java\nThis repository extends `JpaRepository<MembershipPlan, UUID>` and provides standard CRUD operations for `MembershipPlan` entities. It will also include a custom query method `findByIsActiveTrue()` to retrieve all currently active membership plans.\n\n### MembershipRepository.java\nThis repository extends `JpaRepository<Membership, UUID>` and provides standard CRUD operations for `Membership` entities. It will include custom query methods such as `findByUserId(Long userId)` to retrieve all memberships for a given user, and `findByUserIdAndStatus(Long userId, MembershipStatus status)` to find memberships by user and status.\n\n### MembershipService.java\nThis service class will be responsible for the following public methods:\n\n1.  `MembershipPlan createMembershipPlan(MembershipPlan membershipPlan)`:\n    -   **Signature:** `MembershipPlan createMembershipPlan(MembershipPlan membershipPlan)`\n    -   **Logic:**\n        1.  Validate that the `membershipPlan` object is not null and its `name` is unique.\n        2.  Set `isActive` to `true` by default.\n        3.  Save the new `membershipPlan` using `membershipPlanRepository.save()`.\n        4.  Return the saved `MembershipPlan`.\n    -   **Error Cases:** Throws `IllegalArgumentException` if the plan name already exists or if validation fails (HTTP 400).\n\n2.  `MembershipPlan updateMembershipPlan(UUID id, MembershipPlan membershipPlanDetails)`:\n    -   **Signature:** `MembershipPlan updateMembershipPlan(UUID id, MembershipPlan membershipPlanDetails)`\n    -   **Logic:**\n        1.  Find the existing `MembershipPlan` by `id` using `membershipPlanRepository.findById()`. If not found, throw `ResourceNotFoundException`.\n        2.  Update the fields of the existing plan with `membershipPlanDetails` (name, description, price, durationInMonths, isActive).\n        3.  Save the updated `MembershipPlan` using `membershipPlanRepository.save()`.\n        4.  Return the updated `MembershipPlan`.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if the plan is not found (HTTP 404), `IllegalArgumentException` if validation fails (HTTP 400).\n\n3.  `void deleteMembershipPlan(UUID id)`:\n    -   **Signature:** `void deleteMembershipPlan(UUID id)`\n    -   **Logic:**\n        1.  Check if the `MembershipPlan` exists by `id` using `membershipPlanRepository.existsById()`. If not, throw `ResourceNotFoundException`.\n        2.  Delete the `MembershipPlan` using `membershipPlanRepository.deleteById()`.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if the plan is not found (HTTP 404).\n\n4.  `List<MembershipPlan> getAllMembershipPlans()`:\n    -   **Signature:** `List<MembershipPlan> getAllMembershipPlans()`\n    -   **Logic:**\n        1.  Retrieve all `MembershipPlan` entities using `membershipPlanRepository.findAll()`.\n        2.  Return the list of plans.\n\n5.  `MembershipPlan getMembershipPlanById(UUID id)`:\n    -   **Signature:** `MembershipPlan getMembershipPlanById(UUID id)`\n    -   **Logic:**\n        1.  Find the `MembershipPlan` by `id` using `membershipPlanRepository.findById()`.\n        2.  Return the `MembershipPlan` if found, otherwise throw `ResourceNotFoundException`.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if the plan is not found (HTTP 404).\n\n6.  `Membership assignMembershipToUser(Long userId, UUID planId)`:\n    -   **Signature:** `Membership assignMembershipToUser(Long userId, UUID planId)`\n    -   **Logic:**\n        1.  Retrieve `User` by `userId` from `userRepository.findById(userId)` (from `shared-backend`). If not found, throw `ResourceNotFoundException`.\n        2.  Retrieve `MembershipPlan` by `planId` using `membershipPlanRepository.findById(planId)`. If not found, throw `ResourceNotFoundException`.\n        3.  Calculate `startDate` as `LocalDate.now()` and `endDate` by adding `durationInMonths` to `startDate`.\n        4.  Create a new `Membership` entity, setting `user`, `membershipPlan`, `startDate`, `endDate`, and `status` to `ACTIVE`.\n        5.  Save the new `Membership` using `membershipRepository.save()`.\n        6.  Return the newly created `Membership`.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if user or plan not found (HTTP 404), `IllegalStateException` if the user already has an active membership for the same plan (HTTP 409).\n\n7.  `Membership updateMembershipStatus(UUID membershipId, MembershipStatus newStatus)`:\n    -   **Signature:** `Membership updateMembershipStatus(UUID membershipId, MembershipStatus newStatus)`\n    -   **Logic:**\n        1.  Find the existing `Membership` by `membershipId` using `membershipRepository.findById()`. If not found, throw `ResourceNotFoundException`.\n        2.  Update the `status` of the `Membership` to `newStatus`.\n        3.  Save the updated `Membership` using `membershipRepository.save()`.\n        4.  Return the updated `Membership`.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if membership not found (HTTP 404), `IllegalArgumentException` if `newStatus` is invalid for the current state (HTTP 400).\n\n8.  `List<Membership> getUserMemberships(Long userId)`:\n    -   **Signature:** `List<Membership> getUserMemberships(Long userId)`\n    -   **Logic:**\n        1.  Retrieve `User` by `userId` from `userRepository.findById(userId)` (from `shared-backend`). If not found, throw `ResourceNotFoundException`.\n        2.  Retrieve all `Membership` entities for the given `userId` using `membershipRepository.findByUserId(userId)`.\n        3.  Return the list of memberships.\n    -   **Error Cases:** Throws `ResourceNotFoundException` if user not found (HTTP 404).\n\nThis feature relies on `UserRepository` from `shared-backend` to fetch `User` entities when assigning or retrieving user-specific memberships. It does not expose any direct API endpoints; these will be handled by the `membership-api` feature, which will inject `MembershipService`.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
