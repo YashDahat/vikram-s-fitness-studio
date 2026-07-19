@@ -922,14 +922,46 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a scheduled fitness class with details like name, time, instructor, and capacity.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the fitness class. Auto-generated."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the fitness class. Not null, max 100 characters."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Description of the fitness class. Max 500 characters."
+    }, {
+      "name" : "startTime",
+      "type" : "LocalDateTime",
+      "description" : "Start time of the class. Not null."
+    }, {
+      "name" : "endTime",
+      "type" : "LocalDateTime",
+      "description" : "End time of the class. Not null."
+    }, {
+      "name" : "instructor",
+      "type" : "String",
+      "description" : "Name of the instructor. Not null, max 100 characters."
+    }, {
+      "name" : "maxCapacity",
+      "type" : "Integer",
+      "description" : "Maximum number of participants allowed in the class. Not null, min 1."
+    }, {
+      "name" : "currentBookedSlots",
+      "type" : "Integer",
+      "description" : "Current number of booked slots for the class. Not null, defaults to 0."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "booking-core",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the data structure for a scheduled fitness class.",
     "change_required" : null
   }, {
     "file_name" : "Booking.java",
@@ -940,14 +972,34 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a user's booking for a specific fitness class.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the booking. Auto-generated."
+    }, {
+      "name" : "user",
+      "type" : "User",
+      "description" : "The user who made the booking. Not null."
+    }, {
+      "name" : "fitnessClass",
+      "type" : "FitnessClass",
+      "description" : "The fitness class being booked. Not null."
+    }, {
+      "name" : "bookingTime",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the booking was made. Not null."
+    }, {
+      "name" : "status",
+      "type" : "BookingStatus",
+      "description" : "Current status of the booking (e.g., CONFIRMED, CANCELLED). Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/User.java", "backend/src/main/java/com/vikramsfitnessstudio/model/FitnessClass.java", "backend/src/main/java/com/vikramsfitnessstudio/model/BookingStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "booking-core",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the data structure for a user's booking of a fitness class.",
     "change_required" : null
   }, {
     "file_name" : "BookingStatus.java",
@@ -958,14 +1010,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Enumeration for booking statuses (e.g., CONFIRMED, CANCELLED, COMPLETED).",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "CONFIRMED",
+      "type" : "BookingStatus",
+      "description" : "The booking is confirmed."
+    }, {
+      "name" : "CANCELLED",
+      "type" : "BookingStatus",
+      "description" : "The booking has been cancelled."
+    }, {
+      "name" : "COMPLETED",
+      "type" : "BookingStatus",
+      "description" : "The class associated with the booking has been completed."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "booking-core",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the enumeration for booking statuses.",
     "change_required" : null
   }, {
     "file_name" : "FitnessClassRepository.java",
@@ -976,14 +1040,14 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for FitnessClass entities.",
-    "public_functions" : null,
+    "public_functions" : [ ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/FitnessClass.java" ],
     "depends_on" : [ ],
     "feature_name" : "booking-core",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access methods for FitnessClass entities.",
     "change_required" : null
   }, {
     "file_name" : "BookingRepository.java",
@@ -994,14 +1058,29 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for Booking entities.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "findByUserId",
+      "parameters" : [ "Long userId" ],
+      "return_type" : "List<Booking>",
+      "description" : "Finds all bookings for a given user ID."
+    }, {
+      "name" : "findByFitnessClassIdAndStatusNot",
+      "parameters" : [ "Long fitnessClassId", "BookingStatus status" ],
+      "return_type" : "List<Booking>",
+      "description" : "Finds bookings for a specific fitness class that are not of a given status."
+    }, {
+      "name" : "findByUserIdAndFitnessClassIdAndStatusNot",
+      "parameters" : [ "Long userId", "Long fitnessClassId", "BookingStatus status" ],
+      "return_type" : "List<Booking>",
+      "description" : "Finds bookings for a specific user and fitness class that are not of a given status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/Booking.java" ],
     "depends_on" : [ ],
     "feature_name" : "booking-core",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access methods for Booking entities, including custom queries for user-specific bookings and class availability.",
     "change_required" : null
   }, {
     "file_name" : "BookingService.java",
@@ -1012,14 +1091,59 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles business logic for class schedules and user bookings.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllFitnessClasses",
+      "parameters" : [ ],
+      "return_type" : "List<FitnessClass>",
+      "description" : "Retrieves all available fitness classes."
+    }, {
+      "name" : "getFitnessClassById",
+      "parameters" : [ "Long classId" ],
+      "return_type" : "FitnessClass",
+      "description" : "Retrieves a fitness class by its ID, throwing ResourceNotFoundException if not found."
+    }, {
+      "name" : "createBooking",
+      "parameters" : [ "Long userId", "Long classId" ],
+      "return_type" : "Booking",
+      "description" : "Creates a new booking for a user in a specified fitness class, performing capacity and duplicate booking checks."
+    }, {
+      "name" : "cancelBooking",
+      "parameters" : [ "Long bookingId", "Long userId" ],
+      "return_type" : "Booking",
+      "description" : "Cancels an existing booking, verifying ownership and updating class capacity."
+    }, {
+      "name" : "getUserBookings",
+      "parameters" : [ "Long userId" ],
+      "return_type" : "List<Booking>",
+      "description" : "Retrieves all bookings made by a specific user."
+    }, {
+      "name" : "getAllBookings",
+      "parameters" : [ ],
+      "return_type" : "List<Booking>",
+      "description" : "Retrieves all bookings in the system (admin access)."
+    }, {
+      "name" : "updateFitnessClass",
+      "parameters" : [ "Long classId", "FitnessClass updatedClass" ],
+      "return_type" : "FitnessClass",
+      "description" : "Updates an existing fitness class's details (admin access)."
+    }, {
+      "name" : "createFitnessClass",
+      "parameters" : [ "FitnessClass newClass" ],
+      "return_type" : "FitnessClass",
+      "description" : "Creates a new fitness class (admin access)."
+    }, {
+      "name" : "deleteFitnessClass",
+      "parameters" : [ "Long classId" ],
+      "return_type" : "void",
+      "description" : "Deletes a fitness class, ensuring no active bookings exist for it (admin access)."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/repository/FitnessClassRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/BookingRepository.java" ],
     "depends_on" : [ ],
     "feature_name" : "booking-core",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements business logic for managing fitness classes and user bookings, including capacity checks and status updates.",
     "change_required" : null
   }, {
     "file_name" : "BookingController.java",
@@ -3151,8 +3275,8 @@
     "feature_display_name" : "Booking System (Core)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/FitnessClass.java", "backend/src/main/java/com/vikramsfitnessstudio/model/Booking.java", "backend/src/main/java/com/vikramsfitnessstudio/model/BookingStatus.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/FitnessClassRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/BookingRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/service/BookingService.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Booking System (Core) feature manages the backend logic and data persistence for fitness classes and user bookings at Vikram's Fitness Studio. It defines the core domain models: `FitnessClass` for scheduled classes, `Booking` for user reservations, and `BookingStatus` for the lifecycle of a booking. This feature provides repositories for data access and a service layer (`BookingService`) that encapsulates the business rules for creating, retrieving, and managing fitness classes and bookings.\n\n`FitnessClass.java` defines the structure for a fitness class, including its name, schedule, instructor, and capacity. `Booking.java` represents a user's reservation for a specific `FitnessClass`, linking to a `User` (from `shared-backend`) and having a `BookingStatus`. `BookingStatus.java` is an enum defining the possible states of a booking.\n\n`FitnessClassRepository.java` and `BookingRepository.java` are Spring Data JPA repositories that provide standard CRUD operations and custom query methods for `FitnessClass` and `Booking` entities, respectively.\n\n`BookingService.java` is the central business logic component. It orchestrates interactions with `FitnessClassRepository` and `BookingRepository`. It will expose methods for:\n\n1.  **Retrieving all available fitness classes**: `getAllFitnessClasses(): List<FitnessClass>`\n    *   Steps:\n        1.  Retrieve all `FitnessClass` entities from `FitnessClassRepository`.\n        2.  Return the list.\n\n2.  **Retrieving a fitness class by ID**: `getFitnessClassById(Long classId): FitnessClass`\n    *   Steps:\n        1.  Attempt to find a `FitnessClass` by `classId` using `FitnessClassRepository.findById()`.\n        2.  If not found, throw `ResourceNotFoundException`.\n        3.  Return the `FitnessClass`.\n\n3.  **Creating a new booking**: `createBooking(Long userId, Long classId): Booking`\n    *   Steps:\n        1.  Retrieve the `FitnessClass` by `classId` using `getFitnessClassById(classId)`.\n        2.  Check if the class has available capacity. If `currentBookedSlots >= maxCapacity`, throw `IllegalStateException` with a message indicating the class is full.\n        3.  Retrieve the `User` from the `shared-backend`'s `UserRepository` using `userId`. If the user is not found, throw `ResourceNotFoundException`.\n        4.  Check if the user already has an active booking for this class. If `bookingRepository.findByUserIdAndFitnessClassIdAndStatusNot(userId, classId, BookingStatus.CANCELLED)` returns a non-empty list, throw `IllegalStateException`.\n        5.  Create a new `Booking` entity with `userId`, `fitnessClass`, and `BookingStatus.CONFIRMED`.\n        6.  Increment `currentBookedSlots` on the `FitnessClass` and save it via `fitnessClassRepository.save()`.\n        7.  Save the new `Booking` entity using `bookingRepository.save()`.\n        8.  Return the created `Booking`.\n    *   Error cases:\n        *   `ResourceNotFoundException` (HTTP 404) if `FitnessClass` or `User` not found.\n        *   `IllegalStateException` (HTTP 400) if class is full or user already booked.\n\n4.  **Cancelling a booking**: `cancelBooking(Long bookingId, Long userId): Booking`\n    *   Steps:\n        1.  Retrieve the `Booking` by `bookingId` using `bookingRepository.findById()`.\n        2.  If not found, throw `ResourceNotFoundException`.\n        3.  Verify that the `Booking` belongs to the `userId` provided. If `booking.getUser().getId() != userId`, throw `IllegalArgumentException`.\n        4.  Check if the booking status is `CONFIRMED`. If not, throw `IllegalStateException`.\n        5.  Set the `BookingStatus` to `CANCELLED`.\n        6.  Decrement `currentBookedSlots` on the associated `FitnessClass` and save it via `fitnessClassRepository.save()`.\n        7.  Save the updated `Booking` entity using `bookingRepository.save()`.\n        8.  Return the updated `Booking`.\n    *   Error cases:\n        *   `ResourceNotFoundException` (HTTP 404) if `Booking` not found.\n        *   `IllegalArgumentException` (HTTP 403) if booking does not belong to the user.\n        *   `IllegalStateException` (HTTP 400) if booking is not in `CONFIRMED` status.\n\n5.  **Retrieving bookings for a user**: `getUserBookings(Long userId): List<Booking>`\n    *   Steps:\n        1.  Retrieve all `Booking` entities associated with `userId` from `bookingRepository.findByUserId()`.\n        2.  Return the list.\n\n6.  **Retrieving all bookings (admin only)**: `getAllBookings(): List<Booking>`\n    *   Steps:\n        1.  Retrieve all `Booking` entities from `bookingRepository.findAll()`.\n        2.  Return the list.\n\n7.  **Updating a fitness class (admin only)**: `updateFitnessClass(Long classId, FitnessClass updatedClass): FitnessClass`\n    *   Steps:\n        1.  Retrieve the existing `FitnessClass` by `classId` using `getFitnessClassById(classId)`.\n        2.  Update the fields of the existing `FitnessClass` with values from `updatedClass`.\n        3.  Save the updated `FitnessClass` using `fitnessClassRepository.save()`.\n        4.  Return the updated `FitnessClass`.\n    *   Error cases:\n        *   `ResourceNotFoundException` (HTTP 404) if `FitnessClass` not found.\n\n8.  **Creating a fitness class (admin only)**: `createFitnessClass(FitnessClass newClass): FitnessClass`\n    *   Steps:\n        1.  Save the `newClass` entity using `fitnessClassRepository.save()`.\n        2.  Return the created `FitnessClass`.\n\n9.  **Deleting a fitness class (admin only)**: `deleteFitnessClass(Long classId): void`\n    *   Steps:\n        1.  Retrieve the `FitnessClass` by `classId` using `getFitnessClassById(classId)`.\n        2.  Check if there are any active bookings for this class. If `bookingRepository.findByFitnessClassIdAndStatusNot(classId, BookingStatus.CANCELLED)` returns a non-empty list, throw `IllegalStateException`.\n        3.  Delete the `FitnessClass` using `fitnessClassRepository.deleteById(classId)`.\n    *   Error cases:\n        *   `ResourceNotFoundException` (HTTP 404) if `FitnessClass` not found.\n        *   `IllegalStateException` (HTTP 400) if there are active bookings for the class.\n\nThis feature depends on the `shared-backend` feature for `User` entity and `UserRepository` access.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
