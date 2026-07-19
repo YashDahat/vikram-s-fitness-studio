@@ -2645,14 +2645,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Acts as a secure proxy to fetch Google Reviews, hiding the API key from the client.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getGoogleReviews",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<GoogleReviewDto>>",
+      "description" : "Fetches Google Reviews for Vikram's Fitness Studio and returns them as a list of GoogleReviewDto. Throws an exception if the Google Places API call fails."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/reviews",
+      "request_body" : null,
+      "response_body" : "List<GoogleReviewDto>",
+      "description" : "Fetches a list of Google Reviews for the fitness studio.",
+      "access" : "public"
+    } ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "google-reviews-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes a public API endpoint to fetch Google Reviews, acting as a secure proxy.",
     "change_required" : null
   }, {
     "file_name" : "GoogleReviewDto.java",
@@ -2664,13 +2676,33 @@
     "status" : "PLANNED",
     "description" : "Data transfer object for a single Google Review.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "authorName",
+      "type" : "String",
+      "description" : "The name of the review author. Not null."
+    }, {
+      "name" : "profilePhotoUrl",
+      "type" : "String",
+      "description" : "URL to the author's profile photo. Can be null."
+    }, {
+      "name" : "rating",
+      "type" : "Integer",
+      "description" : "The rating given by the author (1-5). Not null."
+    }, {
+      "name" : "relativePublishTime",
+      "type" : "String",
+      "description" : "Human-readable time since the review was published (e.g., 'a month ago'). Not null."
+    }, {
+      "name" : "text",
+      "type" : "String",
+      "description" : "The full text of the review. Can be null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "google-reviews-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for a single Google Review.",
     "change_required" : null
   }, {
     "file_name" : "client.ts",
@@ -4136,8 +4168,8 @@
     "feature_display_name" : "Google Reviews Proxy (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/controller/GoogleReviewController.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/GoogleReviewDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature provides a secure backend proxy for fetching Google Reviews, preventing the exposure of the Google Places API key on the client-side. The `GoogleReviewController` exposes a single public endpoint `/api/v1/reviews` that frontend applications can call to retrieve a list of Google reviews. This controller internally calls the Google Places API to fetch reviews for 'Vikram's Fitness Studio' using a configured API key. The raw review data from Google is then mapped to a simplified `GoogleReviewDto` before being returned to the client. The `GoogleReviewDto` defines the structure of a single Google review, including fields like `authorName`, `profilePhotoUrl`, `rating`, `relativePublishTime`, and `text`.",
+    "depends_on_features" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
