@@ -3495,14 +3495,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Displays available membership plans in a card grid with options to purchase.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "MembershipPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the membership plans page with a hero section and a grid of membership plan cards."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useMemberships.ts", "frontend/src/components/membership/MembershipPlanCard.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays available membership plans; consumes data from `useMemberships` hook.",
     "change_required" : null
   }, {
     "file_name" : "MembershipPlanCard.tsx",
@@ -3513,14 +3518,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A card component to display details of a single membership plan.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "MembershipPlanCard",
+      "parameters" : [ "{ plan: MembershipPlanDto }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a card with membership plan details and a 'Join Now' button."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/types/membership.ts", "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays details of a single membership plan and initiates purchase via `useOrders`.",
     "change_required" : null
   }, {
     "file_name" : "useMemberships.ts",
@@ -3531,14 +3541,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions for fetching and managing membership data.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "useMemberships",
+      "parameters" : [ ],
+      "return_type" : "{ memberships: MembershipPlanDto[], isLoading: boolean, error: Error | null }",
+      "description" : "Fetches all active membership plans and manages loading/error states."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/services/membershipService.ts", "frontend/src/types/membership.ts" ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides functions for fetching membership plan data by calling `membershipService.getAllMembershipPlans()`.",
     "change_required" : null
   }, {
     "file_name" : "membershipService.ts",
@@ -3549,14 +3564,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Service for making API calls to membership-related endpoints.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "getAllMembershipPlans",
+      "parameters" : [ ],
+      "return_type" : "Promise<MembershipPlanDto[]>",
+      "description" : "Fetches all available membership plans from the backend."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/memberships/plans",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all active membership plans.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/membership.ts" ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — makes API calls to membership-related endpoints, specifically `getAllMembershipPlans()`.",
     "change_required" : null
   }, {
     "file_name" : "membership.ts",
@@ -3567,14 +3594,22 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "TypeScript types for membership plans and user subscriptions.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "MembershipPlanDto",
+      "type" : "{ id: UUID, name: string, description: string, price: BigDecimal, durationInMonths: number, isActive: boolean }",
+      "description" : "DTO for a membership plan."
+    }, {
+      "name" : "UserMembershipDto",
+      "type" : "{ id: UUID, membershipPlanName: string, startDate: LocalDate, endDate: LocalDate, status: string }",
+      "description" : "DTO for a user's active membership."
+    } ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for membership plans and user subscriptions.",
     "change_required" : null
   }, {
     "file_name" : "PaymentSuccessPage.tsx",
@@ -3585,14 +3620,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Confirmation page shown after a successful membership payment.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "PaymentSuccessPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the payment success confirmation page."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/hooks/useOrders.ts" ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays a confirmation message after a successful membership payment.",
     "change_required" : null
   }, {
     "file_name" : "useOrders.ts",
@@ -3603,14 +3643,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions for creating and managing orders, including payment integration.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "useOrders",
+      "parameters" : [ ],
+      "return_type" : "{ createOrder: (membershipPlanId: UUID, quantity: number) => Promise<void>, isLoading: boolean, error: Error | null }",
+      "description" : "Provides functionality to create an order for a membership plan and handle payment initiation."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "frontend/src/services/orderService.ts", "frontend/src/types/order.ts" ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides functions for creating orders and handling payment redirection by calling `orderService`.",
     "change_required" : null
   }, {
     "file_name" : "orderService.ts",
@@ -3621,14 +3666,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Service for making API calls to order and payment-related endpoints.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "createOrder",
+      "parameters" : [ "UUID membershipPlanId", "number quantity" ],
+      "return_type" : "Promise<OrderDto>",
+      "description" : "Creates a new order for a membership plan and initiates the payment process."
+    }, {
+      "name" : "createPaymentOrder",
+      "parameters" : [ "UUID orderId", "BigDecimal amount" ],
+      "return_type" : "Promise<PaymentOrderResponse>",
+      "description" : "Initiates a payment order with the payment gateway for a given order."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/orders",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Creates a new order for a membership plan.",
+      "access" : null
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/payments/orders",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Initiates a payment order with the payment gateway.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/order.ts" ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — makes API calls to order and payment-related endpoints, specifically `createOrder()` and `createPaymentOrder()`.",
     "change_required" : null
   }, {
     "file_name" : "order.ts",
@@ -3639,14 +3708,34 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "TypeScript types for orders and payment data.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "OrderDto",
+      "type" : "{ id: UUID, userId: Long, orderDate: LocalDateTime, totalAmount: BigDecimal, status: OrderStatus, orderItems: OrderItemDto[] }",
+      "description" : "DTO for an order."
+    }, {
+      "name" : "OrderItemDto",
+      "type" : "{ id: UUID, membershipPlanId: UUID, quantity: number, priceAtPurchase: BigDecimal }",
+      "description" : "DTO for an item within an order."
+    }, {
+      "name" : "CreateOrderRequest",
+      "type" : "{ membershipPlanId: UUID, quantity: number }",
+      "description" : "Request DTO for creating a new order."
+    }, {
+      "name" : "PaymentOrderResponse",
+      "type" : "{ orderId: UUID, paymentGatewayOrderId: string, amount: BigDecimal, currency: string, receipt: string }",
+      "description" : "Response DTO after creating a payment order."
+    }, {
+      "name" : "PaymentConfirmationRequest",
+      "type" : "{ orderId: UUID, paymentGatewayOrderId: string, status: string, signature: string, amount: BigDecimal, currency: string }",
+      "description" : "Request DTO for confirming a payment."
+    } ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "membership-frontend",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for orders and payment data.",
     "change_required" : null
   }, {
     "file_name" : "ClassesPage.tsx",
@@ -4410,8 +4499,8 @@
     "feature_display_name" : "Membership UI (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/MembershipPage.tsx", "frontend/src/components/membership/MembershipPlanCard.tsx", "frontend/src/hooks/useMemberships.ts", "frontend/src/services/membershipService.ts", "frontend/src/types/membership.ts", "frontend/src/pages/PaymentSuccessPage.tsx", "frontend/src/hooks/useOrders.ts", "frontend/src/services/orderService.ts", "frontend/src/types/order.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0D1B2A] text-white\n- Primary CTA: bg-[#F26419] hover:bg-[#E05A15] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#F26419]\n- Section bg: bg-[#F5F5F5] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\n## Feature Instruction: Membership UI (Frontend)\n\nThis feature provides the user interface for viewing and purchasing membership plans, as well as a confirmation page for successful payments. It interacts with the `membership-api` and `order-processing-backend` features to fetch membership plan data and create orders, respectively. It also integrates with the `payment-integration-backend` for handling payment processing.\n\n### Data Flow and Interactions\n\n1.  **`MembershipPage.tsx`**: This page is the entry point for users to browse membership plans. It utilizes the `useMemberships` hook to fetch all available membership plans. It renders these plans using `MembershipPlanCard` components.\n\n2.  **`useMemberships.ts`**: This hook provides the `getAllMembershipPlans` function, which calls `membershipService.getAllMembershipPlans()` to retrieve membership plan data from the backend. It manages loading states and errors.\n\n3.  **`membershipService.ts`**: This service is responsible for making API calls to the `membership-api` backend. It contains the `getAllMembershipPlans()` function, which performs a GET request to `/api/v1/memberships/plans`.\n\n4.  **`MembershipPlanCard.tsx`**: This component displays the details of a single `MembershipPlanDto`. It includes a \"Join Now\" button that, when clicked, will initiate the purchase process. This button will trigger the `createOrder` function from the `useOrders` hook, passing the `membershipPlanId` and a quantity of 1. Upon successful order creation, it will redirect the user to the payment success page.\n\n5.  **`useOrders.ts`**: This hook provides the `createOrder` function, which calls `orderService.createOrder()` to create a new order in the backend. It also handles the redirection to the payment success page upon successful order creation.\n\n6.  **`orderService.ts`**: This service is responsible for making API calls to the `order-processing-backend` and `payment-integration-backend`. It contains:\n    *   `createOrder(membershipPlanId: UUID, quantity: number)`: This function performs a POST request to `/api/v1/orders` with a `CreateOrderRequest` containing the `membershipPlanId` and `quantity`. Upon successful order creation, it then calls `paymentService.createPaymentOrder()` (from `payment-integration-backend`) to initiate the payment process.\n    *   `createPaymentOrder(orderId: UUID, amount: BigDecimal)`: This function performs a POST request to `/api/v1/payments/orders` with the `orderId` and `amount` to get payment gateway details. It then redirects the user to the payment gateway if a redirect URL is provided.\n\n7.  **`PaymentSuccessPage.tsx`**: This page is displayed after a successful membership payment. It will display a confirmation message. It can potentially use the `useOrders` hook to fetch order details based on a query parameter (e.g., `orderId`) to display specific information about the purchased membership.\n\n8.  **`membership.ts` and `order.ts`**: These files define the TypeScript interfaces for `MembershipPlanDto`, `UserMembershipDto`, `OrderDto`, `OrderItemDto`, `CreateOrderRequest`, `PaymentOrderResponse`, and `PaymentConfirmationRequest`, ensuring type safety across the frontend application.\n\n### Error Handling\n\nAll API calls should include appropriate error handling using `try-catch` blocks. Errors should be logged to the console and, where appropriate, displayed to the user using toast notifications or similar UI feedback mechanisms.\n\n### Authentication\n\nAPI calls to `/api/v1/memberships/plans` are public. However, creating an order via `/api/v1/orders` requires an authenticated user. The `api/client.ts` interceptor will automatically attach the JWT token from `localStorage.getItem('token')` to authenticated requests.\n\n## File-Specific Instructions\n\n### `MembershipPage.tsx`\n\n*   **Structure**: The page should use the `Layout` component from `core-ui-frontend`. It will have a hero section with a headline and subheadline, followed by a section displaying the membership plans in a grid.\n*   **Hero Section**: \n    *   Headline: \"Unlock Your Potential with Vikram's Fitness Studio Memberships\"\n    *   Subheadline: \"Invest in your long-term health and achieve sustainable results with our personalized plans.\"\n    *   CTA Text: \"View Our Classes\"\n    *   CTA Link: \"/classes\"\n    *   Background Image: `https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80` with a `bg-black bg-opacity-50` overlay.\n*   **Membership Plans Section**: This section will display a loading spinner while `useMemberships` is fetching data. If an error occurs, it will display an error message. Otherwise, it will render a grid of `MembershipPlanCard` components, each displaying a `MembershipPlanDto`.\n\n### `MembershipPlanCard.tsx`\n\n*   **Props**: It will accept a `MembershipPlanDto` as a prop.\n*   **Layout**: Each card will display the plan's `name`, `description`, `price`, and `durationInMonths`. The \"Join Now\" button will be styled using the Primary CTA design token.\n*   **Action**: On clicking \"Join Now\", it will call `useOrders().createOrder` with the plan's `id` and a quantity of 1.\n\n### `useMemberships.ts`\n\n*   **Functionality**: This hook will provide a `memberships` state (type `MembershipPlanDto[]`), `isLoading` state, and `error` state. It will use `useEffect` to call `membershipService.getAllMembershipPlans()` on component mount.\n\n### `membershipService.ts`\n\n*   **Functionality**: This service will contain an `async` function `getAllMembershipPlans()` that makes a GET request to `/api/v1/memberships/plans` and returns a `Promise<MembershipPlanDto[]>`.\n\n### `membership.ts`\n\n*   **Types**: Define `MembershipPlanDto` and `UserMembershipDto` interfaces based on the `membership-api` data shapes.\n\n### `PaymentSuccessPage.tsx`\n\n*   **Structure**: The page should use the `Layout` component from `core-ui-frontend`. It will display a success message and potentially details about the purchased membership.\n*   **Content**: Display a prominent \"Payment Successful!\" message. Include a message like \"Thank you for becoming a member of Vikram's Fitness Studio. Your journey to a healthier you begins now!\" Provide a button to navigate to the member dashboard.\n\n### `useOrders.ts`\n\n*   **Functionality**: This hook will provide an `async` function `createOrder(membershipPlanId: UUID, quantity: number)` that calls `orderService.createOrder()`. It will also manage loading and error states. Upon successful order creation, it will navigate to the `/payment-success` page.\n\n### `orderService.ts`\n\n*   **Functionality**: This service will contain two `async` functions:\n    *   `createOrder(membershipPlanId: UUID, quantity: number)`: Makes a POST request to `/api/v1/orders` with a `CreateOrderRequest`. On success, it calls `createPaymentOrder`.\n    *   `createPaymentOrder(orderId: UUID, amount: BigDecimal)`: Makes a POST request to `/api/v1/payments/orders` to initiate payment. It expects a `PaymentOrderResponse` and will handle redirection to the payment gateway if a `paymentGatewayOrderId` is returned.\n\n### `order.ts`\n\n*   **Types**: Define `OrderDto`, `OrderItemDto`, `CreateOrderRequest`, `PaymentOrderResponse`, and `PaymentConfirmationRequest` interfaces based on the `order-processing-backend` and `payment-integration-backend` data shapes.\n",
+    "depends_on_features" : [ "membership-api", "order-processing-backend", "payment-integration-backend", "authentication-frontend", "core-ui-frontend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
