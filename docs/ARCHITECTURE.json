@@ -4409,14 +4409,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "The main dashboard for administrators, showing key stats and navigation to management pages.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminDashboardPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin dashboard with navigation links to manage membership plans, fitness classes, and blog posts."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — the main entry point for the admin portal, providing navigation to other management sections.",
     "change_required" : null
   }, {
     "file_name" : "AdminMembershipPlansPage.tsx",
@@ -4427,14 +4432,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Admin page for creating, updating, and deleting membership plans.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminMembershipPlansPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the page for managing membership plans, including a table and forms for adding/editing."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useMemberships.ts", "frontend/src/components/admin/membership/MembershipPlansTable.tsx", "frontend/src/components/admin/membership/MembershipPlanForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — manages membership plans, displaying them in a table and providing forms for creation/editing.",
     "change_required" : null
   }, {
     "file_name" : "MembershipPlansTable.tsx",
@@ -4445,14 +4455,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A table for displaying and managing all membership plans.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MembershipPlansTable",
+      "parameters" : [ "{ plans: MembershipPlanDto[], onEdit: (plan: MembershipPlanDto) => void, onDelete: (id: UUID) => void } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of membership plans, allowing administrators to view, edit, and delete them."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/membership.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a table of membership plans with edit and delete actions.",
     "change_required" : null
   }, {
     "file_name" : "MembershipPlanForm.tsx",
@@ -4463,14 +4478,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A form (in a dialog/modal) for creating or editing a membership plan.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MembershipPlanForm",
+      "parameters" : [ "{ isOpen: boolean, onClose: () => void, onSubmit: (plan: MembershipPlanDto) => void, initialData?: MembershipPlanDto } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for creating or editing a membership plan, typically within a dialog."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useMemberships.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a form for creating or editing membership plans.",
     "change_required" : null
   }, {
     "file_name" : "AdminClassesPage.tsx",
@@ -4481,14 +4501,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Admin page for managing the fitness class schedule.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminClassesPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the page for managing fitness classes, including a table and forms for adding/editing."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBookings.ts", "frontend/src/components/admin/classes/ClassesTable.tsx", "frontend/src/components/admin/classes/ClassForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — manages fitness classes, displaying them in a table and providing forms for creation/editing.",
     "change_required" : null
   }, {
     "file_name" : "ClassesTable.tsx",
@@ -4499,14 +4524,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A table for displaying and managing all scheduled fitness classes.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ClassesTable",
+      "parameters" : [ "{ classes: FitnessClassDto[], onEdit: (fitnessClass: FitnessClassDto) => void, onDelete: (id: Long) => void } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of fitness classes, allowing administrators to view, edit, and delete them."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/booking.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a table of fitness classes with edit and delete actions.",
     "change_required" : null
   }, {
     "file_name" : "ClassForm.tsx",
@@ -4517,14 +4547,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A form (in a dialog/modal) for creating or editing a fitness class.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ClassForm",
+      "parameters" : [ "{ isOpen: boolean, onClose: () => void, onSubmit: (fitnessClass: FitnessClassDto) => void, initialData?: FitnessClassDto } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for creating or editing a fitness class, typically within a dialog."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBookings.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a form for creating or editing fitness classes.",
     "change_required" : null
   }, {
     "file_name" : "AdminBlogPage.tsx",
@@ -4535,14 +4570,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Admin page for creating, updating, and deleting blog posts.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminBlogPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the page for managing blog posts, including a table and forms for adding/editing."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBlog.ts", "frontend/src/components/admin/blog/BlogPostsTable.tsx", "frontend/src/components/admin/blog/BlogPostForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — manages blog posts, displaying them in a table and providing forms for creation/editing.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostsTable.tsx",
@@ -4553,14 +4593,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A table for displaying and managing all blog posts.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPostsTable",
+      "parameters" : [ "{ posts: BlogPostDto[], onEdit: (post: BlogPostDto) => void, onDelete: (id: UUID) => void } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a table of blog posts, allowing administrators to view, edit, and delete them."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a table of blog posts with edit and delete actions.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostForm.tsx",
@@ -4571,14 +4616,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A form (in a dialog/modal) for creating or editing a blog post.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPostForm",
+      "parameters" : [ "{ isOpen: boolean, onClose: () => void, onSubmit: (post: BlogPostDto) => void, initialData?: BlogPostDto } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for creating or editing a blog post, typically within a dialog."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBlog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a form for creating or editing blog posts.",
     "change_required" : null
   }, {
     "file_name" : "DeleteConfirmationDialog.tsx",
@@ -4589,14 +4639,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A reusable dialog component to confirm deletion of any admin-managed resource.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "DeleteConfirmationDialog",
+      "parameters" : [ "{ isOpen: boolean, onClose: () => void, onConfirm: () => void, resourceName: string } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a confirmation dialog for delete operations, requiring user confirmation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a reusable dialog for confirming delete operations.",
     "change_required" : null
   } ],
   "features" : [ {
@@ -4784,8 +4839,8 @@
     "feature_display_name" : "Admin Portal (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/AdminDashboardPage.tsx", "frontend/src/pages/AdminMembershipPlansPage.tsx", "frontend/src/components/admin/membership/MembershipPlansTable.tsx", "frontend/src/components/admin/membership/MembershipPlanForm.tsx", "frontend/src/pages/AdminClassesPage.tsx", "frontend/src/components/admin/classes/ClassesTable.tsx", "frontend/src/components/admin/classes/ClassForm.tsx", "frontend/src/pages/AdminBlogPage.tsx", "frontend/src/components/admin/blog/BlogPostsTable.tsx", "frontend/src/components/admin/blog/BlogPostForm.tsx", "frontend/src/components/admin/common/DeleteConfirmationDialog.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Admin Portal (Frontend) feature provides a comprehensive web interface for administrators of Vikram's Fitness Studio to manage various aspects of the business, including membership plans, fitness classes, and blog posts. It leverages the `AdminLayout` from the `core-ui-frontend` feature for consistent navigation and styling, and interacts with the backend APIs provided by `membership-api`, `booking-api`, and `content-management-backend` features.\n\n## Design Tokens\n- Admin Navbar: bg-[#0D1B2A] text-white\n- Primary CTA: bg-[#1B998B] hover:bg-[#1B998B] text-white font-semibold rounded-md px-4 py-2 transition-all duration-200\n- Secondary CTA: bg-[#F26419] hover:bg-[#F26419] text-white font-semibold rounded-md px-4 py-2 transition-all duration-200\n- Brand text accent: text-[#1B998B]\n- Section bg: bg-[#F5F5F5]\n- Card: bg-white rounded-lg shadow-sm border border-gray-100 p-4\n- Section container: <div className=\"max-w-7xl mx-auto py-6 sm:px-6 lg:px-8\">\n- Body: text-[#333333] leading-relaxed\n\n### AdminDashboardPage.tsx\nThis page serves as the entry point for the admin portal, providing an overview and navigation links to other admin sections. It should display a welcoming message and cards or links to 'Manage Membership Plans', 'Manage Fitness Classes', and 'Manage Blog Posts'. It uses the `AdminLayout` component for consistent header and sidebar navigation.\n\n### AdminMembershipPlansPage.tsx\nThis page allows administrators to manage membership plans. It fetches all membership plans using the `useMemberships` hook (from `membership-frontend` feature), which in turn calls the `getAllMembershipPlans` API from `membership-api`. It displays these plans in a `MembershipPlansTable` component. It also provides functionality to create and edit membership plans using the `MembershipPlanForm` component, and to delete plans, which will trigger a `DeleteConfirmationDialog`.\n\n### MembershipPlansTable.tsx\nThis component displays a sortable and filterable table of `MembershipPlanDto` objects. Each row should include the plan's `name`, `description`, `price`, `durationInMonths`, and `isActive` status. It provides actions to 'Edit' and 'Delete' each plan. The 'Edit' action opens the `MembershipPlanForm` pre-filled with the plan's data. The 'Delete' action opens the `DeleteConfirmationDialog`.\n\n### MembershipPlanForm.tsx\nThis component is a form for creating or editing a `MembershipPlanDto`. It should be rendered within a dialog or modal. When creating a new plan, the form fields will be empty. When editing, the form fields will be pre-populated with the existing plan's data. It includes fields for `name` (string, required), `description` (string, optional), `price` (BigDecimal, required), `durationInMonths` (Integer, required), and `isActive` (boolean, required). On submission, it calls the `createMembershipPlan` or `updateMembershipPlan` functions from the `useMemberships` hook, which then interacts with the `membership-api` backend.\n\n### AdminClassesPage.tsx\nThis page allows administrators to manage fitness classes. It fetches all fitness classes using the `useBookings` hook (from `booking-frontend` feature), which in turn calls the `getAllFitnessClasses` API from `booking-api`. It displays these classes in a `ClassesTable` component. It also provides functionality to create and edit fitness classes using the `ClassForm` component, and to delete classes, which will trigger a `DeleteConfirmationDialog`.\n\n### ClassesTable.tsx\nThis component displays a sortable and filterable table of `FitnessClassDto` objects. Each row should include the class's `name`, `description`, `startTime`, `endTime`, `instructor`, `maxCapacity`, and `currentBookedSlots`. It provides actions to 'Edit' and 'Delete' each class. The 'Edit' action opens the `ClassForm` pre-filled with the class's data. The 'Delete' action opens the `DeleteConfirmationDialog`.\n\n### ClassForm.tsx\nThis component is a form for creating or editing a `FitnessClassDto`. It should be rendered within a dialog or modal. When creating a new class, the form fields will be empty. When editing, the form fields will be pre-populated with the existing class's data. It includes fields for `name` (string, required), `description` (string, optional), `startTime` (LocalDateTime, required), `endTime` (LocalDateTime, required), `instructor` (string, required), and `maxCapacity` (Integer, required). On submission, it calls the `createFitnessClass` or `updateFitnessClass` functions from the `useBookings` hook, which then interacts with the `booking-api` backend.\n\n### AdminBlogPage.tsx\nThis page allows administrators to manage blog posts. It fetches all blog posts using the `useBlog` hook (from `content-frontend` feature), which in turn calls the `getAllBlogPosts` API from `content-management-backend`. It displays these posts in a `BlogPostsTable` component. It also provides functionality to create and edit blog posts using the `BlogPostForm` component, and to delete posts, which will trigger a `DeleteConfirmationDialog`.\n\n### BlogPostsTable.tsx\nThis component displays a sortable and filterable table of `BlogPostDto` objects. Each row should include the post's `title`, `author`, `publicationDate`, and `lastModifiedDate`. It provides actions to 'Edit' and 'Delete' each post. The 'Edit' action opens the `BlogPostForm` pre-filled with the post's data. The 'Delete' action opens the `DeleteConfirmationDialog`.\n\n### BlogPostForm.tsx\nThis component is a form for creating or editing a `BlogPostDto`. It should be rendered within a dialog or modal. When creating a new post, the form fields will be empty. When editing, the form fields will be pre-populated with the existing post's data. It includes fields for `title` (string, required), `content` (string, required), `author` (string, required), and `publicationDate` (LocalDate, required). On submission, it calls the `createBlogPost` or `updateBlogPost` functions from the `useBlog` hook, which then interacts with the `content-management-backend` backend.\n\n### DeleteConfirmationDialog.tsx\nThis is a reusable dialog component that prompts the user for confirmation before performing a delete action. It accepts `isOpen` (boolean), `onClose` (function), `onConfirm` (function), and `resourceName` (string) as props. The dialog should have a clear title like \"Confirm Deletion\" and a message like \"Are you sure you want to delete this [resourceName]? This action cannot be undone.\" It should have 'Cancel' and 'Delete' buttons, styled appropriately for a destructive action.",
+    "depends_on_features" : [ "core-ui-frontend", "membership-frontend", "booking-frontend", "content-frontend", "membership-api", "booking-api", "content-management-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
