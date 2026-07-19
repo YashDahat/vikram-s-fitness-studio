@@ -2476,13 +2476,37 @@
     "status" : "PLANNED",
     "description" : "Represents a message submitted through the contact form.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the contact message. Generated automatically."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the person submitting the contact form. Not null, max 100 characters."
+    }, {
+      "name" : "email",
+      "type" : "String",
+      "description" : "Email address of the person submitting the contact form. Not null, max 100 characters."
+    }, {
+      "name" : "subject",
+      "type" : "String",
+      "description" : "Subject of the contact message. Not null, max 200 characters."
+    }, {
+      "name" : "message",
+      "type" : "String",
+      "description" : "Content of the contact message. Not null, max 1000 characters."
+    }, {
+      "name" : "receivedAt",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the message was received. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — represents a message submitted through the contact form, mapping to the 'contact_messages' database table.",
     "change_required" : null
   }, {
     "file_name" : "ContactMessageRepository.java",
@@ -2493,14 +2517,14 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for ContactMessage entities.",
-    "public_functions" : null,
+    "public_functions" : [ ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/ContactMessage.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-backend",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access methods for ContactMessage entities, extending JpaRepository.",
     "change_required" : null
   }, {
     "file_name" : "ContactService.java",
@@ -2511,14 +2535,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles logic for saving contact form submissions and sending notifications.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitContactMessage",
+      "parameters" : [ "ContactRequest request" ],
+      "return_type" : "ContactMessage",
+      "description" : "Processes a contact form submission, saves it to the database, and sends a notification."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/repository/ContactMessageRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/service/NotificationService.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-backend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements submitContactMessage(ContactRequest): ContactMessage; delegates persistence to ContactMessageRepository and notification to NotificationService.",
     "change_required" : null
   }, {
     "file_name" : "ContactController.java",
@@ -2529,14 +2558,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Exposes a public endpoint for submitting the contact form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitContactForm",
+      "parameters" : [ "@Valid @RequestBody ContactRequest request" ],
+      "return_type" : "ResponseEntity<ContactMessage>",
+      "description" : "Handles POST requests to submit a new contact message."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/contact",
+      "request_body" : "ContactRequest",
+      "response_body" : "ContactMessage",
+      "description" : "Submits a new contact message from the public contact form.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/ContactService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/ContactRequest.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes a public API endpoint /api/v1/contact for submitting contact form messages.",
     "change_required" : null
   }, {
     "file_name" : "ContactRequest.java",
@@ -2548,13 +2589,29 @@
     "status" : "PLANNED",
     "description" : "Data transfer object for contact form submissions.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Sender's name. @NotBlank, @Size(max=100)"
+    }, {
+      "name" : "email",
+      "type" : "String",
+      "description" : "Sender's email address. @NotBlank, @Email, @Size(max=100)"
+    }, {
+      "name" : "subject",
+      "type" : "String",
+      "description" : "Subject of the message. @NotBlank, @Size(max=200)"
+    }, {
+      "name" : "message",
+      "type" : "String",
+      "description" : "Content of the message. @NotBlank, @Size(max=1000)"
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — data transfer object for contact form submissions.",
     "change_required" : null
   }, {
     "file_name" : "NotificationService.java",
@@ -4056,8 +4113,8 @@
     "feature_display_name" : "Inquiry Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/ContactMessage.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/ContactMessageRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/service/ContactService.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/ContactController.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/ContactRequest.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Inquiry Management (Backend) feature handles the submission and processing of contact form messages from the website. It consists of a DTO for request data, a JPA entity for persistence, a repository for database operations, a service for business logic, and a controller for exposing the API endpoint.\n\n### ContactRequest.java\nThis DTO defines the structure of the data submitted by users through the contact form. It includes fields for the sender's name, email, subject, and message, with appropriate validation annotations.\n\n### ContactMessage.java\nThis is a JPA entity that maps to the `contact_messages` table in the database. It stores the details of each contact message, including a generated ID, the sender's name, email, subject, message content, and a timestamp for when the message was received.\n\n### ContactMessageRepository.java\nThis Spring Data JPA repository provides standard CRUD operations for the `ContactMessage` entity. It extends `JpaRepository<ContactMessage, UUID>`, inheriting methods like `save()` and `findById()`.\n\n### ContactService.java\nThis service class encapsulates the business logic for handling contact messages. It injects `ContactMessageRepository` to persist messages and `NotificationService` (from the `notification-service-backend` feature) to send email notifications. The `submitContactMessage` method performs the following steps:\n1. Converts the `ContactRequest` DTO into a `ContactMessage` entity.\n2. Sets the `receivedAt` timestamp to the current time.\n3. Persists the `ContactMessage` entity using `contactMessageRepository.save()`.\n4. Calls `notificationService.sendContactFormNotification()` to send an email to the studio administrators with the details of the submitted message.\n\n**Public Functions:**\n- `ContactMessage submitContactMessage(ContactRequest request)`:\n  - Parameters: `ContactRequest request` - DTO containing contact form data.\n  - Return Type: `ContactMessage` - The saved contact message entity.\n  - Logic:\n    1. Create a new `ContactMessage` instance from the `ContactRequest`.\n    2. Set `receivedAt` to `LocalDateTime.now()`.\n    3. Save the `ContactMessage` to the database using `contactMessageRepository.save()`.\n    4. Call `notificationService.sendContactFormNotification(request.getName(), request.getEmail(), request.getSubject(), request.getMessage())`.\n    5. Return the saved `ContactMessage`.\n  - Error Cases: Throws `IllegalArgumentException` if the request is invalid (handled by `@Valid` in controller).\n\n### ContactController.java\nThis REST controller exposes a public API endpoint for submitting contact messages. It injects `ContactService` to delegate the business logic. The `submitContactForm` method handles POST requests to `/api/v1/contact`.\n\n**Public Functions:**\n- `ResponseEntity<ContactMessage> submitContactForm(@Valid @RequestBody ContactRequest request)`:\n  - Parameters: `@Valid @RequestBody ContactRequest request` - The contact form data.\n  - Return Type: `ResponseEntity<ContactMessage>` - HTTP 201 Created with the saved `ContactMessage`.\n  - Logic:\n    1. Call `contactService.submitContactMessage(request)`.\n    2. Return `ResponseEntity.status(HttpStatus.CREATED).body(savedMessage)`.\n  - Error Cases:\n    - `MethodArgumentNotValidException` (400 Bad Request) if `ContactRequest` validation fails (handled by `GlobalExceptionHandler`).\n    - `Exception` (500 Internal Server Error) for other unexpected errors (handled by `GlobalExceptionHandler`).\n\n**Inter-file Wiring:**\n- `ContactController` injects `ContactService`.\n- `ContactService` injects `ContactMessageRepository` and `NotificationService`.\n- `ContactService.submitContactMessage()` calls `contactMessageRepository.save()` and `notificationService.sendContactFormNotification()`.\n",
+    "depends_on_features" : [ "notification-service-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
