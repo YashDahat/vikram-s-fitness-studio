@@ -722,14 +722,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Exposes public endpoints for fetching membership plans and managing user memberships.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getMembershipPlans",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<MembershipPlanDto>>",
+      "description" : "Retrieves all active membership plans."
+    }, {
+      "name" : "getUserMemberships",
+      "parameters" : [ "Principal principal" ],
+      "return_type" : "ResponseEntity<List<UserMembershipDto>>",
+      "description" : "Retrieves all memberships for the authenticated user."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/memberships/plans",
+      "request_body" : null,
+      "response_body" : "List<MembershipPlanDto>",
+      "description" : "Retrieves a list of all active membership plans.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/memberships/my-memberships",
+      "request_body" : null,
+      "response_body" : "List<UserMembershipDto>",
+      "description" : "Retrieves a list of all memberships for the currently authenticated user.",
+      "access" : "authenticated"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/MembershipService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/MembershipPlanDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "membership-api",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes public endpoints for fetching active membership plans via `getMembershipPlans()` and authenticated endpoints for users to view their own memberships via `getUserMemberships(Principal principal)`.",
     "change_required" : null
   }, {
     "file_name" : "AdminMembershipPlanController.java",
@@ -740,14 +764,74 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides admin-only CRUD endpoints for managing membership plans.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllMembershipPlans",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<MembershipPlanDto>>",
+      "description" : "Retrieves all membership plans, including inactive ones."
+    }, {
+      "name" : "getMembershipPlanById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<MembershipPlanDto>",
+      "description" : "Retrieves a specific membership plan by its ID."
+    }, {
+      "name" : "createMembershipPlan",
+      "parameters" : [ "MembershipPlanDto membershipPlanDto" ],
+      "return_type" : "ResponseEntity<MembershipPlanDto>",
+      "description" : "Creates a new membership plan."
+    }, {
+      "name" : "updateMembershipPlan",
+      "parameters" : [ "UUID id", "MembershipPlanDto membershipPlanDto" ],
+      "return_type" : "ResponseEntity<MembershipPlanDto>",
+      "description" : "Updates an existing membership plan."
+    }, {
+      "name" : "deleteMembershipPlan",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Deletes a membership plan by its ID."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/memberships/plans",
+      "request_body" : null,
+      "response_body" : "List<MembershipPlanDto>",
+      "description" : "Retrieves a list of all membership plans.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/memberships/plans/{id}",
+      "request_body" : null,
+      "response_body" : "MembershipPlanDto",
+      "description" : "Retrieves a specific membership plan by its ID.",
+      "access" : "admin"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/admin/memberships/plans",
+      "request_body" : "MembershipPlanDto",
+      "response_body" : "MembershipPlanDto",
+      "description" : "Creates a new membership plan.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/memberships/plans/{id}",
+      "request_body" : "MembershipPlanDto",
+      "response_body" : "MembershipPlanDto",
+      "description" : "Updates an existing membership plan.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/memberships/plans/{id}",
+      "request_body" : null,
+      "response_body" : "Void",
+      "description" : "Deletes a membership plan by its ID.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/MembershipService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/MembershipPlanDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "membership-api",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — provides admin-only CRUD endpoints for managing membership plans via `getAllMembershipPlans()`, `getMembershipPlanById(UUID id)`, `createMembershipPlan(MembershipPlanDto membershipPlanDto)`, `updateMembershipPlan(UUID id, MembershipPlanDto membershipPlanDto)`, and `deleteMembershipPlan(UUID id)`.",
     "change_required" : null
   }, {
     "file_name" : "MembershipPlanDto.java",
@@ -759,13 +843,37 @@
     "status" : "PLANNED",
     "description" : "Data transfer object for membership plan details.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the membership plan. Not null."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the membership plan. Not null, max 100 characters."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Description of the membership plan. Max 500 characters."
+    }, {
+      "name" : "price",
+      "type" : "BigDecimal",
+      "description" : "Price of the membership plan. Not null, positive value."
+    }, {
+      "name" : "durationInMonths",
+      "type" : "Integer",
+      "description" : "Duration of the membership plan in months. Not null, positive value."
+    }, {
+      "name" : "isActive",
+      "type" : "Boolean",
+      "description" : "Indicates if the membership plan is currently active and available for purchase. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "membership-api",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for transferring membership plan details.",
     "change_required" : null
   }, {
     "file_name" : "UserMembershipDto.java",
@@ -777,13 +885,33 @@
     "status" : "PLANNED",
     "description" : "Data transfer object representing a user's current membership status.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the user's membership. Not null."
+    }, {
+      "name" : "membershipPlanName",
+      "type" : "String",
+      "description" : "Name of the membership plan the user is subscribed to. Not null."
+    }, {
+      "name" : "startDate",
+      "type" : "LocalDate",
+      "description" : "The date when the membership started. Not null."
+    }, {
+      "name" : "endDate",
+      "type" : "LocalDate",
+      "description" : "The date when the membership will expire. Not null."
+    }, {
+      "name" : "status",
+      "type" : "String",
+      "description" : "Current status of the membership (e.g., ACTIVE, EXPIRED, CANCELLED). Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "membership-api",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for transferring a user's current membership status.",
     "change_required" : null
   }, {
     "file_name" : "FitnessClass.java",
@@ -3014,8 +3142,8 @@
     "feature_display_name" : "Membership Management (API)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/controller/MembershipController.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/admin/AdminMembershipPlanController.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/MembershipPlanDto.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/UserMembershipDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature provides the backend API for managing membership plans and user memberships for Vikram's Fitness Studio. It consists of two DTOs, MembershipPlanDto and UserMembershipDto, and two controllers: MembershipController for public and authenticated user access, and AdminMembershipPlanController for administrative CRUD operations on membership plans. All business logic and persistence are delegated to the `membership-core` feature's `MembershipService`.\n\n### MembershipPlanDto.java\nThis DTO is used for transferring membership plan details between the controllers and the frontend. It mirrors the `MembershipPlan` entity from `membership-core`.\n\n### UserMembershipDto.java\nThis DTO is used for transferring a user's current membership status and details. It mirrors the `Membership` entity from `membership-core`.\n\n### MembershipController.java\nThis controller exposes public endpoints to retrieve all active membership plans and authenticated endpoints for users to view their own memberships. It injects `MembershipService` from the `membership-core` feature.\n\n#### Public Endpoints:\n1.  `GET /api/v1/memberships/plans`:\n    -   **Description**: Retrieves a list of all active membership plans available at Vikram's Fitness Studio.\n    -   **Logic**:\n        1.  Call `membershipService.getAllMembershipPlans()`.\n        2.  Filter the returned list to include only plans where `isActive` is `true`.\n        3.  Map the filtered `MembershipPlan` entities to `MembershipPlanDto`.\n        4.  Return a `200 OK` response with the list of `MembershipPlanDto`.\n\n#### Authenticated Endpoints:\n1.  `GET /api/v1/memberships/my-memberships`:\n    -   **Description**: Retrieves a list of all memberships for the currently authenticated user.\n    -   **Logic**:\n        1.  Extract the `userId` from the authenticated principal.\n        2.  Call `membershipService.getUserMemberships(userId)`.\n        3.  Map the returned `Membership` entities to `UserMembershipDto`.\n        4.  Return a `200 OK` response with the list of `UserMembershipDto`.\n    -   **Error Cases**:\n        -   If `userId` cannot be determined from the principal, return `401 Unauthorized`.\n\n### AdminMembershipPlanController.java\nThis controller provides admin-only CRUD (Create, Read, Update, Delete) operations for membership plans. It injects `MembershipService` from the `membership-core` feature.\n\n#### Admin Endpoints:\n1.  `GET /api/v1/admin/memberships/plans`:\n    -   **Description**: Retrieves a list of all membership plans, including inactive ones.\n    -   **Logic**:\n        1.  Call `membershipService.getAllMembershipPlans()`.\n        2.  Map the returned `MembershipPlan` entities to `MembershipPlanDto`.\n        3.  Return a `200 OK` response with the list of `MembershipPlanDto`.\n\n2.  `GET /api/v1/admin/memberships/plans/{id}`:\n    -   **Description**: Retrieves a specific membership plan by its ID.\n    -   **Logic**:\n        1.  Call `membershipService.getMembershipPlanById(id)`.\n        2.  Map the returned `MembershipPlan` entity to `MembershipPlanDto`.\n        3.  Return a `200 OK` response with the `MembershipPlanDto`.\n    -   **Error Cases**:\n        -   If the plan is not found, throw `ResourceNotFoundException` which will result in a `404 Not Found` response.\n\n3.  `POST /api/v1/admin/memberships/plans`:\n    -   **Description**: Creates a new membership plan.\n    -   **Logic**:\n        1.  Validate the `MembershipPlanDto` request body.\n        2.  Map the `MembershipPlanDto` to a `MembershipPlan` entity.\n        3.  Call `membershipService.createMembershipPlan(membershipPlan)`.\n        4.  Map the returned `MembershipPlan` entity to `MembershipPlanDto`.\n        5.  Return a `201 Created` response with the created `MembershipPlanDto`.\n    -   **Error Cases**:\n        -   If validation fails, return `400 Bad Request`.\n\n4.  `PUT /api/v1/admin/memberships/plans/{id}`:\n    -   **Description**: Updates an existing membership plan.\n    -   **Logic**:\n        1.  Validate the `MembershipPlanDto` request body.\n        2.  Map the `MembershipPlanDto` to a `MembershipPlan` entity.\n        3.  Call `membershipService.updateMembershipPlan(id, membershipPlanDetails)`.\n        4.  Map the returned `MembershipPlan` entity to `MembershipPlanDto`.\n        5.  Return a `200 OK` response with the updated `MembershipPlanDto`.\n    -   **Error Cases**:\n        -   If the plan is not found, throw `ResourceNotFoundException` which will result in a `404 Not Found` response.\n        -   If validation fails, return `400 Bad Request`.\n\n5.  `DELETE /api/v1/admin/memberships/plans/{id}`:\n    -   **Description**: Deletes a membership plan by its ID.\n    -   **Logic**:\n        1.  Call `membershipService.deleteMembershipPlan(id)`.\n        2.  Return a `204 No Content` response.\n    -   **Error Cases**:\n        -   If the plan is not found, throw `ResourceNotFoundException` which will result in a `404 Not Found` response.",
+    "depends_on_features" : [ "membership-core" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
