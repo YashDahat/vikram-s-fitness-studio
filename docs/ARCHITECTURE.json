@@ -4087,14 +4087,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "The main portal for logged-in members, showing upcoming bookings, membership status, and progress summary.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MemberDashboardPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the member dashboard with summaries of bookings, membership, and progress."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/member/UpcomingBookings.tsx", "frontend/src/components/member/MembershipStatus.tsx", "frontend/src/components/member/ProgressChart.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — the main dashboard for logged-in members, displaying upcoming bookings, membership status, and progress summary.",
     "change_required" : null
   }, {
     "file_name" : "MyBookingsPage.tsx",
@@ -4105,14 +4110,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A page within the member portal for viewing and managing all personal bookings.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MyBookingsPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the page for viewing and managing member bookings."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBookings.ts", "frontend/src/components/member/BookingsTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays all personal bookings and allows cancellation.",
     "change_required" : null
   }, {
     "file_name" : "MyProgressPage.tsx",
@@ -4123,14 +4133,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A page for members to log workouts and track their fitness progress over time.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MyProgressPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the page for logging workouts and tracking fitness progress."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useProgress.ts", "frontend/src/components/member/ProgressTrackerForm.tsx", "frontend/src/components/member/ProgressHistoryChart.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — allows members to log workouts and track fitness progress.",
     "change_required" : null
   }, {
     "file_name" : "UpcomingBookings.tsx",
@@ -4141,14 +4156,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A dashboard component showing a summary of the member's next few bookings.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "UpcomingBookings",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a summary card of upcoming fitness class bookings for the member."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBookings.ts" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a summary of the member's next few bookings.",
     "change_required" : null
   }, {
     "file_name" : "MembershipStatus.tsx",
@@ -4159,14 +4179,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A dashboard component displaying the member's current membership plan and expiry date.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "MembershipStatus",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays the member's current membership plan details and status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useMemberships.ts" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays the member's current membership plan and expiry date.",
     "change_required" : null
   }, {
     "file_name" : "ProgressChart.tsx",
@@ -4177,14 +4202,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A dashboard component showing a chart of the member's recent progress.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProgressChart",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a chart visualizing the member's recent fitness progress."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useProgress.ts" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a chart of the member's recent progress.",
     "change_required" : null
   }, {
     "file_name" : "BookingsTable.tsx",
@@ -4195,14 +4225,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A table displaying a member's booking history with options to cancel.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BookingsTable",
+      "parameters" : [ "BookingDto[] bookings", "(bookingId: number) => void onCancelBooking", "boolean isLoading" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a table of member bookings and handles cancellation actions."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/booking.ts" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a table of a member's booking history with options to cancel.",
     "change_required" : null
   }, {
     "file_name" : "ProgressTrackerForm.tsx",
@@ -4213,14 +4248,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A form for members to input new progress metrics or workout logs.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProgressTrackerForm",
+      "parameters" : [ "(data: WorkoutLogDto | ProgressMetricDto) => void onSubmit", "boolean isLoading" ],
+      "return_type" : "JSX.Element",
+      "description" : "Provides a form for members to log new workout data or progress metrics."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useProgress.ts" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a form for members to input new progress metrics or workout logs.",
     "change_required" : null
   }, {
     "file_name" : "ProgressHistoryChart.tsx",
@@ -4231,14 +4271,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A detailed chart visualizing a member's progress over a selected time period.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProgressHistoryChart",
+      "parameters" : [ "WorkoutLogDto[] workoutLogs", "ProgressMetricDto[] progressMetrics" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a detailed chart of historical fitness progress."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/progress.ts" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a detailed chart visualizing a member's progress over a selected time period.",
     "change_required" : null
   }, {
     "file_name" : "useProgress.ts",
@@ -4249,14 +4294,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions for fetching and submitting member progress data.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useProgress",
+      "parameters" : [ ],
+      "return_type" : "{ progressMetrics: ProgressMetricDto[], workoutLogs: WorkoutLogDto[], isLoading: boolean, error: Error | null, logWorkout: (workoutLog: WorkoutLogDto) => Promise<void>, logProgressMetric: (metric: ProgressMetricDto) => Promise<void>, getWorkoutLogs: () => Promise<void>, getProgressMetrics: (metricName: string) => Promise<void> }",
+      "description" : "A custom hook to manage member progress data, including fetching and submission."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/progressService.ts", "frontend/src/types/progress.ts" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides functions for fetching and submitting member progress data.",
     "change_required" : null
   }, {
     "file_name" : "progressService.ts",
@@ -4267,14 +4317,62 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Service for making API calls to progress tracking endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "logWorkout",
+      "parameters" : [ "WorkoutLogDto workoutLog" ],
+      "return_type" : "Promise<WorkoutLogDto>",
+      "description" : "Submits a new workout log to the backend."
+    }, {
+      "name" : "getWorkoutLogs",
+      "parameters" : [ ],
+      "return_type" : "Promise<WorkoutLogDto[]>",
+      "description" : "Fetches all workout logs for the authenticated user."
+    }, {
+      "name" : "logProgressMetric",
+      "parameters" : [ "ProgressMetricDto metric" ],
+      "return_type" : "Promise<ProgressMetricDto>",
+      "description" : "Submits a new progress metric to the backend."
+    }, {
+      "name" : "getProgressMetrics",
+      "parameters" : [ "string metricName" ],
+      "return_type" : "Promise<ProgressMetricDto[]>",
+      "description" : "Fetches progress metrics for a specific metric name for the authenticated user."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/progress/workouts",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Logs a new workout for the member.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/progress/workouts",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Retrieves all workout logs for the member.",
+      "access" : null
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/progress/metrics",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Logs a new progress metric for the member.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/progress/metrics",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Retrieves progress metrics for a specific metric name for the member.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/progress.ts" ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — handles API calls to progress tracking endpoints, exposing logWorkout(WorkoutLogDto): Promise<WorkoutLogDto>, getWorkoutLogs(): Promise<WorkoutLogDto[]>, logProgressMetric(ProgressMetricDto): Promise<ProgressMetricDto>, and getProgressMetrics(string): Promise<ProgressMetricDto[]>.",
     "change_required" : null
   }, {
     "file_name" : "progress.ts",
@@ -4286,13 +4384,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for workout logs and progress metrics.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "WorkoutLogDto",
+      "type" : "{ id: number; date: string; description: string; exercises: string; }",
+      "description" : "DTO for workout log data."
+    }, {
+      "name" : "ProgressMetricDto",
+      "type" : "{ id: number; date: string; metricName: string; metricValue: number; }",
+      "description" : "DTO for progress metric data."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "member-portal-frontend",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — TypeScript types for workout logs and progress metrics.",
     "change_required" : null
   }, {
     "file_name" : "AdminDashboardPage.tsx",
@@ -4669,8 +4775,8 @@
     "feature_display_name" : "Member Portal (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/MemberDashboardPage.tsx", "frontend/src/pages/MyBookingsPage.tsx", "frontend/src/pages/MyProgressPage.tsx", "frontend/src/components/member/UpcomingBookings.tsx", "frontend/src/components/member/MembershipStatus.tsx", "frontend/src/components/member/ProgressChart.tsx", "frontend/src/components/member/BookingsTable.tsx", "frontend/src/components/member/ProgressTrackerForm.tsx", "frontend/src/components/member/ProgressHistoryChart.tsx", "frontend/src/hooks/useProgress.ts", "frontend/src/services/progressService.ts", "frontend/src/types/progress.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature provides the frontend for the member portal of Vikram's Fitness Studio, allowing logged-in members to view their dashboard, manage bookings, and track their fitness progress. It consists of three main pages: `MemberDashboardPage.tsx`, `MyBookingsPage.tsx`, and `MyProgressPage.tsx`, along with several reusable components and custom hooks.\n\n## Design Tokens\n- Navbar: bg-[#0D1B2A] text-white\n- Primary CTA: bg-[#1B998B] hover:bg-[#1B998B] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#1B998B]\n- Section bg: bg-[#F5F5F5] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\n### MemberDashboardPage.tsx\nThis page serves as the central hub for members. It uses the `AdminLayout` component from `core-ui-frontend` for consistent navigation and styling. The page is divided into sections displaying key information:\n1.  **Welcome Section**: A greeting to the logged-in member, emphasizing their fitness journey.\n2.  **Upcoming Bookings**: This section renders the `UpcomingBookings` component, which fetches and displays a summary of the member's next few fitness class bookings using the `useBookings` hook. It shows `FitnessClassDto` details such as `name`, `startTime`, and `instructor`.\n3.  **Membership Status**: This section renders the `MembershipStatus` component, which fetches and displays the member's current membership plan details using the `useMemberships` hook. It shows `UserMembershipDto` details like `membershipPlanName`, `startDate`, `endDate`, and `status`.\n4.  **Progress Summary**: This section renders the `ProgressChart` component, which fetches and displays a visual summary of the member's recent fitness progress using the `useProgress` hook. It displays `ProgressMetricDto` data.\n\n### MyBookingsPage.tsx\nThis page allows members to view and manage all their personal bookings. It uses the `AdminLayout` component. It utilizes the `useBookings` hook to fetch `BookingDto` and `FitnessClassDto` data. The page renders the `BookingsTable` component, which displays a list of bookings. The `BookingsTable` component will allow members to cancel bookings by calling the `cancelUserBooking(bookingId: number)` function from the `useBookings` hook.\n\n### MyProgressPage.tsx\nThis page is dedicated to tracking and logging fitness progress. It uses the `AdminLayout` component. It leverages the `useProgress` hook to fetch and submit `WorkoutLogDto` and `ProgressMetricDto` data. The page includes:\n1.  **Progress Tracker Form**: This section renders the `ProgressTrackerForm` component, allowing members to input new workout logs or progress metrics. The form will call `logWorkout(workoutLog: WorkoutLogDto)` or `logProgressMetric(metric: ProgressMetricDto)` from the `useProgress` hook.\n2.  **Progress History Chart**: This section renders the `ProgressHistoryChart` component, which visualizes the member's historical progress data fetched via the `useProgress` hook.\n\n### Components\n-   **UpcomingBookings.tsx**: Displays a card-like summary of upcoming bookings. It consumes `useBookings` to get `BookingDto` and `FitnessClassDto` data.\n-   **MembershipStatus.tsx**: Displays the member's current membership plan and its expiry. It consumes `useMemberships` to get `UserMembershipDto` data.\n-   **ProgressChart.tsx**: Renders a chart visualizing recent progress. It consumes `useProgress` to get `ProgressMetricDto` data.\n-   **BookingsTable.tsx**: Displays a detailed table of all bookings. It takes `BookingDto[]` as props and provides functionality to cancel bookings by calling `onCancelBooking(bookingId: number)` passed as a prop.\n-   **ProgressTrackerForm.tsx**: A form for logging new workouts or metrics. It takes `onSubmit(data: WorkoutLogDto | ProgressMetricDto)` as a prop.\n-   **ProgressHistoryChart.tsx**: Displays a detailed chart of historical progress. It takes `ProgressMetricDto[]` or `WorkoutLogDto[]` as props.\n\n### Hooks\n-   **useProgress.ts**: This custom hook provides an interface to interact with the `progressService.ts`. It exposes `progressMetrics: ProgressMetricDto[]`, `workoutLogs: WorkoutLogDto[]`, `isLoading: boolean`, `error: Error | null`, `logWorkout(workoutLog: WorkoutLogDto): Promise<void>`, `logProgressMetric(metric: ProgressMetricDto): Promise<void>`, `getWorkoutLogs(): Promise<void>`, and `getProgressMetrics(metricName: string): Promise<void>`. It uses `progressService.logWorkout`, `progressService.getWorkoutLogs`, `progressService.logProgressMetric`, and `progressService.getProgressMetrics`.\n\n### Services\n-   **progressService.ts**: This service handles API calls related to member progress tracking. It uses the `api/client.ts` for HTTP requests. It provides the following functions:\n    -   `logWorkout(workoutLog: WorkoutLogDto): Promise<WorkoutLogDto>`: Makes a POST request to `/api/v1/progress/workouts` with the `WorkoutLogDto` as the request body. Returns the created `WorkoutLogDto`.\n    -   `getWorkoutLogs(): Promise<WorkoutLogDto[]>`: Makes a GET request to `/api/v1/progress/workouts`. Returns a list of `WorkoutLogDto`.\n    -   `logProgressMetric(metric: ProgressMetricDto): Promise<ProgressMetricDto>`: Makes a POST request to `/api/v1/progress/metrics` with the `ProgressMetricDto` as the request body. Returns the created `ProgressMetricDto`.\n    -   `getProgressMetrics(metricName: string): Promise<ProgressMetricDto[]>`: Makes a GET request to `/api/v1/progress/metrics?metricName={metricName}`. Returns a list of `ProgressMetricDto`.\n\n### Types\n-   **progress.ts**: Defines TypeScript interfaces for `WorkoutLogDto` and `ProgressMetricDto`, mirroring the backend DTOs from `progress-tracking-backend`.\n\nThis feature relies on `authentication-frontend` for user authentication and `core-ui-frontend` for shared layout components. It consumes APIs from `booking-api`, `membership-api`, and `progress-tracking-backend`.",
+    "depends_on_features" : [ "authentication-frontend", "core-ui-frontend", "booking-frontend", "membership-frontend", "progress-tracking-backend", "booking-api", "membership-api" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
