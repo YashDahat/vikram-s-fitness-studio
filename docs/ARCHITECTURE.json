@@ -1154,14 +1154,62 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Exposes public endpoints for viewing class schedules and member-only endpoints for creating/managing bookings.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllFitnessClasses",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<FitnessClassDto>>",
+      "description" : "Retrieves all available fitness classes."
+    }, {
+      "name" : "createBooking",
+      "parameters" : [ "Principal principal", "CreateBookingRequest request" ],
+      "return_type" : "ResponseEntity<BookingDto>",
+      "description" : "Creates a new booking for the authenticated user."
+    }, {
+      "name" : "getUserBookings",
+      "parameters" : [ "Principal principal" ],
+      "return_type" : "ResponseEntity<List<BookingDto>>",
+      "description" : "Retrieves all bookings for the authenticated user."
+    }, {
+      "name" : "cancelBooking",
+      "parameters" : [ "Principal principal", "Long bookingId" ],
+      "return_type" : "ResponseEntity<BookingDto>",
+      "description" : "Cancels an existing booking for the authenticated user."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/classes",
+      "request_body" : null,
+      "response_body" : "List<FitnessClassDto>",
+      "description" : "Get all available fitness classes.",
+      "access" : "public"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/bookings",
+      "request_body" : "CreateBookingRequest",
+      "response_body" : "BookingDto",
+      "description" : "Create a new booking for a fitness class.",
+      "access" : "authenticated"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/bookings/my-bookings",
+      "request_body" : null,
+      "response_body" : "List<BookingDto>",
+      "description" : "Get all bookings for the authenticated user.",
+      "access" : "authenticated"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/bookings/{bookingId}",
+      "request_body" : null,
+      "response_body" : "BookingDto",
+      "description" : "Cancel a specific booking by ID.",
+      "access" : "authenticated"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/BookingService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/CreateBookingRequest.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/BookingDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "booking-api",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes public endpoints for viewing class schedules and member-only endpoints for creating/managing bookings, delegating business logic to BookingService.",
     "change_required" : null
   }, {
     "file_name" : "AdminFitnessClassController.java",
@@ -1172,14 +1220,74 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides admin-only CRUD endpoints for managing fitness class schedules.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllFitnessClasses",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<FitnessClassDto>>",
+      "description" : "Retrieves all fitness classes for admin view."
+    }, {
+      "name" : "getFitnessClassById",
+      "parameters" : [ "Long classId" ],
+      "return_type" : "ResponseEntity<FitnessClassDto>",
+      "description" : "Retrieves a specific fitness class by ID for admin view."
+    }, {
+      "name" : "createFitnessClass",
+      "parameters" : [ "FitnessClassDto fitnessClassDto" ],
+      "return_type" : "ResponseEntity<FitnessClassDto>",
+      "description" : "Creates a new fitness class."
+    }, {
+      "name" : "updateFitnessClass",
+      "parameters" : [ "Long classId", "FitnessClassDto fitnessClassDto" ],
+      "return_type" : "ResponseEntity<FitnessClassDto>",
+      "description" : "Updates an existing fitness class."
+    }, {
+      "name" : "deleteFitnessClass",
+      "parameters" : [ "Long classId" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Deletes a fitness class by ID."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/classes",
+      "request_body" : null,
+      "response_body" : "List<FitnessClassDto>",
+      "description" : "Get all fitness classes (admin).",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/classes/{classId}",
+      "request_body" : null,
+      "response_body" : "FitnessClassDto",
+      "description" : "Get a specific fitness class by ID (admin).",
+      "access" : "admin"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/admin/classes",
+      "request_body" : "FitnessClassDto",
+      "response_body" : "FitnessClassDto",
+      "description" : "Create a new fitness class (admin).",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/classes/{classId}",
+      "request_body" : "FitnessClassDto",
+      "response_body" : "FitnessClassDto",
+      "description" : "Update an existing fitness class (admin).",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/classes/{classId}",
+      "request_body" : null,
+      "response_body" : "Void",
+      "description" : "Delete a fitness class by ID (admin).",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/BookingService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/FitnessClassDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "booking-api",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — provides admin-only CRUD endpoints for managing fitness class schedules, delegating business logic to BookingService.",
     "change_required" : null
   }, {
     "file_name" : "AdminBookingController.java",
@@ -1190,14 +1298,50 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides admin-only endpoints for viewing and managing all user bookings.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllBookings",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<BookingDto>>",
+      "description" : "Retrieves all bookings for admin view."
+    }, {
+      "name" : "getBookingById",
+      "parameters" : [ "Long bookingId" ],
+      "return_type" : "ResponseEntity<BookingDto>",
+      "description" : "Retrieves a specific booking by ID for admin view."
+    }, {
+      "name" : "cancelBooking",
+      "parameters" : [ "Long bookingId" ],
+      "return_type" : "ResponseEntity<BookingDto>",
+      "description" : "Cancels a specific booking by ID (admin)."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/bookings",
+      "request_body" : null,
+      "response_body" : "List<BookingDto>",
+      "description" : "Get all bookings (admin).",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/bookings/{bookingId}",
+      "request_body" : null,
+      "response_body" : "BookingDto",
+      "description" : "Get a specific booking by ID (admin).",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/bookings/{bookingId}",
+      "request_body" : null,
+      "response_body" : "BookingDto",
+      "description" : "Cancel a specific booking by ID (admin).",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/BookingService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/BookingDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "booking-api",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — provides admin-only endpoints for viewing and managing all user bookings, delegating business logic to BookingService.",
     "change_required" : null
   }, {
     "file_name" : "CreateBookingRequest.java",
@@ -1209,13 +1353,17 @@
     "status" : "PLANNED",
     "description" : "Data transfer object for creating a new class booking.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "fitnessClassId",
+      "type" : "Long",
+      "description" : "The ID of the fitness class to book. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "booking-api",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure for creating a new class booking.",
     "change_required" : null
   }, {
     "file_name" : "BookingDto.java",
@@ -1227,13 +1375,33 @@
     "status" : "PLANNED",
     "description" : "Data transfer object representing a booking.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the booking."
+    }, {
+      "name" : "userId",
+      "type" : "Long",
+      "description" : "The ID of the user who made the booking."
+    }, {
+      "name" : "fitnessClassId",
+      "type" : "Long",
+      "description" : "The ID of the fitness class booked."
+    }, {
+      "name" : "bookingTime",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the booking was made."
+    }, {
+      "name" : "status",
+      "type" : "BookingStatus",
+      "description" : "Current status of the booking (e.g., CONFIRMED, CANCELLED)."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "booking-api",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure representing a booking.",
     "change_required" : null
   }, {
     "file_name" : "FitnessClassDto.java",
@@ -1245,13 +1413,45 @@
     "status" : "PLANNED",
     "description" : "Data transfer object representing a fitness class.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the fitness class."
+    }, {
+      "name" : "name",
+      "type" : "String",
+      "description" : "Name of the fitness class. Not null, max 100 characters."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "Description of the fitness class. Max 500 characters."
+    }, {
+      "name" : "startTime",
+      "type" : "LocalDateTime",
+      "description" : "Start time of the fitness class. Not null."
+    }, {
+      "name" : "endTime",
+      "type" : "LocalDateTime",
+      "description" : "End time of the fitness class. Not null."
+    }, {
+      "name" : "instructor",
+      "type" : "String",
+      "description" : "Name of the instructor. Not null, max 100 characters."
+    }, {
+      "name" : "maxCapacity",
+      "type" : "Integer",
+      "description" : "Maximum number of participants for the class. Not null, min 1."
+    }, {
+      "name" : "currentBookedSlots",
+      "type" : "Integer",
+      "description" : "Current number of booked slots for the class. Not null, min 0."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "booking-api",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data structure representing a fitness class.",
     "change_required" : null
   }, {
     "file_name" : "WorkoutLog.java",
@@ -3284,8 +3484,8 @@
     "feature_display_name" : "Booking System (API)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/controller/BookingController.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/admin/AdminFitnessClassController.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/admin/AdminBookingController.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/CreateBookingRequest.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/BookingDto.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/FitnessClassDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Booking System API feature provides backend services and controllers for managing fitness classes and user bookings at Vikram's Fitness Studio. It exposes public endpoints for viewing the class schedule and authenticated endpoints for members to create, view, and cancel their bookings. Additionally, it includes admin-only endpoints for full CRUD operations on fitness classes and for managing all user bookings.\n\n### Data Transfer Objects (DTOs)\n\n- `FitnessClassDto`: Represents a fitness class with details like `id`, `name`, `description`, `startTime`, `endTime`, `instructor`, `maxCapacity`, and `currentBookedSlots`. This DTO is used for both public display and admin management of fitness classes.\n- `CreateBookingRequest`: Used by members to request a new booking, containing `fitnessClassId`.\n- `BookingDto`: Represents a user's booking, including `id`, `userId`, `fitnessClassId`, `bookingTime`, and `status`.\n\n### Core Logic (`BookingService` from `booking-core`)\n\nThis feature relies heavily on the `BookingService` from the `booking-core` feature for its business logic. The `BookingService` handles:\n- Retrieving all fitness classes: `getAllFitnessClasses(): List<FitnessClass>`\n- Retrieving a specific fitness class by ID: `getFitnessClassById(Long classId): FitnessClass`\n- Creating a new booking: `createBooking(Long userId, Long classId): Booking`\n- Cancelling an existing booking: `cancelBooking(Long bookingId, Long userId): Booking`\n- Retrieving all bookings for a specific user: `getUserBookings(Long userId): List<Booking>`\n- Retrieving all bookings (admin only): `getAllBookings(): List<Booking>`\n- Creating a new fitness class (admin only): `createFitnessClass(FitnessClass newClass): FitnessClass`\n- Updating an existing fitness class (admin only): `updateFitnessClass(Long classId, FitnessClass updatedClass): FitnessClass`\n- Deleting a fitness class (admin only): `deleteFitnessClass(Long classId): void`\n\n### Controllers\n\n1. **`BookingController`**\n   - Injects `BookingService`.\n   - **`getAllFitnessClasses()`**: \n     1. Calls `bookingService.getAllFitnessClasses()`.\n     2. Maps the list of `FitnessClass` entities to `FitnessClassDto`s.\n     3. Returns a `ResponseEntity` with a list of `FitnessClassDto`s and HTTP status 200 OK.\n   - **`createBooking(Principal principal, CreateBookingRequest request)`**: \n     1. Extracts `userId` from the `principal` (authenticated user).\n     2. Validates `request` using `@Valid`.\n     3. Calls `bookingService.createBooking(userId, request.getFitnessClassId())`.\n     4. Maps the created `Booking` entity to a `BookingDto`.\n     5. Returns a `ResponseEntity` with the `BookingDto` and HTTP status 201 Created. Throws `ResourceNotFoundException` if the class does not exist, or `IllegalStateException` if the class is full or the user already booked.\n   - **`getUserBookings(Principal principal)`**: \n     1. Extracts `userId` from the `principal`.\n     2. Calls `bookingService.getUserBookings(userId)`.\n     3. Maps the list of `Booking` entities to `BookingDto`s.\n     4. Returns a `ResponseEntity` with a list of `BookingDto`s and HTTP status 200 OK.\n   - **`cancelBooking(Principal principal, Long bookingId)`**: \n     1. Extracts `userId` from the `principal`.\n     2. Calls `bookingService.cancelBooking(bookingId, userId)`.\n     3. Maps the cancelled `Booking` entity to a `BookingDto`.\n     4. Returns a `ResponseEntity` with the `BookingDto` and HTTP status 200 OK. Throws `ResourceNotFoundException` if the booking does not exist or does not belong to the user, or `IllegalStateException` if the booking cannot be cancelled (e.g., too close to start time).\n\n2. **`AdminFitnessClassController`**\n   - Injects `BookingService`.\n   - **`getAllFitnessClasses()`**: \n     1. Calls `bookingService.getAllFitnessClasses()`.\n     2. Maps the list of `FitnessClass` entities to `FitnessClassDto`s.\n     3. Returns a `ResponseEntity` with a list of `FitnessClassDto`s and HTTP status 200 OK.\n   - **`getFitnessClassById(Long classId)`**: \n     1. Calls `bookingService.getFitnessClassById(classId)`.\n     2. Maps the `FitnessClass` entity to a `FitnessClassDto`.\n     3. Returns a `ResponseEntity` with the `FitnessClassDto` and HTTP status 200 OK. Throws `ResourceNotFoundException` if the class does not exist.\n   - **`createFitnessClass(@Valid FitnessClassDto fitnessClassDto)`**: \n     1. Validates `fitnessClassDto` using `@Valid`.\n     2. Maps `fitnessClassDto` to a `FitnessClass` entity.\n     3. Calls `bookingService.createFitnessClass(newClass)`.\n     4. Maps the created `FitnessClass` entity back to a `FitnessClassDto`.\n     5. Returns a `ResponseEntity` with the `FitnessClassDto` and HTTP status 201 Created.\n   - **`updateFitnessClass(Long classId, @Valid FitnessClassDto fitnessClassDto)`**: \n     1. Validates `fitnessClassDto` using `@Valid`.\n     2. Maps `fitnessClassDto` to a `FitnessClass` entity.\n     3. Calls `bookingService.updateFitnessClass(classId, updatedClass)`.\n     4. Maps the updated `FitnessClass` entity back to a `FitnessClassDto`.\n     5. Returns a `ResponseEntity` with the `FitnessClassDto` and HTTP status 200 OK. Throws `ResourceNotFoundException` if the class does not exist.\n   - **`deleteFitnessClass(Long classId)`**: \n     1. Calls `bookingService.deleteFitnessClass(classId)`.\n     2. Returns a `ResponseEntity` with no content and HTTP status 204 No Content. Throws `ResourceNotFoundException` if the class does not exist.\n\n3. **`AdminBookingController`**\n   - Injects `BookingService`.\n   - **`getAllBookings()`**: \n     1. Calls `bookingService.getAllBookings()`.\n     2. Maps the list of `Booking` entities to `BookingDto`s.\n     3. Returns a `ResponseEntity` with a list of `BookingDto`s and HTTP status 200 OK.\n   - **`getBookingById(Long bookingId)`**: \n     1. Calls `bookingService.getBookingById(bookingId)` (assuming `BookingService` has this method, if not, it should be added or derived from `getAllBookings` and filtering).\n     2. Maps the `Booking` entity to a `BookingDto`.\n     3. Returns a `ResponseEntity` with the `BookingDto` and HTTP status 200 OK. Throws `ResourceNotFoundException` if the booking does not exist.\n   - **`cancelBooking(Long bookingId)`**: \n     1. Calls `bookingService.cancelBooking(bookingId, null)` (admin can cancel any booking without user ID check, assuming `BookingService` handles this or a dedicated admin cancel method exists).\n     2. Maps the cancelled `Booking` entity to a `BookingDto`.\n     3. Returns a `ResponseEntity` with the `BookingDto` and HTTP status 200 OK. Throws `ResourceNotFoundException` if the booking does not exist or `IllegalStateException` if the booking cannot be cancelled.\n\n### Error Handling\n\n- Controllers will throw `ResourceNotFoundException` (mapped to 404 Not Found by `GlobalExceptionHandler` from `shared-backend`) when an entity is not found.\n- Controllers will throw `IllegalStateException` (mapped to 400 Bad Request or 409 Conflict by `GlobalExceptionHandler`) for business rule violations (e.g., class full, booking too late to cancel).\n- `@Valid` annotations on DTOs will trigger `MethodArgumentNotValidException` (mapped to 400 Bad Request by `GlobalExceptionHandler`) for validation failures.\n\n### Security\n\n- Public endpoints (`GET /api/v1/classes`) are accessible without authentication.\n- Member endpoints (`POST /api/v1/bookings`, `GET /api/v1/bookings/my-bookings`, `DELETE /api/v1/bookings/{bookingId}`) require authentication with the `MEMBER` role.\n- Admin endpoints (`/api/v1/admin/**`) require authentication with the `ADMIN` role.",
+    "depends_on_features" : [ "booking-core", "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
