@@ -3746,14 +3746,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Displays the weekly class schedule with options to book a session.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ClassesPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main page for viewing and interacting with fitness classes."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBookings.ts", "frontend/src/components/booking/ClassSchedule.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "booking-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — Displays the weekly class schedule by consuming data and functions from the `useBookings` hook and rendering the `ClassSchedule` component.",
     "change_required" : null
   }, {
     "file_name" : "ClassSchedule.tsx",
@@ -3764,14 +3769,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A component displaying fitness classes in a weekly calendar or list view.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ClassSchedule",
+      "parameters" : [ "{ fitnessClasses: FitnessClassDto[], userBookings: BookingDto[], onBookClass: (fitnessClassId: number) => void, onCancelBooking: (bookingId: number) => void, isLoading: boolean, isBookingLoading: boolean, isCancelLoading: boolean } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a schedule of fitness classes, allowing users to book or cancel sessions."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/booking.ts", "frontend/src/hooks/useBookings.ts" ],
     "depends_on" : [ ],
     "feature_name" : "booking-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — A presentational component for displaying fitness classes and handling user interactions (booking/cancellation) via props.",
     "change_required" : null
   }, {
     "file_name" : "useBookings.ts",
@@ -3782,14 +3792,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions for fetching class schedules and managing user bookings.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useBookings",
+      "parameters" : [ ],
+      "return_type" : "{ fitnessClasses: FitnessClassDto[], userBookings: BookingDto[], isLoadingClasses: boolean, isLoadingBookings: boolean, errorClasses: Error | null, errorBookings: Error | null, bookClass: (fitnessClassId: number) => Promise<void>, cancelUserBooking: (bookingId: number) => Promise<void>, isBookingLoading: boolean, isCancelLoading: boolean }",
+      "description" : "A custom React hook to manage fitness class data and user bookings, including fetching, booking, and cancellation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/bookingService.ts", "frontend/src/types/booking.ts" ],
     "depends_on" : [ ],
     "feature_name" : "booking-frontend",
-    "file_role" : null,
+    "file_role" : "HOOK layer — Provides state and functions for fetching fitness classes and managing user bookings, abstracting API calls via `bookingService.ts`.",
     "change_required" : null
   }, {
     "file_name" : "bookingService.ts",
@@ -3800,14 +3815,62 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Service for making API calls to class and booking-related endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllFitnessClasses",
+      "parameters" : [ ],
+      "return_type" : "Promise<FitnessClassDto[]>",
+      "description" : "Fetches all available fitness classes from the backend."
+    }, {
+      "name" : "createBooking",
+      "parameters" : [ "CreateBookingRequest request" ],
+      "return_type" : "Promise<BookingDto>",
+      "description" : "Creates a new booking for a fitness class."
+    }, {
+      "name" : "getUserBookings",
+      "parameters" : [ ],
+      "return_type" : "Promise<BookingDto[]>",
+      "description" : "Fetches all bookings for the authenticated user."
+    }, {
+      "name" : "cancelBooking",
+      "parameters" : [ "number bookingId" ],
+      "return_type" : "Promise<BookingDto>",
+      "description" : "Cancels an existing booking by its ID."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/classes",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all fitness classes.",
+      "access" : null
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/bookings",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Creates a new booking for a fitness class.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/bookings/my-bookings",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches bookings for the current user.",
+      "access" : null
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/bookings/{bookingId}",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Cancels a specific booking.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/booking.ts" ],
     "depends_on" : [ ],
     "feature_name" : "booking-frontend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — Handles API calls to the backend booking endpoints, providing functions for fetching classes, creating bookings, getting user bookings, and canceling bookings.",
     "change_required" : null
   }, {
     "file_name" : "booking.ts",
@@ -3819,13 +3882,25 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for fitness classes and user bookings.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "FitnessClassDto",
+      "type" : "interface",
+      "description" : "Interface for fitness class data, including id, name, description, time, instructor, and capacity."
+    }, {
+      "name" : "BookingDto",
+      "type" : "interface",
+      "description" : "Interface for user booking data, including id, user ID, class ID, booking time, and status."
+    }, {
+      "name" : "CreateBookingRequest",
+      "type" : "interface",
+      "description" : "Interface for the request body when creating a new booking."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "booking-frontend",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — Defines TypeScript interfaces for `FitnessClassDto`, `BookingDto`, and `CreateBookingRequest`.",
     "change_required" : null
   }, {
     "file_name" : "BlogPage.tsx",
@@ -4508,8 +4583,8 @@
     "feature_display_name" : "Booking UI (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/ClassesPage.tsx", "frontend/src/components/booking/ClassSchedule.tsx", "frontend/src/hooks/useBookings.ts", "frontend/src/services/bookingService.ts", "frontend/src/types/booking.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0D1B2A] text-white\n- Primary CTA: bg-[#1B998B] hover:bg-[#157a6e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#1B998B]\n- Section bg: bg-[#F5F5F5] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\n## Feature Instruction: Booking UI (Frontend)\n\nThis feature provides the user interface for viewing fitness classes and managing personal bookings at Vikram's Fitness Studio. It consists of a main `ClassesPage.tsx` for displaying the weekly schedule, a reusable `ClassSchedule.tsx` component, a `useBookings.ts` hook for data fetching and mutation, a `bookingService.ts` for API interactions, and `booking.ts` for defining TypeScript types.\n\n### Data Types (`booking.ts`)\n\nThe `booking.ts` file defines the TypeScript interfaces for `FitnessClassDto`, `BookingDto`, and `CreateBookingRequest` which mirror the backend DTOs from the `booking-api` feature. These types ensure strong typing throughout the frontend booking flow.\n\n```\n\ntypescript\nexport interface FitnessClassDto {\n  id: number;\n  name: string;\n  description: string;\n  startTime: string; // LocalDateTime from backend, use string for ISO format\n  endTime: string;   // LocalDateTime from backend, use string for ISO format\n  instructor: string;\n  maxCapacity: number;\n  currentBookedSlots: number;\n}\n\nexport interface BookingDto {\n  id: number;\n  userId: number;\n  fitnessClassId: number;\n  bookingTime: string; // LocalDateTime from backend, use string for ISO format\n  status: 'CONFIRMED' | 'CANCELLED' | 'COMPLETED';\n}\n\nexport interface CreateBookingRequest {\n  fitnessClassId: number;\n}\n\n\n```\n\n### API Service (`bookingService.ts`)\n\n`bookingService.ts` is responsible for making HTTP requests to the `booking-api` backend. It uses the `apiClient` from `frontend/src/api/client.ts` to handle authenticated requests. It exports the following asynchronous functions:\n\n- `getAllFitnessClasses(): Promise<FitnessClassDto[]>`: Fetches all available fitness classes. Calls `GET /api/v1/classes`.\n- `createBooking(request: CreateBookingRequest): Promise<BookingDto>`: Creates a new booking for the authenticated user. Calls `POST /api/v1/bookings`.\n- `getUserBookings(): Promise<BookingDto[]>`: Fetches all bookings for the authenticated user. Calls `GET /api/v1/bookings/my-bookings`.\n- `cancelBooking(bookingId: number): Promise<BookingDto>`: Cancels a specific booking for the authenticated user. Calls `DELETE /api/v1/bookings/{bookingId}`.\n\nError handling in `bookingService.ts` should catch network errors or API errors and re-throw them for the hooks to handle.\n\n### React Hook (`useBookings.ts`)\n\nThe `useBookings.ts` hook provides the state and functions necessary for the `ClassesPage.tsx` and `ClassSchedule.tsx` components. It leverages `react-query` or similar for data fetching, caching, and mutation management. It exports the following:\n\n- `useBookings()`: A custom hook that returns an object with:\n    - `fitnessClasses: FitnessClassDto[]`: A list of all available fitness classes.\n    - `userBookings: BookingDto[]`: A list of bookings for the currently authenticated user.\n    - `isLoadingClasses: boolean`: Loading state for fitness classes.\n    - `isLoadingBookings: boolean`: Loading state for user bookings.\n    - `errorClasses: Error | null`: Error object if fetching classes fails.\n    - `errorBookings: Error | null`: Error object if fetching bookings fails.\n    - `bookClass(fitnessClassId: number): Promise<void>`: Function to create a new booking. On success, it should invalidate and refetch `userBookings` and `fitnessClasses` to reflect the updated `currentBookedSlots`.\n    - `cancelUserBooking(bookingId: number): Promise<void>`: Function to cancel an existing booking. On success, it should invalidate and refetch `userBookings` and `fitnessClasses`.\n    - `isBookingLoading: boolean`: Loading state for booking creation.\n    - `isCancelLoading: boolean`: Loading state for booking cancellation.\n\nThis hook will call the functions defined in `bookingService.ts`.\n\n### Component (`ClassSchedule.tsx`)\n\nThe `ClassSchedule.tsx` component is a presentational component that displays a list or calendar view of fitness classes. It receives `fitnessClasses` and `userBookings` as props, along with `onBookClass` and `onCancelBooking` callback functions.\n\n```\n\ntypescript\ninterface ClassScheduleProps {\n  fitnessClasses: FitnessClassDto[];\n  userBookings: BookingDto[];\n  onBookClass: (fitnessClassId: number) => void;\n  onCancelBooking: (bookingId: number) => void;\n  isLoading: boolean;\n  isBookingLoading: boolean;\n  isCancelLoading: boolean;\n}\n\nconst ClassSchedule: React.FC<ClassScheduleProps> = ({ fitnessClasses, userBookings, onBookClass, onCancelBooking, isLoading, isBookingLoading, isCancelLoading }) => {\n  // ... component implementation\n}\n\n\n```\n\nIt should:\n1. Display classes grouped by day and time.\n2. For each class, show `name`, `instructor`, `startTime`, `endTime`, `description`, `currentBookedSlots`, and `maxCapacity`.\n3. Indicate if a class is full (`currentBookedSlots === maxCapacity`).\n4. For authenticated users, show a 'Book Now' button for available classes they haven't booked, and a 'Cancel Booking' button for classes they have booked.\n5. Disable 'Book Now' if the class is full or `isBookingLoading` is true.\n6. Disable 'Cancel Booking' if `isCancelLoading` is true.\n7. Provide visual feedback (e.g., spinners) when `isBookingLoading` or `isCancelLoading` is true.\n8. Use the design tokens for styling, particularly for buttons and card backgrounds.\n\n### Page (`ClassesPage.tsx`)\n\nThe `ClassesPage.tsx` is the main page for displaying the fitness class schedule. It uses the `Layout` component from `core-ui-frontend` for consistent navigation and footer.\n\nIt should:\n1. Fetch fitness classes and user bookings using the `useBookings` hook.\n2. Display a prominent heading: \"Our Class Schedule\" with an encouraging sub-heading like \"Find your perfect workout and book your spot today!\"\n3. Render the `ClassSchedule` component, passing the data and booking/cancellation functions from `useBookings`.\n4. Show loading indicators while `isLoadingClasses` or `isLoadingBookings` is true.\n5. Display error messages if `errorClasses` or `errorBookings` are present.\n6. The page structure should follow the `Section container` design token.\n7. The hero section should feature a background image relevant to fitness, with an overlay, and the studio's name and a compelling headline.\n\n```\n\ntypescript\n// Example structure for ClassesPage.tsx\nimport React from 'react';\nimport Layout from '@/components/Layout';\nimport { useBookings } from '@/hooks/useBookings';\nimport { ClassSchedule } from '@/components/booking/ClassSchedule';\n\nconst ClassesPage: React.FC = () => {\n  const { fitnessClasses, userBookings, isLoadingClasses, isLoadingBookings, errorClasses, errorBookings, bookClass, cancelUserBooking, isBookingLoading, isCancelLoading } = useBookings();\n\n  return (\n    <Layout>\n      <section className=\"relative bg-cover bg-center h-96\" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80)' }}>\n        <div className=\"absolute inset-0 bg-black bg-opacity-50\" />\n        <div className=\"relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4\">\n          <h1 className=\"text-4xl md:text-6xl font-bold text-white\">Vikram's Fitness Studio</h1>\n          <p className=\"mt-4 text-xl md:text-2xl font-light\">Find your perfect workout and book your spot today!</p>\n        </div>\n      </section>\n\n      <section className=\"py-16 px-4 bg-[#F5F5F5]\">\n        <div className=\"max-w-7xl mx-auto\">\n          <h2 className=\"text-3xl font-bold text-[#0D1B2A] text-center mb-8\">Our Class Schedule</h2>\n          {isLoadingClasses || isLoadingBookings ? (\n            <p className=\"text-center text-[#333333]\">Loading classes...</p>\n          ) : errorClasses || errorBookings ? (\n            <p className=\"text-center text-red-500\">Error loading classes: {errorClasses?.message || errorBookings?.message}</p>\n          ) : (\n            <ClassSchedule\n              fitnessClasses={fitnessClasses}\n              userBookings={userBookings}\n              onBookClass={bookClass}\n              onCancelBooking={cancelUserBooking}\n              isLoading={isLoadingClasses || isLoadingBookings}\n              isBookingLoading={isBookingLoading}\n              isCancelLoading={isCancelLoading}\n            />\n          )}\n        </div>\n      </section>\n    </Layout>\n  );\n};\n\nexport default ClassesPage;\n\n\n```",
+    "depends_on_features" : [ "booking-api", "authentication-frontend", "core-ui-frontend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
