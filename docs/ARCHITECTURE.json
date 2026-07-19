@@ -2927,14 +2927,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "The root component of the React application that sets up routing.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "App",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main application structure, including routing and authentication context."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/context/AuthContext.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui-frontend",
-    "file_role" : null,
+    "file_role" : "Root component that sets up application-wide routing and provides authentication context.",
     "change_required" : null
   }, {
     "file_name" : "Layout.tsx",
@@ -2945,14 +2950,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Main application layout component, including the header, footer, and content area.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Layout",
+      "parameters" : [ "{ children: React.ReactNode } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the standard public page layout with header, footer, and children content."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/Header.tsx", "frontend/src/components/Footer.tsx", "frontend/src/components/common/WhatsAppCta.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui-frontend",
-    "file_role" : null,
+    "file_role" : "Main application layout component for public-facing pages, integrating Header, Footer, and content.",
     "change_required" : null
   }, {
     "file_name" : "Header.tsx",
@@ -2963,14 +2973,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Application header with navigation links, logo, and user authentication status.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Header",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the application header with navigation links and user authentication status."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui-frontend",
-    "file_role" : null,
+    "file_role" : "Application header component displaying navigation, logo, and user authentication status.",
     "change_required" : null
   }, {
     "file_name" : "Footer.tsx",
@@ -2981,14 +2996,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Application footer with contact information, social media links, and sitemap.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Footer",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the application footer with business contact details and navigation."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui-frontend",
-    "file_role" : null,
+    "file_role" : "Application footer component displaying contact information, social media links, and sitemap.",
     "change_required" : null
   }, {
     "file_name" : "ProtectedRoute.tsx",
@@ -2999,14 +3019,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A wrapper component that restricts access to routes based on user authentication and roles.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProtectedRoute",
+      "parameters" : [ "{ children: React.ReactNode, allowedRoles?: string[] } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Protects routes by checking user authentication and roles, redirecting if unauthorized."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useAuth.ts" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui-frontend",
-    "file_role" : null,
+    "file_role" : "Wrapper component that restricts access to routes based on user authentication and roles.",
     "change_required" : null
   }, {
     "file_name" : "AdminLayout.tsx",
@@ -3017,14 +3042,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Layout for the admin dashboard, including a sidebar for navigation.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AdminLayout",
+      "parameters" : [ "{ children: React.ReactNode } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the admin dashboard layout with a sidebar and content area."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui-frontend",
-    "file_role" : null,
+    "file_role" : "Layout component for the admin dashboard, including a sidebar for navigation.",
     "change_required" : null
   }, {
     "file_name" : "WhatsAppCta.tsx",
@@ -3035,14 +3065,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A floating action button for quick WhatsApp inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "WhatsAppCta",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a floating WhatsApp button for direct communication."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui-frontend",
-    "file_role" : null,
+    "file_role" : "A floating action button for quick WhatsApp inquiries.",
     "change_required" : null
   }, {
     "file_name" : "HomePage.tsx",
@@ -4256,8 +4291,8 @@
     "feature_display_name" : "Core UI (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/App.tsx", "frontend/src/components/Layout.tsx", "frontend/src/components/Header.tsx", "frontend/src/components/Footer.tsx", "frontend/src/components/ProtectedRoute.tsx", "frontend/src/components/AdminLayout.tsx", "frontend/src/components/common/WhatsAppCta.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Core UI (Frontend) feature provides the foundational structure and common components for the entire React application. It includes the main application entry point (`App.tsx`), the public-facing layout (`Layout.tsx`), the admin-specific layout (`AdminLayout.tsx`), essential navigation elements (`Header.tsx`, `Footer.tsx`), a protected route wrapper (`ProtectedRoute.tsx`), and a common WhatsApp CTA component (`WhatsAppCta.tsx`).\n\n## Design Tokens\n- Navbar: bg-[#0D1B2A] text-white\n- Primary CTA: bg-[#F26419] hover:bg-[#E05A15] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#F26419]\n- Section bg: bg-[#F5F5F5] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\n### `App.tsx`\nThis file serves as the root component, responsible for setting up the application's routing using `react-router-dom`. It wraps the entire application within the `AuthProvider` from the `authentication-frontend` feature to provide authentication context to all child components. The main routes include public pages, authenticated member pages, and protected admin pages. Public routes like `/`, `/about`, `/contact`, `/classes`, `/memberships`, and `/blog` are accessible to all users. Authenticated routes like `/member/dashboard`, `/member/bookings`, and `/member/progress` are wrapped by `ProtectedRoute` to ensure only logged-in users can access them. Admin routes under `/admin/*` are also wrapped by `ProtectedRoute` and require the user to have an 'ADMIN' role.\n\n### `Layout.tsx`\nThis component defines the standard layout for public-facing pages. It includes the `Header` at the top, the main content area (passed as `children`), and the `Footer` at the bottom. It also incorporates the `WhatsAppCta` component for easy access to support. The layout ensures a consistent look and feel across all public pages, applying global styling and responsive design principles.\n\n### `Header.tsx`\nThe `Header` component displays the studio's logo, main navigation links, and user authentication status. It consumes the `useAuth` hook from the `authentication-frontend` feature to determine if a user is logged in and to display appropriate links (e.g., 'Login'/'Register' or 'Member Portal'/'Logout'). Navigation links should include 'Home', 'Classes', 'Memberships', 'Blog', 'About Us', and 'Contact'. The header should be responsive, adapting its layout for mobile and desktop views.\n\n### `Footer.tsx`\nThis component provides consistent footer content across the application. It includes Vikram's Fitness Studio's contact information (address, phone), social media links, and a sitemap. The contact details should be displayed verbatim:\n- Address: Chinar Heights, 33/9, Prabhat Rd, opp. Shri Mahila Griha Udyog Lijjat Papad Factory, Abhiman Society, Kachare Colony, Papad, Pune, Maharashtra 411004\n- Phone: 095277 30493\n\n### `ProtectedRoute.tsx`\nThis component acts as a guard for routes that require authentication or specific roles. It takes `children` (the component to render if authorized) and an optional `allowedRoles` array. It uses the `useAuth` hook to check the user's authentication status and roles. If the user is not authenticated, they are redirected to the `/login` page. If `allowedRoles` are specified, and the authenticated user does not possess any of the required roles, they are redirected to a `/` or `/member/dashboard` page, depending on whether they are a regular member or an unprivileged authenticated user. This component ensures that sensitive routes are only accessible to authorized users.\n\n### `AdminLayout.tsx`\nThis component provides a distinct layout for the admin dashboard. It includes a sidebar for admin-specific navigation links (e.g., 'Dashboard', 'Manage Classes', 'Manage Memberships', 'Manage Blog Posts') and a main content area. This layout ensures that admin pages have a consistent interface separate from the public-facing site. The sidebar should be collapsible and responsive.\n\n### `WhatsAppCta.tsx`\nThis component renders a floating WhatsApp button that, when clicked, opens a WhatsApp chat with the studio's contact number. The button should be positioned consistently (e.g., bottom-right) across all public pages, providing an easy way for users to inquire. The WhatsApp number should be `9527730493` (without the leading zero or spaces).",
+    "depends_on_features" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
