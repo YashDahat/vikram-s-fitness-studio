@@ -2031,14 +2031,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a customer's order, typically for a membership plan.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the order. Not null."
+    }, {
+      "name" : "user",
+      "type" : "User",
+      "description" : "The user who placed the order. Not null."
+    }, {
+      "name" : "orderDate",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the order was placed. Not null."
+    }, {
+      "name" : "totalAmount",
+      "type" : "BigDecimal",
+      "description" : "Total amount of the order. Not null, precision 10, scale 2."
+    }, {
+      "name" : "status",
+      "type" : "OrderStatus",
+      "description" : "Current status of the order (e.g., PENDING, COMPLETED). Not null."
+    }, {
+      "name" : "orderItems",
+      "type" : "List<OrderItem>",
+      "description" : "List of items included in this order. Cascade all operations, orphan removal."
+    } ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/User.java", "backend/src/main/java/com/vikramsfitnessstudio/model/OrderStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the structure of a customer order, including its status and associated items.",
     "change_required" : null
   }, {
     "file_name" : "OrderItem.java",
@@ -2049,14 +2073,34 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a single item within an order, linking to a MembershipPlan.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the order item. Not null."
+    }, {
+      "name" : "order",
+      "type" : "Order",
+      "description" : "The order this item belongs to. Not null."
+    }, {
+      "name" : "membershipPlan",
+      "type" : "MembershipPlan",
+      "description" : "The membership plan associated with this order item. Not null."
+    }, {
+      "name" : "quantity",
+      "type" : "Integer",
+      "description" : "Quantity of the membership plan ordered. Not null, min 1."
+    }, {
+      "name" : "priceAtPurchase",
+      "type" : "BigDecimal",
+      "description" : "Price of the membership plan at the time of purchase. Not null, precision 10, scale 2."
+    } ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/Order.java", "backend/src/main/java/com/vikramsfitnessstudio/model/MembershipPlan.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines a single item within an order, linking to a specific membership plan.",
     "change_required" : null
   }, {
     "file_name" : "OrderStatus.java",
@@ -2067,14 +2111,14 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Enumeration for order statuses (e.g., PENDING, COMPLETED, FAILED).",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the enumeration for possible order statuses.",
     "change_required" : null
   }, {
     "file_name" : "OrderRepository.java",
@@ -2085,14 +2129,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for Order entities.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "findByUserId",
+      "parameters" : [ "Long userId" ],
+      "return_type" : "List<Order>",
+      "description" : "Retrieves all orders placed by a specific user."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/Order.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides data access methods for `Order` entities, including finding orders by user ID.",
     "change_required" : null
   }, {
     "file_name" : "OrderService.java",
@@ -2103,14 +2152,29 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles business logic for creating and managing orders.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "createOrder",
+      "parameters" : [ "Long userId", "CreateOrderRequest createOrderRequest" ],
+      "return_type" : "OrderDto",
+      "description" : "Creates a new order for a user based on the provided request. Throws ResourceNotFoundException if the membership plan does not exist."
+    }, {
+      "name" : "getOrdersByUserId",
+      "parameters" : [ "Long userId" ],
+      "return_type" : "List<OrderDto>",
+      "description" : "Retrieves all orders for a given user ID."
+    }, {
+      "name" : "getAllOrders",
+      "parameters" : [ ],
+      "return_type" : "List<OrderDto>",
+      "description" : "Retrieves all orders in the system (admin access)."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/repository/OrderRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/service/MembershipService.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements `createOrder(CreateOrderRequest): OrderDto`, `getOrdersByUserId(Long userId): List<OrderDto>`, and `getAllOrders(): List<OrderDto>`; delegates persistence to `OrderRepository` and membership plan retrieval to `MembershipService`.",
     "change_required" : null
   }, {
     "file_name" : "OrderController.java",
@@ -2121,14 +2185,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Exposes endpoints for members to create and view their orders.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "createOrder",
+      "parameters" : [ "Principal principal", "CreateOrderRequest createOrderRequest" ],
+      "return_type" : "ResponseEntity<OrderDto>",
+      "description" : "Handles requests to create a new order for the authenticated user."
+    }, {
+      "name" : "getMemberOrders",
+      "parameters" : [ "Principal principal" ],
+      "return_type" : "ResponseEntity<List<OrderDto>>",
+      "description" : "Handles requests to retrieve all orders for the authenticated user."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/orders",
+      "request_body" : "CreateOrderRequest",
+      "response_body" : "OrderDto",
+      "description" : "Creates a new order for the authenticated user.",
+      "access" : "authenticated"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/orders/my-orders",
+      "request_body" : null,
+      "response_body" : "List<OrderDto>",
+      "description" : "Retrieves all orders for the authenticated user.",
+      "access" : "authenticated"
+    } ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/OrderService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/CreateOrderRequest.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/OrderDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes REST endpoints for authenticated members to `POST /api/v1/orders` to create orders and `GET /api/v1/orders/my-orders` to view their orders.",
     "change_required" : null
   }, {
     "file_name" : "AdminOrderController.java",
@@ -2139,14 +2227,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides admin-only endpoints for viewing all customer orders.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "getAllOrders",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<OrderDto>>",
+      "description" : "Handles requests to retrieve all orders in the system for administrators."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/orders",
+      "request_body" : null,
+      "response_body" : "List<OrderDto>",
+      "description" : "Retrieves all orders in the system.",
+      "access" : "admin"
+    } ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/OrderService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/OrderDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — provides admin-only REST endpoint `GET /api/v1/admin/orders` to view all customer orders.",
     "change_required" : null
   }, {
     "file_name" : "CreateOrderRequest.java",
@@ -2157,14 +2257,22 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Data transfer object for creating a new order.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "membershipPlanId",
+      "type" : "UUID",
+      "description" : "The ID of the membership plan being ordered. Not null."
+    }, {
+      "name" : "quantity",
+      "type" : "Integer",
+      "description" : "The quantity of the membership plan. Not null, min 1."
+    } ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data transfer object for creating a new order.",
     "change_required" : null
   }, {
     "file_name" : "OrderDto.java",
@@ -2175,14 +2283,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Data transfer object representing a customer order.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the order."
+    }, {
+      "name" : "userId",
+      "type" : "Long",
+      "description" : "ID of the user who placed the order."
+    }, {
+      "name" : "orderDate",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the order was placed."
+    }, {
+      "name" : "totalAmount",
+      "type" : "BigDecimal",
+      "description" : "Total amount of the order."
+    }, {
+      "name" : "status",
+      "type" : "OrderStatus",
+      "description" : "Current status of the order."
+    }, {
+      "name" : "orderItems",
+      "type" : "List<OrderItemDto>",
+      "description" : "List of items included in this order."
+    } ],
+    "api_endpoints" : [ ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "order-processing-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — defines the data transfer object representing a customer order for API responses.",
     "change_required" : null
   }, {
     "file_name" : "PaymentService.java",
@@ -3828,8 +3960,8 @@
     "feature_display_name" : "Order Processing (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/Order.java", "backend/src/main/java/com/vikramsfitnessstudio/model/OrderItem.java", "backend/src/main/java/com/vikramsfitnessstudio/model/OrderStatus.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/OrderRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/service/OrderService.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/OrderController.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/admin/AdminOrderController.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/CreateOrderRequest.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/OrderDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature handles the backend logic for customer orders at Vikram's Fitness Studio, primarily for membership plan purchases. It defines the `Order` and `OrderItem` entities, manages their persistence via `OrderRepository`, and provides business logic through `OrderService`. The `OrderService` interacts with the `MembershipService` from the `membership-core` feature to retrieve membership plan details and potentially assign memberships upon order completion. The `OrderController` exposes endpoints for authenticated members to create and view their orders, while the `AdminOrderController` provides administrative access to view all orders. The `OrderStatus` enum defines the possible states of an order.\n\n### Order Flow:\n1.  A member initiates an order by sending a `CreateOrderRequest` to `OrderController.createOrder()`.\n2.  `OrderController` calls `OrderService.createOrder()`.\n3.  `OrderService.createOrder()` performs the following steps:\n    a.  Validates the `membershipPlanId` by calling `membershipService.getMembershipPlanById(UUID planId)` from the `membership-core` feature.\n    b.  Creates a new `Order` entity with `OrderStatus.PENDING`.\n    c.  Creates `OrderItem` entities linked to the `Order` and the `MembershipPlan`.\n    d.  Persists the `Order` and `OrderItem` entities using `orderRepository.save()`.\n    e.  Returns an `OrderDto` representing the created order.\n4.  The `OrderController` returns the `OrderDto` with HTTP status 201 Created.\n\n### Member Order Retrieval:\n1.  An authenticated member requests their orders via `OrderController.getMemberOrders()`.\n2.  `OrderController` calls `OrderService.getOrdersByUserId(Long userId)`.\n3.  `OrderService` retrieves orders from `orderRepository.findByUserId(Long userId)`.\n4.  `OrderService` maps the `Order` entities to `OrderDto` and returns them.\n5.  `OrderController` returns a list of `OrderDto` with HTTP status 200 OK.\n\n### Admin Order Retrieval:\n1.  An administrator requests all orders via `AdminOrderController.getAllOrders()`.\n2.  `AdminOrderController` calls `OrderService.getAllOrders()`.\n3.  `OrderService` retrieves all orders from `orderRepository.findAll()`.\n4.  `OrderService` maps the `Order` entities to `OrderDto` and returns them.\n5.  `AdminOrderController` returns a list of `OrderDto` with HTTP status 200 OK.\n\n### Error Handling:\n-   If a `MembershipPlan` is not found during order creation, `OrderService` throws a `ResourceNotFoundException` (from `shared-backend` feature), which `OrderController` translates to an HTTP 404 Not Found response.\n-   Invalid input (e.g., missing fields in `CreateOrderRequest`) will result in `MethodArgumentNotValidException` (from `shared-backend` feature) handled globally, returning HTTP 400 Bad Request.",
+    "depends_on_features" : [ "membership-core", "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
