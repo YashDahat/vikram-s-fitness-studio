@@ -3911,14 +3911,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Displays a grid of blog posts with titles, summaries, and images.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main blog page, fetching and displaying a list of blog posts."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBlog.ts", "frontend/src/components/blog/BlogCard.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "content-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays a list of blog posts using the `useBlog` hook and `BlogCard` components.",
     "change_required" : null
   }, {
     "file_name" : "BlogPostDetailPage.tsx",
@@ -3929,14 +3934,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Displays the full content of a single blog post.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogPostDetailPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the detailed view of a single blog post."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBlog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "content-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays the full content of a single blog post based on its ID from the URL, using the `useBlog` hook.",
     "change_required" : null
   }, {
     "file_name" : "BlogCard.tsx",
@@ -3947,14 +3957,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A card component for displaying a blog post summary on the main blog page.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "BlogCard",
+      "parameters" : [ "{ post: BlogPostDto } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a card with a blog post's summary, image, and a link to its detail page."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "content-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a summary of a blog post, linking to its detail page.",
     "change_required" : null
   }, {
     "file_name" : "useBlog.ts",
@@ -3965,14 +3980,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions for fetching blog posts.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useBlog",
+      "parameters" : [ ],
+      "return_type" : "{ blogPosts: BlogPostDto[], blogPost: BlogPostDto | null, isLoading: boolean, error: Error | null, getAllBlogPosts: () => Promise<void>, getBlogPostById: (id: UUID) => Promise<void> }",
+      "description" : "A React hook to fetch and manage blog post data."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/blogService.ts", "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "content-frontend",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides functions for fetching blog posts from `blogService.ts` and manages their loading state and errors.",
     "change_required" : null
   }, {
     "file_name" : "blogService.ts",
@@ -3983,14 +4003,38 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Service for making API calls to blog-related endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllBlogPosts",
+      "parameters" : [ ],
+      "return_type" : "Promise<BlogPostDto[]>",
+      "description" : "Fetches all blog posts from the backend."
+    }, {
+      "name" : "getBlogPostById",
+      "parameters" : [ "UUID id" ],
+      "return_type" : "Promise<BlogPostDto>",
+      "description" : "Fetches a single blog post by its ID from the backend."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/blog",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all blog posts.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/blog/{id}",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a single blog post by its ID.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/blog.ts" ],
     "depends_on" : [ ],
     "feature_name" : "content-frontend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — makes API calls to blog-related endpoints in the `content-management-backend` feature.",
     "change_required" : null
   }, {
     "file_name" : "blog.ts",
@@ -4002,13 +4046,37 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for blog posts.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "UUID",
+      "description" : "Unique identifier for the blog post."
+    }, {
+      "name" : "title",
+      "type" : "string",
+      "description" : "Title of the blog post."
+    }, {
+      "name" : "content",
+      "type" : "string",
+      "description" : "Full content of the blog post."
+    }, {
+      "name" : "author",
+      "type" : "string",
+      "description" : "Author of the blog post."
+    }, {
+      "name" : "publicationDate",
+      "type" : "LocalDate",
+      "description" : "Date when the blog post was published."
+    }, {
+      "name" : "lastModifiedDate",
+      "type" : "LocalDateTime",
+      "description" : "Date when the blog post was last modified."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "content-frontend",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines the TypeScript type for `BlogPostDto`.",
     "change_required" : null
   }, {
     "file_name" : "MemberDashboardPage.tsx",
@@ -4592,8 +4660,8 @@
     "feature_display_name" : "Content Display (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/BlogPage.tsx", "frontend/src/pages/BlogPostDetailPage.tsx", "frontend/src/components/blog/BlogCard.tsx", "frontend/src/hooks/useBlog.ts", "frontend/src/services/blogService.ts", "frontend/src/types/blog.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature, Content Display (Frontend), is responsible for rendering blog posts to the public. It consists of two main pages: `BlogPage.tsx` which displays a list of blog post summaries, and `BlogPostDetailPage.tsx` which shows the full content of a single blog post. These pages utilize the `useBlog.ts` hook to fetch data from the backend. The `useBlog.ts` hook, in turn, interacts with `blogService.ts` to make API calls to the `/api/v1/blog` and `/api/v1/blog/{id}` endpoints provided by the `content-management-backend` feature. The `BlogCard.tsx` component is used on the `BlogPage.tsx` to display individual blog post summaries, consuming the `BlogPostDto` type defined in `blog.ts`. All frontend components adhere to the design tokens derived from the provided color scheme and visual direction.\n\n## Design Tokens\n- Navbar: bg-[#0D1B2A] text-white\n- Primary CTA: bg-[#F26419] hover:bg-[#E05A17] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#F26419]\n- Section bg: bg-[#F5F5F5] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\n### `BlogPage.tsx`\nThis page displays a grid of blog posts. It should fetch all blog posts using `useBlog().getAllBlogPosts()` and render them using `BlogCard` components. The page should have a clear heading \"Our Latest Insights\" with an encouraging tone. Each `BlogCard` should link to the `BlogPostDetailPage` for the respective blog post.\n\n### `BlogPostDetailPage.tsx`\nThis page displays the full content of a single blog post. It should extract the blog post ID from the URL parameters and use `useBlog().getBlogPostById(id)` to fetch the specific blog post. The content should be rendered with appropriate typography and spacing, reflecting the professional and encouraging tone. The page should display the title, author, publication date, and the full content of the blog post.\n\n### `BlogCard.tsx`\nThis component receives a `BlogPostDto` as a prop. It should display the blog post's title, a truncated summary of its content, the author, and the publication date. It should also include a placeholder image (e.g., a relevant Unsplash image for fitness/health) and a \"Read More\" button that navigates to the `BlogPostDetailPage` for that post. The card should use the `Card` design token for its styling.\n\n### `useBlog.ts`\nThis hook provides functions to interact with the `blogService.ts`. It should expose `getAllBlogPosts(): Promise<BlogPostDto[]>` and `getBlogPostById(id: UUID): Promise<BlogPostDto>`. It should manage loading states and errors for these operations.\n\n### `blogService.ts`\nThis service is responsible for making actual API calls to the `content-management-backend`. It should have two asynchronous functions:\n1. `getAllBlogPosts(): Promise<BlogPostDto[]>`: Makes a GET request to `/api/v1/blog`.\n2. `getBlogPostById(id: UUID): Promise<BlogPostDto>`: Makes a GET request to `/api/v1/blog/{id}`.\nBoth functions should handle potential network errors and return the data or throw an error.\n\n### `blog.ts`\nThis file defines the TypeScript interface for `BlogPostDto`, which mirrors the `BlogPostDto` data shape from the `content-management-backend` feature.",
+    "depends_on_features" : [ "content-management-backend", "core-ui-frontend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
