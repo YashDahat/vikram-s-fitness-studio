@@ -3088,14 +3088,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Landing page featuring a full-bleed hero, value proposition sections, class highlights, and testimonials.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HomePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main landing page, composed of HeroSection, ValueProposition, ClassHighlights, Testimonials, and CtaSection."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/ValueProposition.tsx", "frontend/src/components/home/ClassHighlights.tsx", "frontend/src/components/home/Testimonials.tsx", "frontend/src/components/home/CtaSection.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — serves as the main landing page for the studio, integrating various components to showcase services and build trust.",
     "change_required" : null
   }, {
     "file_name" : "HeroSection.tsx",
@@ -3106,14 +3111,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "The main hero section for the homepage with a primary call-to-action.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HeroSection",
+      "parameters" : [ "{ headline: string, subheadline: string, ctaText: string, ctaLink: string } props" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the hero section with dynamic content and a CTA button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a full-bleed hero image with a headline, subheadline, and a call-to-action button.",
     "change_required" : null
   }, {
     "file_name" : "ValueProposition.tsx",
@@ -3124,14 +3134,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Component highlighting the studio's focus on sustainable weight loss and lifestyle disease management.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ValueProposition",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section detailing the studio's value propositions."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — highlights the studio's core value propositions and unique selling points.",
     "change_required" : null
   }, {
     "file_name" : "ClassHighlights.tsx",
@@ -3142,14 +3157,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A section on the homepage showcasing a few featured fitness classes.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ClassHighlights",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a section displaying featured fitness classes, fetching data via useBookings."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useBookings.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — showcases a selection of featured fitness classes by consuming the `useBookings` hook.",
     "change_required" : null
   }, {
     "file_name" : "Testimonials.tsx",
@@ -3160,14 +3180,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Displays a rotating carousel of Google Reviews to build social proof.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "Testimonials",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a carousel of testimonials, fetching data via useReviews."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useReviews.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a rotating carousel of Google Reviews by consuming the `useReviews` hook.",
     "change_required" : null
   }, {
     "file_name" : "CtaSection.tsx",
@@ -3178,14 +3203,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A prominent call-to-action section, e.g., 'Book a Free Trial'.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CtaSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a call-to-action section with a headline, message, and button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides a prominent call-to-action to encourage user engagement.",
     "change_required" : null
   }, {
     "file_name" : "AboutPage.tsx",
@@ -3196,14 +3226,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Static page detailing the studio's philosophy, history, and information about the trainers.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the About Us page with sections on philosophy, story, and trainers."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — presents detailed information about the studio's philosophy, history, and trainers.",
     "change_required" : null
   }, {
     "file_name" : "ContactPage.tsx",
@@ -3214,14 +3249,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Page containing a contact form, address details, and an interactive map.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the Contact Us page, including ContactForm, LocationMap, and studio details."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/contact/ContactForm.tsx", "frontend/src/components/contact/LocationMap.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — provides contact details, an inquiry form, and an embedded map for the studio's location.",
     "change_required" : null
   }, {
     "file_name" : "ContactForm.tsx",
@@ -3232,14 +3272,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A form for users to send inquiries to the studio.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a contact form and handles submission via useContact."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/hooks/useContact.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — provides a form for users to submit inquiries, utilizing the `useContact` hook.",
     "change_required" : null
   }, {
     "file_name" : "LocationMap.tsx",
@@ -3250,14 +3295,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "An embedded Google Map showing the studio's location.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "LocationMap",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders an embedded Google Map with the studio's location."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — embeds a Google Map displaying the studio's physical location.",
     "change_required" : null
   }, {
     "file_name" : "NotFoundPage.tsx",
@@ -3268,14 +3318,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "A user-friendly 404 page for handling invalid routes.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "NotFoundPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the 404 Not Found page."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays a user-friendly message for invalid or non-existent routes.",
     "change_required" : null
   }, {
     "file_name" : "useContact.ts",
@@ -3286,14 +3341,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions for submitting the contact form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useContact",
+      "parameters" : [ ],
+      "return_type" : "{ submitContactForm: (contactData: ContactRequest) => Promise<void>, isLoading: boolean, error: Error | null }",
+      "description" : "A React hook to manage contact form submission, including loading and error states."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/contactService.ts", "frontend/src/types/contact.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides the `submitContactForm` function for submitting contact inquiries to the backend.",
     "change_required" : null
   }, {
     "file_name" : "contactService.ts",
@@ -3304,14 +3364,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Service for making API calls related to the contact form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "submitContactMessage",
+      "parameters" : [ "ContactRequest contactData" ],
+      "return_type" : "Promise<ContactMessage>",
+      "description" : "Sends a POST request to the backend to submit a contact message."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/contact",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Submits a contact form message to the backend.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/contact.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — handles API communication for submitting contact messages.",
     "change_required" : null
   }, {
     "file_name" : "contact.ts",
@@ -3323,13 +3395,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for contact form submissions.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "ContactRequest",
+      "type" : "{ name: string, email: string, subject: string, message: string }",
+      "description" : "Interface for the contact form request payload."
+    }, {
+      "name" : "ContactMessage",
+      "type" : "{ id: string, name: string, email: string, subject: string, message: string, receivedAt: string }",
+      "description" : "Interface for the contact message response from the backend."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for contact form requests and responses.",
     "change_required" : null
   }, {
     "file_name" : "useReviews.ts",
@@ -3340,14 +3420,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides functions for fetching Google Reviews from the backend proxy.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "useReviews",
+      "parameters" : [ ],
+      "return_type" : "{ reviews: GoogleReviewDto[], isLoading: boolean, error: Error | null }",
+      "description" : "A React hook to fetch Google Reviews, including loading and error states."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/reviewService.ts", "frontend/src/types/review.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "HOOK layer — provides the `getReviews` function for fetching Google Reviews from the backend.",
     "change_required" : null
   }, {
     "file_name" : "reviewService.ts",
@@ -3358,14 +3443,26 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Service for making API calls to the Google Reviews proxy endpoint.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getReviews",
+      "parameters" : [ ],
+      "return_type" : "Promise<GoogleReviewDto[]>",
+      "description" : "Sends a GET request to the backend to fetch Google Reviews."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/reviews",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of Google Reviews from the backend proxy.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/api/client.ts", "frontend/src/types/review.ts" ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — handles API communication for fetching Google Reviews.",
     "change_required" : null
   }, {
     "file_name" : "review.ts",
@@ -3377,13 +3474,17 @@
     "status" : "PLANNED",
     "description" : "TypeScript types for Google Review data.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "GoogleReviewDto",
+      "type" : "{ authorName: string, profilePhotoUrl: string, rating: number, relativePublishTime: string, text: string }",
+      "description" : "Interface for Google Review data."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "static-pages-frontend",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines TypeScript types for Google Review data.",
     "change_required" : null
   }, {
     "file_name" : "MembershipPage.tsx",
@@ -4300,8 +4401,8 @@
     "feature_display_name" : "Static Pages (Frontend)",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/HomePage.tsx", "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/ValueProposition.tsx", "frontend/src/components/home/ClassHighlights.tsx", "frontend/src/components/home/Testimonials.tsx", "frontend/src/components/home/CtaSection.tsx", "frontend/src/pages/AboutPage.tsx", "frontend/src/pages/ContactPage.tsx", "frontend/src/components/contact/ContactForm.tsx", "frontend/src/components/contact/LocationMap.tsx", "frontend/src/pages/NotFoundPage.tsx", "frontend/src/hooks/useContact.ts", "frontend/src/services/contactService.ts", "frontend/src/types/contact.ts", "frontend/src/hooks/useReviews.ts", "frontend/src/services/reviewService.ts", "frontend/src/types/review.ts" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "This feature implements all static public-facing pages of Vikram's Fitness Studio, including the homepage, about page, contact page, and a 404 not found page. It focuses on presenting the studio's brand, services, and contact information in an expert, encouraging, and supportive tone, utilizing a clean and professional design.\n\n## Design Tokens\n- Navbar: bg-[#0D1B2A] text-white\n- Primary CTA: bg-[#F26419] hover:bg-[#E05A16] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Secondary CTA: bg-[#1B998B] hover:bg-[#177F73] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#F26419]\n- Section bg: bg-[#F5F5F5] (odd sections) / bg-white (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\n## HomePage.tsx\nThis page serves as the main landing page for Vikram's Fitness Studio. It will be structured into several key sections:\n1.  **HeroSection**: A full-bleed hero image with a compelling headline and subheadline, and a primary call-to-action to 'Book a Free Trial'. The hero image should be relevant to fitness, such as https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80, with a dark overlay.\n2.  **ValueProposition**: This section will highlight Vikram's Fitness Studio's unique selling points, focusing on sustainable weight loss and lifestyle disease management. It should include encouraging and expert copy.\n3.  **ClassHighlights**: This section will showcase a few featured fitness classes. It will fetch class data using the `useBookings` hook from the `booking-frontend` feature and display them in an appealing grid or carousel format. Each class card should display `name`, `description`, `startTime`, `endTime`, and `instructor` from the `FitnessClassDto`.\n4.  **Testimonials**: This section will display a rotating carousel of Google Reviews to build social proof. It will fetch review data using the `useReviews` hook, which in turn calls the `reviewService.getReviews()` function.\n5.  **CtaSection**: A prominent call-to-action section, encouraging users to take the next step, such as 'Join Our Community' or 'View All Classes'.\n\nAll sections should use the defined design tokens for colors, typography, and spacing.\n\n## HeroSection.tsx\nThis component will render the hero section for the `HomePage.tsx`. It will accept `headline`, `subheadline`, and `ctaText` as props. The background image will be a full-bleed image with a dark overlay, as specified in the design tokens. The CTA button will navigate to the `/classes` page.\n\n## ValueProposition.tsx\nThis component will display the studio's core value propositions. It will consist of several distinct points, each with a heading and a descriptive paragraph, emphasizing the studio's health-first, sustainable approach.\n\n## ClassHighlights.tsx\nThis component will display a selection of featured fitness classes. It will use the `useBookings` hook to fetch a list of `FitnessClassDto` objects. It should display a maximum of 3-4 classes, each in a card format. Each card will show the class `name`, `description`, `startTime`, `endTime`, and `instructor`. A 'View All Classes' CTA will navigate to the `/classes` page.\n\n## Testimonials.tsx\nThis component will display a carousel of testimonials. It will use the `useReviews` hook to fetch `GoogleReviewDto` objects. Each testimonial card will display the `authorName`, `profilePhotoUrl`, `rating`, `relativePublishTime`, and `text` of the review.\n\n## CtaSection.tsx\nThis component will render a prominent call-to-action section. It will include a headline, a brief supportive message, and a primary CTA button that navigates to the `/memberships` page.\n\n## AboutPage.tsx\nThis page will provide detailed information about Vikram's Fitness Studio. It will include sections on:\n1.  **Our Philosophy**: A section detailing the studio's health-first, sustainable approach to fitness.\n2.  **Our Story**: A brief history of Vikram's Fitness Studio.\n3.  **Meet Our Trainers**: Information about the studio's trainers, potentially including their specializations and a brief bio. This section should use placeholder trainer data.\n\nAll sections should use the defined design tokens for colors, typography, and spacing.\n\n## ContactPage.tsx\nThis page will provide contact information and a form for inquiries. It will include:\n1.  **ContactForm**: A component allowing users to submit inquiries. This form will use the `useContact` hook to handle form submission.\n2.  **LocationMap**: An embedded Google Map showing the studio's location.\n3.  **Contact Details**: Display the studio's address, phone number, and opening hours as provided in the business context.\n\nAll sections should use the defined design tokens for colors, typography, and spacing.\n\n## ContactForm.tsx\nThis component will render a form with fields for `name`, `email`, `subject`, and `message`. It will use the `useContact` hook to manage form state and submission. Upon successful submission, a success message should be displayed, and the form should be reset. Error messages should be displayed for invalid inputs or failed submissions.\n\n## LocationMap.tsx\nThis component will embed a Google Map centered on the studio's coordinates (18.513863, 73.829895). It should display a marker at the studio's location. The map should be responsive.\n\n## NotFoundPage.tsx\nThis page will serve as a user-friendly 404 error page. It will display a clear message indicating that the requested page was not found and provide a link back to the homepage.\n\n## useContact.ts\nThis hook provides the `submitContactForm` function for sending contact messages. It uses `contactService.submitContactMessage` to make the API call. It manages loading and error states.\n\n### `submitContactForm(contactData: ContactRequest): Promise<void>`\n1.  Calls `contactService.submitContactMessage(contactData)`.\n2.  Handles success and error states, updating internal loading and error flags.\n3.  Throws an error if the API call fails.\n\n## contactService.ts\nThis service handles API calls related to contact form submissions. It exports `submitContactMessage`.\n\n### `submitContactMessage(contactData: ContactRequest): Promise<ContactMessage>`\n1.  Makes a POST request to `/api/v1/contact` with `contactData` as the request body.\n2.  Returns the `ContactMessage` response from the backend.\n3.  Throws an error if the request fails.\n\n## contact.ts\nThis file defines the TypeScript interfaces for `ContactRequest` and `ContactMessage`.\n\n## useReviews.ts\nThis hook provides the `getReviews` function for fetching Google Reviews. It uses `reviewService.getReviews` to make the API call and manages loading and error states.\n\n### `getReviews(): Promise<GoogleReviewDto[]>`\n1.  Calls `reviewService.getReviews()`.\n2.  Handles success and error states, updating internal loading and error flags.\n3.  Returns an array of `GoogleReviewDto`.\n4.  Throws an error if the API call fails.\n\n## reviewService.ts\nThis service handles API calls to the Google Reviews proxy endpoint. It exports `getReviews`.\n\n### `getReviews(): Promise<GoogleReviewDto[]>`\n1.  Makes a GET request to `/api/v1/reviews`.\n2.  Returns a list of `GoogleReviewDto` from the backend.\n3.  Throws an error if the request fails.\n\n## review.ts\nThis file defines the TypeScript interface for `GoogleReviewDto`.",
+    "depends_on_features" : [ "booking-frontend", "inquiry-backend", "google-reviews-backend", "core-ui-frontend", "membership-frontend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
