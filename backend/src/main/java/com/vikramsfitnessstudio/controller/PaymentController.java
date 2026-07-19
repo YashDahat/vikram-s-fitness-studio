@@ -1,5 +1,6 @@
 package com.vikramsfitnessstudio.controller;
 
+import com.vikramsfitnessstudio.dto.CreatePaymentOrderRequest;
 import com.vikramsfitnessstudio.dto.PaymentConfirmationRequest;
 import com.vikramsfitnessstudio.dto.PaymentOrderResponse;
 import com.vikramsfitnessstudio.exception.ResourceNotFoundException;
@@ -29,7 +30,7 @@ public class PaymentController {
                     createPaymentOrderRequest.getAmount()
             );
             return ResponseEntity.ok(response);
-        } catch (PaymentGatewayException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -39,9 +40,9 @@ public class PaymentController {
         try {
             paymentService.confirmPayment(request);
             return ResponseEntity.ok("Payment confirmed successfully.");
-        } catch (PaymentGatewayException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }

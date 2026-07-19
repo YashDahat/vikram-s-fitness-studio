@@ -2,6 +2,7 @@ package com.vikramsfitnessstudio.service;
 
 import com.vikramsfitnessstudio.dto.PaymentConfirmationRequest;
 import com.vikramsfitnessstudio.dto.PaymentOrderResponse;
+import com.vikramsfitnessstudio.exception.PaymentGatewayException;
 import com.vikramsfitnessstudio.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;

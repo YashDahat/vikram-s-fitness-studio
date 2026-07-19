@@ -2,7 +2,6 @@ package com.vikramsfitnessstudio.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import com.vikramsfitnessstudio.model.User;
 
 @Entity
@@ -20,9 +19,8 @@ public class WorkoutLog {
 
     private String description;
 
-    @ElementCollection
-    @CollectionTable(name = "workout_exercise", joinColumns = @JoinColumn(name = "workout_log_id"))
-    private List<Exercise> exercises;
+    @Column(columnDefinition = "TEXT")
+    private String exercises;
 
     public Long getId() {
         return id;
@@ -56,11 +54,11 @@ public class WorkoutLog {
         this.description = description;
     }
 
-    public List<Exercise> getExercises() {
+    public String getExercises() {
         return exercises;
     }
 
-    public void setExercises(List<Exercise> exercises) {
+    public void setExercises(String exercises) {
         this.exercises = exercises;
     }
 }

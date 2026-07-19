@@ -1,0 +1,526 @@
+{
+  "endpoints" : [ {
+    "method" : "GET",
+    "path" : "/api/v1/reviews",
+    "handler" : "getGoogleReviews",
+    "request" : null,
+    "response" : "GoogleReviewDto[]"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/auth/register",
+    "handler" : "register",
+    "request" : "RegisterRequest",
+    "response" : "AuthResponse"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/auth/login",
+    "handler" : "login",
+    "request" : "AuthRequest",
+    "response" : "AuthResponse"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/orders",
+    "handler" : "getAllOrders",
+    "request" : null,
+    "response" : "OrderDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/memberships/plans",
+    "handler" : "getAllMembershipPlans",
+    "request" : null,
+    "response" : "MembershipPlanDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/memberships/plans/{id}",
+    "handler" : "getMembershipPlanById",
+    "request" : null,
+    "response" : "MembershipPlanDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/admin/memberships/plans",
+    "handler" : "createMembershipPlan",
+    "request" : "MembershipPlanDto",
+    "response" : "MembershipPlanDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/v1/admin/memberships/plans/{id}",
+    "handler" : "updateMembershipPlan",
+    "request" : "MembershipPlanDto",
+    "response" : "MembershipPlanDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/v1/admin/memberships/plans/{id}",
+    "handler" : "deleteMembershipPlan",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/bookings",
+    "handler" : "getAllBookings",
+    "request" : null,
+    "response" : "BookingDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/bookings/{bookingId}",
+    "handler" : "getBookingById",
+    "request" : null,
+    "response" : "BookingDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/v1/admin/bookings/{bookingId}",
+    "handler" : "cancelBooking",
+    "request" : null,
+    "response" : "BookingDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/classes",
+    "handler" : "getAllFitnessClasses",
+    "request" : null,
+    "response" : "FitnessClassDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/classes/{classId}",
+    "handler" : "getFitnessClassById",
+    "request" : null,
+    "response" : "FitnessClassDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/admin/classes",
+    "handler" : "createFitnessClass",
+    "request" : "FitnessClassDto",
+    "response" : "FitnessClassDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/v1/admin/classes/{classId}",
+    "handler" : "updateFitnessClass",
+    "request" : "FitnessClassDto",
+    "response" : "FitnessClassDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/v1/admin/classes/{classId}",
+    "handler" : "deleteFitnessClass",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/blog",
+    "handler" : "getAllBlogPosts",
+    "request" : null,
+    "response" : "BlogPostDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/admin/blog/{id}",
+    "handler" : "getBlogPostById",
+    "request" : null,
+    "response" : "BlogPostDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/admin/blog",
+    "handler" : "createBlogPost",
+    "request" : "BlogPostDto",
+    "response" : "BlogPostDto"
+  }, {
+    "method" : "PUT",
+    "path" : "/api/v1/admin/blog/{id}",
+    "handler" : "updateBlogPost",
+    "request" : "BlogPostDto",
+    "response" : "BlogPostDto"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/v1/admin/blog/{id}",
+    "handler" : "deleteBlogPost",
+    "request" : null,
+    "response" : null
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/memberships/plans",
+    "handler" : "getMembershipPlans",
+    "request" : null,
+    "response" : "MembershipPlanDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/memberships/my-memberships",
+    "handler" : "getUserMemberships",
+    "request" : null,
+    "response" : "UserMembershipDto[]"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/payments/orders",
+    "handler" : "createPaymentOrder",
+    "request" : "CreatePaymentOrderRequest",
+    "response" : "PaymentOrderResponse"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/payments/confirm",
+    "handler" : "handlePaymentConfirmation",
+    "request" : "PaymentConfirmationRequest",
+    "response" : "String"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/blog",
+    "handler" : "getAllBlogPosts",
+    "request" : null,
+    "response" : "BlogPostDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/blog/{id}",
+    "handler" : "getBlogPostById",
+    "request" : null,
+    "response" : "BlogPostDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/orders",
+    "handler" : "createOrder",
+    "request" : null,
+    "response" : "OrderDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/orders/my-orders",
+    "handler" : "getMemberOrders",
+    "request" : null,
+    "response" : "OrderDto[]"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/classes",
+    "handler" : "getAllFitnessClasses",
+    "request" : null,
+    "response" : "FitnessClassDto[]"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/bookings",
+    "handler" : "createBooking",
+    "request" : "CreateBookingRequest",
+    "response" : "BookingDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/bookings/my-bookings",
+    "handler" : "getUserBookings",
+    "request" : null,
+    "response" : "BookingDto[]"
+  }, {
+    "method" : "DELETE",
+    "path" : "/api/v1/bookings/{bookingId}",
+    "handler" : "cancelBooking",
+    "request" : null,
+    "response" : "BookingDto"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/progress/workouts",
+    "handler" : "logWorkout",
+    "request" : "WorkoutLogDto",
+    "response" : "WorkoutLogDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/progress/workouts",
+    "handler" : "getWorkoutLogs",
+    "request" : null,
+    "response" : "WorkoutLogDto[]"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/progress/metrics",
+    "handler" : "logProgressMetric",
+    "request" : "ProgressMetricDto",
+    "response" : "ProgressMetricDto"
+  }, {
+    "method" : "GET",
+    "path" : "/api/v1/progress/metrics",
+    "handler" : "getProgressMetrics",
+    "request" : null,
+    "response" : "ProgressMetricDto[]"
+  }, {
+    "method" : "POST",
+    "path" : "/api/v1/contact",
+    "handler" : "submitContactForm",
+    "request" : "ContactRequest",
+    "response" : "ContactMessage"
+  } ],
+  "types" : {
+    "Booking" : {
+      "fields" : {
+        "id" : "Long",
+        "user" : "User?",
+        "fitnessClass" : "FitnessClass?",
+        "status" : "BookingStatus?",
+        "bookingTime" : "LocalDateTime?"
+      }
+    },
+    "Membership" : {
+      "fields" : {
+        "id" : "UUID",
+        "user" : "User?",
+        "membershipPlan" : "MembershipPlan?",
+        "startDate" : "LocalDate?",
+        "endDate" : "LocalDate?",
+        "status" : "MembershipStatus?"
+      }
+    },
+    "BookingStatus" : {
+      "constants" : [ "CONFIRMED", "CANCELLED", "COMPLETED" ]
+    },
+    "OrderItem" : {
+      "fields" : {
+        "id" : "UUID",
+        "order" : "Order?",
+        "membershipPlan" : "MembershipPlan?",
+        "membershipPlanName" : "String?",
+        "priceAtPurchase" : "BigDecimal?",
+        "durationInMonthsAtPurchase" : "Integer?"
+      }
+    },
+    "ContactMessage" : {
+      "fields" : {
+        "id" : "UUID",
+        "name" : "String?",
+        "email" : "String?",
+        "subject" : "String?",
+        "message" : "String?",
+        "receivedAt" : "LocalDateTime?"
+      }
+    },
+    "User" : {
+      "fields" : {
+        "id" : "Long",
+        "username" : "String?",
+        "password" : "String?",
+        "email" : "String?",
+        "roles" : "Set<Role>?"
+      }
+    },
+    "MembershipStatus" : {
+      "constants" : [ "ACTIVE", "EXPIRED", "CANCELLED" ]
+    },
+    "FitnessClass" : {
+      "fields" : {
+        "id" : "Long",
+        "name" : "String?",
+        "description" : "String?",
+        "scheduleTime" : "LocalDateTime?",
+        "instructor" : "String?",
+        "maxCapacity" : "int?"
+      }
+    },
+    "WorkoutLog" : {
+      "fields" : {
+        "id" : "Long",
+        "user" : "User?",
+        "date" : "LocalDate?",
+        "description" : "String?",
+        "exercises" : "String?"
+      }
+    },
+    "Order" : {
+      "fields" : {
+        "id" : "Long",
+        "user" : "User?",
+        "orderDate" : "LocalDateTime?",
+        "status" : "OrderStatus?",
+        "totalAmount" : "BigDecimal?",
+        "orderItems" : "List<OrderItem>?"
+      }
+    },
+    "ProgressMetric" : {
+      "fields" : {
+        "id" : "Long",
+        "user" : "User?",
+        "date" : "LocalDate?",
+        "metricName" : "String?",
+        "metricValue" : "Double?"
+      }
+    },
+    "OrderStatus" : {
+      "constants" : [ "PENDING", "COMPLETED", "CANCELLED", "REFUNDED" ]
+    },
+    "Role" : {
+      "constants" : [ "ADMIN", "MEMBER" ]
+    },
+    "MembershipPlan" : {
+      "fields" : {
+        "id" : "UUID",
+        "name" : "String?",
+        "description" : "String?",
+        "price" : "BigDecimal?",
+        "durationInMonths" : "Integer?",
+        "isActive" : "Boolean?"
+      }
+    },
+    "BlogPost" : {
+      "fields" : {
+        "id" : "UUID",
+        "title" : "String?",
+        "content" : "String?",
+        "author" : "String?",
+        "publicationDate" : "LocalDate?",
+        "lastModifiedDate" : "LocalDateTime?"
+      }
+    },
+    "FitnessClassDto" : {
+      "fields" : {
+        "id" : "Long?",
+        "name" : "String?",
+        "description" : "String?",
+        "startTime" : "LocalDateTime?",
+        "endTime" : "LocalDateTime?",
+        "instructor" : "String?",
+        "maxCapacity" : "Integer?",
+        "currentBookedSlots" : "Integer?"
+      }
+    },
+    "ProgressMetricDto" : {
+      "fields" : {
+        "id" : "Long?",
+        "date" : "java.time.LocalDate?",
+        "metricName" : "String?",
+        "metricValue" : "java.math.BigDecimal?"
+      }
+    },
+    "GoogleReviewDto" : {
+      "fields" : {
+        "authorName" : "String?",
+        "profilePhotoUrl" : "String?",
+        "rating" : "Integer?",
+        "relativePublishTime" : "String?",
+        "text" : "String?"
+      }
+    },
+    "CreatePaymentOrderRequest" : {
+      "fields" : {
+        "orderId" : "UUID",
+        "amount" : "BigDecimal"
+      }
+    },
+    "OrderDto" : {
+      "fields" : {
+        "id" : "UUID?",
+        "userId" : "Long?",
+        "orderDate" : "LocalDateTime?",
+        "totalAmount" : "java.math.BigDecimal?",
+        "status" : "OrderStatus?",
+        "orderItems" : "List<OrderItemDto>?"
+      }
+    },
+    "ContactRequest" : {
+      "fields" : {
+        "name" : "String?",
+        "email" : "String?",
+        "subject" : "String?",
+        "message" : "String?"
+      }
+    },
+    "BookingDto" : {
+      "fields" : {
+        "id" : "Long?",
+        "userId" : "Long?",
+        "fitnessClassId" : "Long?",
+        "bookingTime" : "LocalDateTime?",
+        "status" : "BookingStatus?"
+      }
+    },
+    "CreateBookingRequest" : {
+      "fields" : {
+        "fitnessClassId" : "Long?"
+      }
+    },
+    "WorkoutLogDto" : {
+      "fields" : {
+        "id" : "Long?",
+        "date" : "java.time.LocalDate?",
+        "description" : "String?",
+        "exercises" : "String?"
+      }
+    },
+    "AuthResponse" : {
+      "fields" : {
+        "token" : "String?",
+        "username" : "String?",
+        "roles" : "Set<String>?"
+      }
+    },
+    "UserMembershipDto" : {
+      "fields" : {
+        "id" : "UUID?",
+        "membershipPlanName" : "String?",
+        "startDate" : "java.time.LocalDate?",
+        "endDate" : "java.time.LocalDate?",
+        "status" : "String?"
+      }
+    },
+    "AuthRequest" : {
+      "fields" : {
+        "username" : "String?",
+        "password" : "String?"
+      }
+    },
+    "CreateOrderRequest" : {
+      "fields" : {
+        "membershipPlanId" : "UUID?",
+        "quantity" : "Integer?"
+      }
+    },
+    "MembershipPlanDto" : {
+      "fields" : {
+        "id" : "UUID?",
+        "name" : "String?",
+        "description" : "String?",
+        "price" : "java.math.BigDecimal?",
+        "durationInMonths" : "Integer?",
+        "isActive" : "Boolean?"
+      }
+    },
+    "BlogPostDto" : {
+      "fields" : {
+        "id" : "UUID?",
+        "title" : "String?",
+        "content" : "String?",
+        "author" : "String?",
+        "publicationDate" : "java.time.LocalDate?",
+        "lastModifiedDate" : "LocalDateTime?"
+      }
+    },
+    "ErrorResponse" : {
+      "fields" : {
+        "timestamp" : "LocalDateTime?",
+        "status" : "Integer?",
+        "error" : "String?",
+        "message" : "String?",
+        "path" : "String?"
+      }
+    },
+    "PaymentConfirmationRequest" : {
+      "fields" : {
+        "orderId" : "UUID?",
+        "paymentGatewayOrderId" : "String?",
+        "status" : "String?",
+        "signature" : "String?",
+        "amount" : "java.math.BigDecimal?",
+        "currency" : "String?"
+      }
+    },
+    "PaymentOrderResponse" : {
+      "fields" : {
+        "orderId" : "UUID?",
+        "paymentGatewayOrderId" : "String?",
+        "amount" : "java.math.BigDecimal?",
+        "currency" : "String?",
+        "receipt" : "String?"
+      }
+    },
+    "RegisterRequest" : {
+      "fields" : {
+        "username" : "String?",
+        "password" : "String?",
+        "email" : "String?",
+        "firstName" : "String?",
+        "lastName" : "String?"
+      }
+    },
+    "OrderItemDto" : {
+      "fields" : {
+        "id" : "UUID?",
+        "membershipPlanId" : "UUID?",
+        "membershipPlanName" : "String?",
+        "priceAtPurchase" : "BigDecimal?",
+        "durationInMonthsAtPurchase" : "Integer?"
+      }
+    }
+  }
+}

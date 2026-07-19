@@ -39,7 +39,7 @@ public class UserService {
         }
 
         Set<Role> roles = new HashSet<>();
-        roles.add(Role.USER); // Default role for new registrations
+        roles.add(Role.MEMBER); // Default role for new registrations
 
         User user = new User(
                 request.getUsername(),
