@@ -1462,14 +1462,34 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a member's workout session log, including exercises, sets, and reps.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the workout log. Auto-generated."
+    }, {
+      "name" : "user",
+      "type" : "User",
+      "description" : "The user who logged this workout. Not null."
+    }, {
+      "name" : "date",
+      "type" : "LocalDate",
+      "description" : "The date of the workout. Not null."
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "A description of the workout session. Max 500 characters."
+    }, {
+      "name" : "exercises",
+      "type" : "String",
+      "description" : "JSON string representing a list of exercises, sets, and reps. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/User.java" ],
     "depends_on" : [ ],
     "feature_name" : "progress-tracking-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — Represents a member's workout session log, including exercises, sets, and reps.",
     "change_required" : null
   }, {
     "file_name" : "ProgressMetric.java",
@@ -1480,14 +1500,34 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Represents a member's progress metric entry, such as weight or body fat percentage.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the progress metric. Auto-generated."
+    }, {
+      "name" : "user",
+      "type" : "User",
+      "description" : "The user to whom this progress metric belongs. Not null."
+    }, {
+      "name" : "date",
+      "type" : "LocalDate",
+      "description" : "The date the metric was recorded. Not null."
+    }, {
+      "name" : "metricName",
+      "type" : "String",
+      "description" : "The name of the metric (e.g., 'Weight', 'Body Fat %'). Not null, max 100 characters."
+    }, {
+      "name" : "metricValue",
+      "type" : "BigDecimal",
+      "description" : "The value of the metric. Not null, decimal(10,2)."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/User.java" ],
     "depends_on" : [ ],
     "feature_name" : "progress-tracking-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — Represents a member's progress metric entry, such as weight or body fat percentage.",
     "change_required" : null
   }, {
     "file_name" : "WorkoutLogRepository.java",
@@ -1498,14 +1538,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for WorkoutLog entities.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "findByUserIdOrderByDateDesc",
+      "parameters" : [ "Long userId" ],
+      "return_type" : "List<WorkoutLog>",
+      "description" : "Retrieves all workout logs for a given user, ordered by date in descending order."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/WorkoutLog.java" ],
     "depends_on" : [ ],
     "feature_name" : "progress-tracking-backend",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — Provides data access methods for WorkoutLog entities, including findByUserIdOrderByDateDesc.",
     "change_required" : null
   }, {
     "file_name" : "ProgressMetricRepository.java",
@@ -1516,14 +1561,19 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Provides data access methods for ProgressMetric entities.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "findByUserIdAndMetricNameOrderByDateDesc",
+      "parameters" : [ "Long userId", "String metricName" ],
+      "return_type" : "List<ProgressMetric>",
+      "description" : "Retrieves all progress metrics for a given user and metric name, ordered by date in descending order."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/ProgressMetric.java" ],
     "depends_on" : [ ],
     "feature_name" : "progress-tracking-backend",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — Provides data access methods for ProgressMetric entities, including findByUserIdAndMetricNameOrderByDateDesc.",
     "change_required" : null
   }, {
     "file_name" : "ProgressService.java",
@@ -1534,14 +1584,34 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Handles business logic for member workout and progress tracking.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ {
+      "name" : "logWorkout",
+      "parameters" : [ "Long userId", "WorkoutLogDto workoutLogDto" ],
+      "return_type" : "WorkoutLogDto",
+      "description" : "Logs a new workout session for a user. Throws ResourceNotFoundException if user not found."
+    }, {
+      "name" : "getWorkoutLogsByUserId",
+      "parameters" : [ "Long userId" ],
+      "return_type" : "List<WorkoutLogDto>",
+      "description" : "Retrieves all workout logs for a specific user. Throws ResourceNotFoundException if user not found."
+    }, {
+      "name" : "logProgressMetric",
+      "parameters" : [ "Long userId", "ProgressMetricDto progressMetricDto" ],
+      "return_type" : "ProgressMetricDto",
+      "description" : "Logs a new progress metric for a user. Throws ResourceNotFoundException if user not found."
+    }, {
+      "name" : "getProgressMetricsByUserIdAndMetricName",
+      "parameters" : [ "Long userId", "String metricName" ],
+      "return_type" : "List<ProgressMetricDto>",
+      "description" : "Retrieves progress metrics for a specific user and metric name. Throws ResourceNotFoundException if user not found."
+    } ],
+    "public_variables" : [ ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/repository/WorkoutLogRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/ProgressMetricRepository.java" ],
     "depends_on" : [ ],
     "feature_name" : "progress-tracking-backend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements logWorkout(Long userId, WorkoutLogDto workoutLogDto): WorkoutLogDto, getWorkoutLogsByUserId(Long userId): List<WorkoutLogDto>, logProgressMetric(Long userId, ProgressMetricDto progressMetricDto): ProgressMetricDto, and getProgressMetricsByUserIdAndMetricName(Long userId, String metricName): List<ProgressMetricDto>.",
     "change_required" : null
   }, {
     "file_name" : "ProgressController.java",
@@ -1552,14 +1622,62 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Exposes member-only endpoints for logging and retrieving workout and progress data.",
-    "public_functions" : null,
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "public_functions" : [ {
+      "name" : "logWorkout",
+      "parameters" : [ "Principal principal", "WorkoutLogDto workoutLogDto" ],
+      "return_type" : "ResponseEntity<WorkoutLogDto>",
+      "description" : "Logs a new workout for the authenticated user."
+    }, {
+      "name" : "getWorkoutLogs",
+      "parameters" : [ "Principal principal" ],
+      "return_type" : "ResponseEntity<List<WorkoutLogDto>>",
+      "description" : "Retrieves all workout logs for the authenticated user."
+    }, {
+      "name" : "logProgressMetric",
+      "parameters" : [ "Principal principal", "ProgressMetricDto progressMetricDto" ],
+      "return_type" : "ResponseEntity<ProgressMetricDto>",
+      "description" : "Logs a new progress metric for the authenticated user."
+    }, {
+      "name" : "getProgressMetrics",
+      "parameters" : [ "Principal principal", "String metricName" ],
+      "return_type" : "ResponseEntity<List<ProgressMetricDto>>",
+      "description" : "Retrieves progress metrics for the authenticated user by metric name."
+    } ],
+    "public_variables" : [ ],
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/progress/workouts",
+      "request_body" : "WorkoutLogDto",
+      "response_body" : "WorkoutLogDto",
+      "description" : "Logs a new workout session for the authenticated user.",
+      "access" : "authenticated"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/progress/workouts",
+      "request_body" : null,
+      "response_body" : "List<WorkoutLogDto>",
+      "description" : "Retrieves all workout logs for the authenticated user.",
+      "access" : "authenticated"
+    }, {
+      "method" : "POST",
+      "path" : "/api/v1/progress/metrics",
+      "request_body" : "ProgressMetricDto",
+      "response_body" : "ProgressMetricDto",
+      "description" : "Logs a new progress metric for the authenticated user.",
+      "access" : "authenticated"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/progress/metrics",
+      "request_body" : null,
+      "response_body" : "List<ProgressMetricDto>",
+      "description" : "Retrieves progress metrics for the authenticated user, optionally filtered by metric name.",
+      "access" : "authenticated"
+    } ],
+    "api_endpoints_consumed" : [ ],
     "imports_from" : [ "backend/src/main/java/com/vikramsfitnessstudio/service/ProgressService.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/WorkoutLogDto.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/ProgressMetricDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "progress-tracking-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — Exposes member-only endpoints for logging and retrieving workout and progress data.",
     "change_required" : null
   }, {
     "file_name" : "WorkoutLogDto.java",
@@ -1570,14 +1688,30 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Data transfer object for workout log entries.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the workout log."
+    }, {
+      "name" : "date",
+      "type" : "LocalDate",
+      "description" : "The date of the workout. @NotNull"
+    }, {
+      "name" : "description",
+      "type" : "String",
+      "description" : "A description of the workout session. @Size(max = 500)"
+    }, {
+      "name" : "exercises",
+      "type" : "String",
+      "description" : "JSON string representing a list of exercises, sets, and reps. @NotNull"
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "progress-tracking-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — Data transfer object for workout log entries.",
     "change_required" : null
   }, {
     "file_name" : "ProgressMetricDto.java",
@@ -1588,14 +1722,30 @@
     "updated_date" : "2024-07-29",
     "status" : "PLANNED",
     "description" : "Data transfer object for progress metric entries.",
-    "public_functions" : null,
-    "public_variables" : null,
+    "public_functions" : [ ],
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the progress metric."
+    }, {
+      "name" : "date",
+      "type" : "LocalDate",
+      "description" : "The date the metric was recorded. @NotNull"
+    }, {
+      "name" : "metricName",
+      "type" : "String",
+      "description" : "The name of the metric (e.g., 'Weight', 'Body Fat %'). @NotBlank, @Size(max = 100)"
+    }, {
+      "name" : "metricValue",
+      "type" : "BigDecimal",
+      "description" : "The value of the metric. @NotNull, @DecimalMin(\"0.0\")"
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "progress-tracking-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — Data transfer object for progress metric entries.",
     "change_required" : null
   }, {
     "file_name" : "BlogPost.java",
@@ -3493,8 +3643,8 @@
     "feature_display_name" : "Progress Tracking (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/vikramsfitnessstudio/model/WorkoutLog.java", "backend/src/main/java/com/vikramsfitnessstudio/model/ProgressMetric.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/WorkoutLogRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/repository/ProgressMetricRepository.java", "backend/src/main/java/com/vikramsfitnessstudio/service/ProgressService.java", "backend/src/main/java/com/vikramsfitnessstudio/controller/ProgressController.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/WorkoutLogDto.java", "backend/src/main/java/com/vikramsfitnessstudio/dto/ProgressMetricDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
+    "feature_instruction" : "The Progress Tracking (Backend) feature enables members of Vikram's Fitness Studio to log their workout sessions and track various progress metrics over time. This feature consists of two core domain models: `WorkoutLog` and `ProgressMetric`, each with its own repository for data persistence. The `ProgressService` orchestrates the business logic for creating, retrieving, and managing these logs and metrics. The `ProgressController` exposes RESTful API endpoints, allowing authenticated members to interact with the progress tracking system. Data transfer objects (`WorkoutLogDto` and `ProgressMetricDto`) are used for all API interactions to ensure a clean separation between the internal domain models and the external API contract.\n\n## Data Models\n\n### WorkoutLog\nRepresents a single workout session. It includes a reference to the `User` who performed the workout, the `date` of the workout, a `description` of the workout, and a list of `exercises` performed, each with `sets` and `reps`.\n\n### ProgressMetric\nRepresents a specific measurable metric of a member's progress, such as weight, body fat percentage, or muscle mass. It includes a reference to the `User`, the `date` the metric was recorded, the `metricName` (e.g., \"Weight\"), and the `metricValue`.\n\n## Repositories\n\n### WorkoutLogRepository\nExtends `JpaRepository` to provide standard CRUD operations for `WorkoutLog` entities. It includes a custom query method `findByUserIdOrderByDateDesc` to retrieve workout logs for a specific user, ordered by date in descending order.\n\n### ProgressMetricRepository\nExtends `JpaRepository` to provide standard CRUD operations for `ProgressMetric` entities. It includes a custom query method `findByUserIdAndMetricNameOrderByDateDesc` to retrieve progress metrics for a specific user and metric name, ordered by date in descending order.\n\n## Service Layer\n\n### ProgressService\nThis service handles the business logic for progress tracking. It injects `WorkoutLogRepository` and `ProgressMetricRepository` to interact with the database.\n\n#### `logWorkout(Long userId, WorkoutLogDto workoutLogDto): WorkoutLogDto`\n1. Validates the `workoutLogDto`.\n2. Converts the `WorkoutLogDto` to a `WorkoutLog` entity.\n3. Sets the `User` for the `WorkoutLog` based on the `userId`.\n4. Saves the `WorkoutLog` entity using `workoutLogRepository.save()`.\n5. Converts the saved `WorkoutLog` entity back to `WorkoutLogDto` and returns it.\n6. Throws `ResourceNotFoundException` if the user does not exist.\n\n#### `getWorkoutLogsByUserId(Long userId): List<WorkoutLogDto>`\n1. Retrieves all `WorkoutLog` entities for the given `userId` using `workoutLogRepository.findByUserIdOrderByDateDesc()`.\n2. Converts the list of `WorkoutLog` entities to a list of `WorkoutLogDto` and returns it.\n3. Throws `ResourceNotFoundException` if the user does not exist.\n\n#### `logProgressMetric(Long userId, ProgressMetricDto progressMetricDto): ProgressMetricDto`\n1. Validates the `progressMetricDto`.\n2. Converts the `ProgressMetricDto` to a `ProgressMetric` entity.\n3. Sets the `User` for the `ProgressMetric` based on the `userId`.\n4. Saves the `ProgressMetric` entity using `progressMetricRepository.save()`.\n5. Converts the saved `ProgressMetric` entity back to `ProgressMetricDto` and returns it.\n6. Throws `ResourceNotFoundException` if the user does not exist.\n\n#### `getProgressMetricsByUserIdAndMetricName(Long userId, String metricName): List<ProgressMetricDto>`\n1. Retrieves all `ProgressMetric` entities for the given `userId` and `metricName` using `progressMetricRepository.findByUserIdAndMetricNameOrderByDateDesc()`.\n2. Converts the list of `ProgressMetric` entities to a list of `ProgressMetricDto` and returns it.\n3. Throws `ResourceNotFoundException` if the user does not exist.\n\n## Controller Layer\n\n### ProgressController\nThis controller exposes RESTful API endpoints for progress tracking. It injects `ProgressService` to handle business logic and `JwtUtil` (from `shared-backend`) to extract the user ID from the JWT.\n\n#### `logWorkout(Principal principal, WorkoutLogDto workoutLogDto): ResponseEntity<WorkoutLogDto>`\n- **Endpoint:** `POST /api/v1/progress/workouts`\n- **Access:** `authenticated`\n- Extracts the `userId` from the `Principal`.\n- Calls `progressService.logWorkout()` with the `userId` and `workoutLogDto`.\n- Returns `201 Created` with the created `WorkoutLogDto`.\n- Returns `404 Not Found` if `ResourceNotFoundException` is thrown by the service.\n\n#### `getWorkoutLogs(Principal principal): ResponseEntity<List<WorkoutLogDto>>`\n- **Endpoint:** `GET /api/v1/progress/workouts`\n- **Access:** `authenticated`\n- Extracts the `userId` from the `Principal`.\n- Calls `progressService.getWorkoutLogsByUserId()` with the `userId`.\n- Returns `200 OK` with a list of `WorkoutLogDto`.\n- Returns `404 Not Found` if `ResourceNotFoundException` is thrown by the service.\n\n#### `logProgressMetric(Principal principal, ProgressMetricDto progressMetricDto): ResponseEntity<ProgressMetricDto>`\n- **Endpoint:** `POST /api/v1/progress/metrics`\n- **Access:** `authenticated`\n- Extracts the `userId` from the `Principal`.\n- Calls `progressService.logProgressMetric()` with the `userId` and `progressMetricDto`.\n- Returns `201 Created` with the created `ProgressMetricDto`.\n- Returns `404 Not Found` if `ResourceNotFoundException` is thrown by the service.\n\n#### `getProgressMetrics(Principal principal, String metricName): ResponseEntity<List<ProgressMetricDto>>`\n- **Endpoint:** `GET /api/v1/progress/metrics?metricName={metricName}`\n- **Access:** `authenticated`\n- Extracts the `userId` from the `Principal`.\n- Calls `progressService.getProgressMetricsByUserIdAndMetricName()` with the `userId` and `metricName`.\n- Returns `200 OK` with a list of `ProgressMetricDto`.\n- Returns `404 Not Found` if `ResourceNotFoundException` is thrown by the service.\n\n## DTOs\n\n### WorkoutLogDto\nUsed for transferring workout log data between the client and the server. It includes `id`, `date`, `description`, and a list of `exercises` (each with `name`, `sets`, and `reps`).\n\n### ProgressMetricDto\nUsed for transferring progress metric data between the client and the server. It includes `id`, `date`, `metricName`, and `metricValue`.",
+    "depends_on_features" : [ "shared-backend" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
